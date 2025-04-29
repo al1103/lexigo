@@ -155,7 +155,7 @@ async function speechToText(req, res) {
 
     // Gửi request POST sang Flask server với headers rõ ràng hơn
     const flaskRes = await axios.post(
-      "http://192.168.31.225:5001/transcribe",
+      "http://127.0.0.1:5001/transcribe",
       form,
       {
         headers: form.getHeaders(),
