@@ -1,0 +1,6976 @@
+[
+  {
+    "question": "các",
+    "options": ["saw", "the", "ink", "key"],
+    "answer": {
+      "word": "the",
+      "phonetics": [
+        {
+          "text": "/ˈðiː/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/the-us-stressed.mp3"
+        },
+        {
+          "text": "/ði/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/the-us-unstressed.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "của",
+    "options": ["back", "move", "beat", "of"],
+    "answer": {
+      "word": "of",
+      "phonetics": [
+        {
+          "text": "/ʌv/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/of-1-us-stressed.mp3"
+        },
+        {
+          "text": "/ə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/of-1-us-unstressed.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Một",
+    "options": ["a", "eye", "tell", "fort"],
+    "answer": {
+      "word": "a",
+      "phonetics": [
+        {
+          "text": "/eɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/a-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "TRONG",
+    "options": ["in", "rise", "then", "bay"],
+    "answer": {
+      "word": "in",
+      "phonetics": [
+        {
+          "text": "/ɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/in-us-stressed.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "TRÊN",
+    "options": ["move", "on", "hear", "came"],
+    "answer": {
+      "word": "on",
+      "phonetics": [
+        {
+          "text": "/ɔn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/on-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "qua",
+    "options": ["by", "same", "car", "dark"],
+    "answer": {
+      "word": "by",
+      "phonetics": [
+        {
+          "text": "/baɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/by-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cái này",
+    "options": ["ten", "they", "walk", "this"],
+    "answer": {
+      "word": "this",
+      "phonetics": [
+        {
+          "text": "/ðəs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/this-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Bạn",
+    "options": ["kit", "bus", "ice", "you"],
+    "answer": {
+      "word": "you",
+      "phonetics": [
+        {
+          "text": "/jə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/you-au-us-unstressed.mp3"
+        },
+        {
+          "text": "/ju/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/you-us-stressed.mp3"
+        },
+        {
+          "text": "/jə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/you-au-us-unstressed.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Nó",
+    "options": ["it", "whom", "core", "lost"],
+    "answer": {
+      "word": "it",
+      "phonetics": [
+        {
+          "text": "/ɪt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/it-us-stressed.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "không",
+    "options": ["gets", "test", "now", "not"],
+    "answer": {
+      "word": "not",
+      "phonetics": [
+        {
+          "text": "/nɑt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/not-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hoặc",
+    "options": ["male", "or", "del", "page"],
+    "answer": {
+      "word": "or",
+      "phonetics": [
+        {
+          "text": "/ɔɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/or-us-stressed.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tất cả",
+    "options": ["stop", "van", "it", "all"],
+    "answer": {
+      "word": "all",
+      "phonetics": [
+        {
+          "text": "/ɔl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/all-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mới",
+    "options": ["team", "self", "days", "new"],
+    "answer": {
+      "word": "new",
+      "phonetics": [
+        {
+          "text": "/n(j)u/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/new-us.ogg"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hơn",
+    "options": ["only", "more", "bear", "gain"],
+    "answer": {
+      "word": "more",
+      "phonetics": [
+        {
+          "text": "/ˈmɔɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/more-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "MỘT",
+    "options": ["want", "an", "snow", "both"],
+    "answer": {
+      "word": "an",
+      "phonetics": [
+        {
+          "text": "/æn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/an-us-stressed.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chúng tôi",
+    "options": ["ray", "we", "note", "ad"],
+    "answer": {
+      "word": "we",
+      "phonetics": [
+        {
+          "text": "/wi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/we-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sẽ",
+    "options": ["path", "act", "will", "more"],
+    "answer": {
+      "word": "will",
+      "phonetics": [
+        {
+          "text": "/wɪl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/will-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "trang chủ",
+    "options": ["poor", "home", "tea", "atom"],
+    "answer": {
+      "word": "home",
+      "phonetics": [
+        {
+          "text": "/hoʊm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/home-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Có thể",
+    "options": ["risk", "can", "golf", "face"],
+    "answer": {
+      "word": "can",
+      "phonetics": [
+        {
+          "text": "/ˈkæn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/can-1-us-stressed.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nếu như",
+    "options": ["man", "cart", "host", "if"],
+    "answer": {
+      "word": "if",
+      "phonetics": [
+        {
+          "text": "/ɪf/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/if-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "trang",
+    "options": ["page", "win", "data", "ads"],
+    "answer": {
+      "word": "page",
+      "phonetics": [
+        {
+          "text": "/peɪd͡ʒ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/page-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Của tôi",
+    "options": ["flat", "mom", "my", "home"],
+    "answer": {
+      "word": "my",
+      "phonetics": [
+        {
+          "text": "/mi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/my-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "miễn phí",
+    "options": ["hole", "cap", "work", "free"],
+    "answer": {
+      "word": "free",
+      "phonetics": [
+        {
+          "text": "/fɹiː/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/free-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "một",
+    "options": ["camp", "tree", "home", "one"],
+    "answer": {
+      "word": "one",
+      "phonetics": [
+        {
+          "text": "/wʌn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/one-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "LÀM",
+    "options": ["do", "vote", "wed", "wild"],
+    "answer": {
+      "word": "do",
+      "phonetics": [
+        {
+          "text": "/du/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/do-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "KHÔNG",
+    "options": ["lee", "no", "turn", "null"],
+    "answer": {
+      "word": "no",
+      "phonetics": [
+        {
+          "text": "/noʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/no-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thời gian",
+    "options": ["feel", "time", "post", "open"],
+    "answer": {
+      "word": "time",
+      "phonetics": [
+        {
+          "text": "/taɪm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/time-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "họ",
+    "options": ["sold", "they", "hit", "mean"],
+    "answer": {
+      "word": "they",
+      "phonetics": [
+        {
+          "text": "/ðeɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/they-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "địa điểm",
+    "options": ["safe", "site", "dead", "fear"],
+    "answer": {
+      "word": "site",
+      "phonetics": [
+        {
+          "text": "/saɪt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/site-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Anh ta",
+    "options": ["he", "song", "boys", "miss"],
+    "answer": {
+      "word": "he",
+      "phonetics": [
+        {
+          "text": "/hi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/he-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hướng lên",
+    "options": ["in", "bag", "oil", "up"],
+    "answer": {
+      "word": "up",
+      "phonetics": [
+        {
+          "text": "/ʌp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/up-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "có thể",
+    "options": ["act", "tree", "gain", "may"],
+    "answer": {
+      "word": "may",
+      "phonetics": [
+        {
+          "text": "/meɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/may-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Gì",
+    "options": ["what", "park", "made", "port"],
+    "answer": {
+      "word": "what",
+      "phonetics": [
+        {
+          "text": "/wɒt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/what-us.mp3"
+        },
+        {
+          "text": "[wʌɾ]",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/what-us-unstressed.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ngoài",
+    "options": ["act", "camp", "size", "out"],
+    "answer": {
+      "word": "out",
+      "phonetics": [
+        {
+          "text": "/aʊt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/out-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bất kì",
+    "options": ["item", "can", "any", "p"],
+    "answer": {
+      "word": "any",
+      "phonetics": [
+        {
+          "text": "/ˈɛni/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/any-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhìn thấy",
+    "options": ["know", "goal", "put", "see"],
+    "answer": {
+      "word": "see",
+      "phonetics": [
+        {
+          "text": "/siː/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/see-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chỉ một",
+    "options": ["hot", "wish", "only", "fun"],
+    "answer": {
+      "word": "only",
+      "phonetics": [
+        {
+          "text": "/ˈoʊn.li/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/only-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Vì thế",
+    "options": ["so", "nice", "late", "mail"],
+    "answer": {
+      "word": "so",
+      "phonetics": [
+        {
+          "text": "/soʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/so-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "khi",
+    "options": ["boys", "link", "hi", "when"],
+    "answer": {
+      "word": "when",
+      "phonetics": [
+        {
+          "text": "/wɛn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/when-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đây",
+    "options": ["jump", "here", "wish", "off"],
+    "answer": {
+      "word": "here",
+      "phonetics": [
+        {
+          "text": "/hɪɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/here-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Ai",
+    "options": ["who", "ads", "poor", "pay"],
+    "answer": {
+      "word": "who",
+      "phonetics": [
+        {
+          "text": "/huː/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/who-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Web",
+    "options": ["loss", "mom", "web", "page"],
+    "answer": {
+      "word": "web",
+      "phonetics": [
+        {
+          "text": "/wɛb/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/web-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Mà còn",
+    "options": ["wed", "cost", "link", "also"],
+    "answer": {
+      "word": "also",
+      "phonetics": [
+        {
+          "text": "/ˈɔl.soʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/also-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Hiện nay",
+    "options": ["bear", "now", "put", "nine"],
+    "answer": {
+      "word": "now",
+      "phonetics": [
+        {
+          "text": "/naʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/now-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "giúp đỡ",
+    "options": ["help", "once", "cap", "give"],
+    "answer": {
+      "word": "help",
+      "phonetics": [
+        {
+          "text": "/hɛlp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/help-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "lấy",
+    "options": ["get", "duty", "away", "dan"],
+    "answer": {
+      "word": "get",
+      "phonetics": [
+        {
+          "text": "/ɡɛt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/get-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "xem",
+    "options": ["risk", "type", "view", "cost"],
+    "answer": {
+      "word": "view",
+      "phonetics": [
+        {
+          "text": "/vjuː/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/view-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "là",
+    "options": ["seat", "am", "nor", "much"],
+    "answer": {
+      "word": "am",
+      "phonetics": [
+        {
+          "text": "[ɛ̃ə̃ːm]",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/am-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "là",
+    "options": ["full", "wed", "let", "been"],
+    "answer": {
+      "word": "been",
+      "phonetics": [
+        {
+          "text": "/bɛn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/been-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Làm sao",
+    "options": ["care", "host", "how", "fort"],
+    "answer": {
+      "word": "how",
+      "phonetics": [
+        {
+          "text": "/haʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/how-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Tôi",
+    "options": ["me", "care", "duty", "send"],
+    "answer": {
+      "word": "me",
+      "phonetics": [
+        {
+          "text": "/mi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/me-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "một số",
+    "options": ["grow", "some", "off", "deal"],
+    "answer": {
+      "word": "some",
+      "phonetics": [
+        {
+          "text": "/sʌm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/some-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "của nó",
+    "options": ["its", "will", "also", "took"],
+    "answer": {
+      "word": "its",
+      "phonetics": [
+        {
+          "text": "/ɪts/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/its-us.ogg"
+        }
+      ]
+    }
+  },
+  {
+    "question": "giống",
+    "options": ["easy", "cell", "like", "hour"],
+    "answer": {
+      "word": "like",
+      "phonetics": [
+        {
+          "text": "/laɪk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/like-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tìm thấy",
+    "options": ["skin", "find", "core", "bird"],
+    "answer": {
+      "word": "find",
+      "phonetics": [
+        {
+          "text": "/faɪnd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/find-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ngày",
+    "options": ["love", "bear", "date", "land"],
+    "answer": {
+      "word": "date",
+      "phonetics": [
+        {
+          "text": "/deɪt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/date-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mặt sau",
+    "options": ["her", "fee", "when", "back"],
+    "answer": {
+      "word": "back",
+      "phonetics": [
+        {
+          "text": "/bæk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/back-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đứng đầu",
+    "options": ["host", "law", "top", "job"],
+    "answer": {
+      "word": "top",
+      "phonetics": [
+        {
+          "text": "/tɑp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/top-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "danh sách",
+    "options": ["city", "list", "farm", "fort"],
+    "answer": {
+      "word": "list",
+      "phonetics": [
+        {
+          "text": "/lɪst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/list-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tên",
+    "options": ["name", "gay", "la", "bush"],
+    "answer": {
+      "word": "name",
+      "phonetics": [
+        {
+          "text": "/neɪm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/name-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chỉ",
+    "options": ["tea", "blue", "just", "turn"],
+    "answer": {
+      "word": "just",
+      "phonetics": [
+        {
+          "text": "/d͡ʒʌst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/just-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "qua",
+    "options": ["lord", "inn", "la", "over"],
+    "answer": {
+      "word": "over",
+      "phonetics": [
+        {
+          "text": "/ˈoʊ.vɚ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/over-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "năm",
+    "options": ["year", "die", "flat", "such"],
+    "answer": {
+      "word": "year",
+      "phonetics": [
+        {
+          "text": "/jɪɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/year-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ngày",
+    "options": ["case", "such", "rise", "day"],
+    "answer": {
+      "word": "day",
+      "phonetics": [
+        {
+          "text": "/deɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/day-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hai",
+    "options": ["two", "mass", "name", "mark"],
+    "answer": {
+      "word": "two",
+      "phonetics": [
+        {
+          "text": "/tu/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/two-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Kế tiếp",
+    "options": ["acid", "risk", "help", "next"],
+    "answer": {
+      "word": "next",
+      "phonetics": [
+        {
+          "text": "/nɛkst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/next-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đi",
+    "options": ["tour", "type", "go", "cat"],
+    "answer": {
+      "word": "go",
+      "phonetics": [
+        {
+          "text": "/ɡoʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/go-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "công việc",
+    "options": ["bc", "soft", "help", "work"],
+    "answer": {
+      "word": "work",
+      "phonetics": [
+        {
+          "text": "/wəik/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/work-us.ogg"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cuối cùng",
+    "options": ["hire", "last", "may", "come"],
+    "answer": {
+      "word": "last",
+      "phonetics": [
+        {
+          "text": "/læst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/last-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hầu hết",
+    "options": ["most", "baby", "test", "girl"],
+    "answer": {
+      "word": "most",
+      "phonetics": [
+        {
+          "text": "/ˈmoʊst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/most-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mua",
+    "options": ["make", "gay", "buy", "heat"],
+    "answer": {
+      "word": "buy",
+      "phonetics": [
+        {
+          "text": "/baɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/buy-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "dữ liệu",
+    "options": ["read", "data", "gold", "pain"],
+    "answer": {
+      "word": "data",
+      "phonetics": [
+        {
+          "text": "/ˈdætə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/data-ca-ie-us.mp3"
+        },
+        {
+          "text": "/ˈdeɪtə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/data-ie-uk-us.mp3"
+        },
+        {
+          "text": "/ˈdeɪtə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/data-ie-uk-us.mp3"
+        },
+        {
+          "text": "/ˈdeɪtə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/data-ie-uk-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "làm",
+    "options": ["next", "map", "palm", "make"],
+    "answer": {
+      "word": "make",
+      "phonetics": [
+        {
+          "text": "/meɪk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/make-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bưu kiện",
+    "options": ["post", "help", "most", "bar"],
+    "answer": {
+      "word": "post",
+      "phonetics": [
+        {
+          "text": "/poʊst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/post-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cô ấy",
+    "options": ["show", "she", "her", "lost"],
+    "answer": {
+      "word": "her",
+      "phonetics": [
+        {
+          "text": "/ɚ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/her-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thành phố",
+    "options": ["ever", "hand", "team", "city"],
+    "answer": {
+      "word": "city",
+      "phonetics": [
+        {
+          "text": "/ˈsɪɾi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/city-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thêm vào",
+    "options": ["lake", "add", "path", "bath"],
+    "answer": {
+      "word": "add",
+      "phonetics": [
+        {
+          "text": "/æd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/add-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "như là",
+    "options": ["such", "hand", "dead", "plan"],
+    "answer": {
+      "word": "such",
+      "phonetics": [
+        {
+          "text": "/sʌt͡ʃ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/such-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tốt nhất",
+    "options": ["we", "best", "miss", "join"],
+    "answer": {
+      "word": "best",
+      "phonetics": [
+        {
+          "text": "/ˈbɛst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/best-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sau đó",
+    "options": ["wed", "then", "tom", "new"],
+    "answer": {
+      "word": "then",
+      "phonetics": [
+        {
+          "text": "/ðɛn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/then-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Tốt",
+    "options": ["good", "bird", "time", "safe"],
+    "answer": {
+      "word": "good",
+      "phonetics": [
+        {
+          "text": "[ɡɪ̈d]",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/good-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Tốt",
+    "options": ["huge", "well", "rate", "pay"],
+    "answer": {
+      "word": "well",
+      "phonetics": [
+        {
+          "text": "/wɛl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/well-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cao",
+    "options": ["late", "high", "pair", "wine"],
+    "answer": {
+      "word": "high",
+      "phonetics": [
+        {
+          "text": "/haɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/high-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mỗi",
+    "options": ["each", "four", "lead", "tom"],
+    "answer": {
+      "word": "each",
+      "phonetics": [
+        {
+          "text": "/it͡ʃ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/each-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cô ấy",
+    "options": ["less", "week", "she", "give"],
+    "answer": {
+      "word": "she",
+      "phonetics": [
+        {
+          "text": "/ʃi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/she-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "rất",
+    "options": ["very", "clip", "sign", "fit"],
+    "answer": {
+      "word": "very",
+      "phonetics": [
+        {
+          "text": "/ˈvɛɹi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/very-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sách",
+    "options": ["own", "book", "role", "debt"],
+    "answer": {
+      "word": "book",
+      "phonetics": [
+        {
+          "text": "/buːk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/book-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đọc",
+    "options": ["bear", "sell", "run", "read"],
+    "answer": {
+      "word": "read",
+      "phonetics": [
+        {
+          "text": "/ɹid/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/read-1-us.ogg"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhu cầu",
+    "options": ["take", "stop", "lady", "need"],
+    "answer": {
+      "word": "need",
+      "phonetics": [
+        {
+          "text": "/niːd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/need-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhiều",
+    "options": ["or", "many", "line", "full"],
+    "answer": {
+      "word": "many",
+      "phonetics": [
+        {
+          "text": "/ˈmɛni/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/many-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "người dùng",
+    "options": ["wish", "user", "baby", "disc"],
+    "answer": {
+      "word": "user",
+      "phonetics": [
+        {
+          "text": "/ˈjuzɚ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/user-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bộ",
+    "options": ["tea", "set", "role", "date"],
+    "answer": {
+      "word": "set",
+      "phonetics": [
+        {
+          "text": "/sɛt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/set-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thư",
+    "options": ["add", "not", "bag", "mail"],
+    "answer": {
+      "word": "mail",
+      "phonetics": [
+        {
+          "text": "/meɪ̯l/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/mail-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đầy",
+    "options": ["keep", "full", "loan", "idea"],
+    "answer": {
+      "word": "full",
+      "phonetics": [
+        {
+          "text": "/fʊl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/full-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bản đồ",
+    "options": ["map", "most", "cars", "ad"],
+    "answer": {
+      "word": "map",
+      "phonetics": [
+        {
+          "text": "/mæp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/map-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mạng sống",
+    "options": ["hip", "wish", "gay", "life"],
+    "answer": {
+      "word": "life",
+      "phonetics": [
+        {
+          "text": "/laɪf/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/life-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "biết",
+    "options": ["know", "walk", "log", "away"],
+    "answer": {
+      "word": "know",
+      "phonetics": [
+        {
+          "text": "/noʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/know-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đường",
+    "options": ["ever", "wars", "way", "got"],
+    "answer": {
+      "word": "way",
+      "phonetics": [
+        {
+          "text": "/weɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/way-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ngày",
+    "options": ["palm", "pass", "days", "cart"],
+    "answer": {
+      "word": "days",
+      "phonetics": [
+        {
+          "text": "/ˈdeɪz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/days-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "P",
+    "options": ["moon", "mix", "task", "p"],
+    "answer": {
+      "word": "p",
+      "phonetics": [
+        {
+          "text": "/piː/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/p-2-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "phần",
+    "options": ["drop", "play", "paid", "part"],
+    "answer": {
+      "word": "part",
+      "phonetics": [
+        {
+          "text": "/pɑɹt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/part-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thực tế",
+    "options": ["real", "nine", "blue", "each"],
+    "answer": {
+      "word": "real",
+      "phonetics": [
+        {
+          "text": "/ɹiːl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/real-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mục",
+    "options": ["item", "been", "fees", "each"],
+    "answer": {
+      "word": "item",
+      "phonetics": [
+        {
+          "text": "[ˈaɪ̯ɾm̩]",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/item-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "làm ra",
+    "options": ["made", "held", "good", "any"],
+    "answer": {
+      "word": "made",
+      "phonetics": [
+        {
+          "text": "/meɪd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/made-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tắt",
+    "options": ["low", "safe", "off", "we"],
+    "answer": {
+      "word": "off",
+      "phonetics": [
+        {
+          "text": "/ɔf/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/off-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đường kẻ",
+    "options": ["sky", "shop", "fat", "line"],
+    "answer": {
+      "word": "line",
+      "phonetics": [
+        {
+          "text": "/laɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/line-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "gửi",
+    "options": ["ends", "gene", "send", "zone"],
+    "answer": {
+      "word": "send",
+      "phonetics": [
+        {
+          "text": "/sɛnd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/send-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "kiểu",
+    "options": ["type", "o", "five", "car"],
+    "answer": {
+      "word": "type",
+      "phonetics": [
+        {
+          "text": "/taɪp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/type-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "xe hơi",
+    "options": ["ups", "car", "bell", "rent"],
+    "answer": {
+      "word": "car",
+      "phonetics": [
+        {
+          "text": "/kɑɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/car-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "lấy",
+    "options": ["take", "off", "rate", "sort"],
+    "answer": {
+      "word": "take",
+      "phonetics": [
+        {
+          "text": "/teɪk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/take-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "khu vực",
+    "options": ["any", "area", "true", "send"],
+    "answer": {
+      "word": "area",
+      "phonetics": [
+        {
+          "text": "/ˈæɹ.i.ə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/area-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "muốn",
+    "options": ["want", "fair", "mean", "form"],
+    "answer": {
+      "word": "want",
+      "phonetics": [
+        {
+          "text": "/wɑnt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/want-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "trình diễn",
+    "options": ["term", "well", "show", "hour"],
+    "answer": {
+      "word": "show",
+      "phonetics": [
+        {
+          "text": "/ʃoʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/show-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "o",
+    "options": ["old", "cost", "date", "o"],
+    "answer": {
+      "word": "o",
+      "phonetics": [
+        {
+          "text": "/oʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/o-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thậm chí",
+    "options": ["pick", "page", "mine", "even"],
+    "answer": {
+      "word": "even",
+      "phonetics": [
+        {
+          "text": "/ˈivn̩/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/even-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhiều",
+    "options": ["yeah", "much", "very", "idea"],
+    "answer": {
+      "word": "much",
+      "phonetics": [
+        {
+          "text": "/mʌt͡ʃ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/much-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "dấu hiệu",
+    "options": ["sign", "upon", "face", "four"],
+    "answer": {
+      "word": "sign",
+      "phonetics": [
+        {
+          "text": "/saɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/sign-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tài liệu",
+    "options": ["file", "now", "loss", "tea"],
+    "answer": {
+      "word": "file",
+      "phonetics": [
+        {
+          "text": "/faɪl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/file-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "liên kết",
+    "options": ["wire", "link", "you", "port"],
+    "answer": {
+      "word": "link",
+      "phonetics": [
+        {
+          "text": "/lɪŋk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/link-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mở",
+    "options": ["make", "need", "open", "been"],
+    "answer": {
+      "word": "open",
+      "phonetics": [
+        {
+          "text": "/ˈoʊ.pən/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/open-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "trường hợp",
+    "options": ["case", "blog", "open", "hear"],
+    "answer": {
+      "word": "case",
+      "phonetics": [
+        {
+          "text": "/keɪs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/case-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "như nhau",
+    "options": ["same", "some", "ring", "eyes"],
+    "answer": {
+      "word": "same",
+      "phonetics": [
+        {
+          "text": "/seɪm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/same-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sở hữu",
+    "options": ["west", "post", "copy", "own"],
+    "answer": {
+      "word": "own",
+      "phonetics": [
+        {
+          "text": "/ˈoʊn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/own-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cả hai",
+    "options": ["five", "bug", "plan", "both"],
+    "answer": {
+      "word": "both",
+      "phonetics": [
+        {
+          "text": "/boʊθ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/both-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "trò chơi",
+    "options": ["game", "band", "teen", "fast"],
+    "answer": {
+      "word": "game",
+      "phonetics": [
+        {
+          "text": "/ɡeɪm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/game-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sự chăm sóc",
+    "options": ["eyes", "sold", "care", "let"],
+    "answer": {
+      "word": "care",
+      "phonetics": [
+        {
+          "text": "/ke(ə)ɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/care-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "xuống",
+    "options": ["goal", "air", "west", "down"],
+    "answer": {
+      "word": "down",
+      "phonetics": [
+        {
+          "text": "/daʊn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/down-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "kết thúc",
+    "options": ["over", "end", "any", "fees"],
+    "answer": {
+      "word": "end",
+      "phonetics": [
+        {
+          "text": "/ɛnd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/end-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "anh ta",
+    "options": ["copy", "lack", "king", "him"],
+    "answer": {
+      "word": "him",
+      "phonetics": [
+        {
+          "text": "/əm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/him-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mỗi",
+    "options": ["per", "ship", "nine", "turn"],
+    "answer": {
+      "word": "per",
+      "phonetics": [
+        {
+          "text": "/pɝ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/per-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "to lớn",
+    "options": ["big", "far", "sure", "tape"],
+    "answer": {
+      "word": "big",
+      "phonetics": [
+        {
+          "text": "/bɪɡ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/big-us.ogg"
+        }
+      ]
+    }
+  },
+  {
+    "question": "pháp luật",
+    "options": ["core", "buy", "tea", "law"],
+    "answer": {
+      "word": "law",
+      "phonetics": [
+        {
+          "text": "/lɔ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/law-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "kích cỡ",
+    "options": ["sent", "duty", "size", "base"],
+    "answer": {
+      "word": "size",
+      "phonetics": [
+        {
+          "text": "/saɪz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/size-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nghệ thuật",
+    "options": ["boys", "jack", "bass", "art"],
+    "answer": {
+      "word": "art",
+      "phonetics": [
+        {
+          "text": "/ɑɹt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/art-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cửa hàng",
+    "options": ["shop", "same", "tips", "work"],
+    "answer": {
+      "word": "shop",
+      "phonetics": [
+        {
+          "text": "/ʃɑp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/shop-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chữ",
+    "options": ["goes", "free", "text", "if"],
+    "answer": {
+      "word": "text",
+      "phonetics": [
+        {
+          "text": "/tɛkst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/text-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tỷ lệ",
+    "options": ["not", "eye", "cat", "rate"],
+    "answer": {
+      "word": "rate",
+      "phonetics": [
+        {
+          "text": "/ɹeɪt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/rate-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hình thức",
+    "options": ["ex", "club", "bag", "form"],
+    "answer": {
+      "word": "form",
+      "phonetics": [
+        {
+          "text": "/fɔɹm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/form-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "yêu",
+    "options": ["wait", "area", "far", "love"],
+    "answer": {
+      "word": "love",
+      "phonetics": [
+        {
+          "text": "/lʌv/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/love-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cũ",
+    "options": ["old", "fix", "baby", "art"],
+    "answer": {
+      "word": "old",
+      "phonetics": [
+        {
+          "text": "/ˈoʊld/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/old-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "John",
+    "options": ["part", "spot", "john", "bank"],
+    "answer": {
+      "word": "john",
+      "phonetics": [
+        {
+          "text": "/ˈdʒɑn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/john-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chủ yếu",
+    "options": ["late", "wall", "main", "come"],
+    "answer": {
+      "word": "main",
+      "phonetics": [
+        {
+          "text": "/meɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/main-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "gọi",
+    "options": ["call", "p", "left", "move"],
+    "answer": {
+      "word": "call",
+      "phonetics": [
+        {
+          "text": "/kɔl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/call-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Tại sao",
+    "options": ["teen", "why", "dry", "big"],
+    "answer": {
+      "word": "why",
+      "phonetics": [
+        {
+          "text": "/waɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/why-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cứu",
+    "options": ["zip", "tips", "sky", "save"],
+    "answer": {
+      "word": "save",
+      "phonetics": [
+        {
+          "text": "/seɪv/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/save-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thấp",
+    "options": ["more", "play", "low", "make"],
+    "answer": {
+      "word": "low",
+      "phonetics": [
+        {
+          "text": "/loʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/low-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "người đàn ông",
+    "options": ["thus", "del", "spot", "man"],
+    "answer": {
+      "word": "man",
+      "phonetics": [
+        {
+          "text": "/mæn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/man-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thẻ",
+    "options": ["em", "card", "left", "oil"],
+    "answer": {
+      "word": "card",
+      "phonetics": [
+        {
+          "text": "/kɑɹd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/card-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "j",
+    "options": ["vice", "j", "cash", "skin"],
+    "answer": {
+      "word": "j",
+      "phonetics": [
+        {
+          "text": "/dʒeɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/j-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "công việc",
+    "options": ["jack", "golf", "job", "mean"],
+    "answer": {
+      "word": "job",
+      "phonetics": [
+        {
+          "text": "/d͡ʒɑb/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/job-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thiếu niên",
+    "options": ["teen", "mom", "fly", "row"],
+    "answer": {
+      "word": "teen",
+      "phonetics": [
+        {
+          "text": "/tiːn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/teen-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cũng vậy",
+    "options": ["lord", "too", "the", "test"],
+    "answer": {
+      "word": "too",
+      "phonetics": [
+        {
+          "text": "/tu/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/too-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tham gia",
+    "options": ["kind", "join", "free", "two"],
+    "answer": {
+      "word": "join",
+      "phonetics": [
+        {
+          "text": "/ˈdʒɔɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/join-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Đàn ông",
+    "options": ["we", "men", "word", "city"],
+    "answer": {
+      "word": "men",
+      "phonetics": [
+        {
+          "text": "/mɛn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/men-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Tây",
+    "options": ["cell", "out", "head", "west"],
+    "answer": {
+      "word": "west",
+      "phonetics": [
+        {
+          "text": "/wɛst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/west-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bên trái",
+    "options": ["ad", "test", "felt", "left"],
+    "answer": {
+      "word": "left",
+      "phonetics": [
+        {
+          "text": "/lɛft/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/left-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đội",
+    "options": ["walk", "feet", "days", "team"],
+    "answer": {
+      "word": "team",
+      "phonetics": [
+        {
+          "text": "/tiːm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/team-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hộp",
+    "options": ["week", "box", "make", "red"],
+    "answer": {
+      "word": "box",
+      "phonetics": [
+        {
+          "text": "/bɑks/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/box-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Gay",
+    "options": ["gay", "heat", "rich", "toy"],
+    "answer": {
+      "word": "gay",
+      "phonetics": [
+        {
+          "text": "/ɡeɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/gay-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tuần",
+    "options": ["blue", "able", "feet", "week"],
+    "answer": {
+      "word": "week",
+      "phonetics": [
+        {
+          "text": "/wik/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/week-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ghi chú",
+    "options": ["he", "sets", "note", "fax"],
+    "answer": {
+      "word": "note",
+      "phonetics": [
+        {
+          "text": "/noʊt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/note-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sống",
+    "options": ["most", "live", "seem", "far"],
+    "answer": {
+      "word": "live",
+      "phonetics": [
+        {
+          "text": "/lɪv/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/live-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "không khí",
+    "options": ["six", "air", "site", "lee"],
+    "answer": {
+      "word": "air",
+      "phonetics": [
+        {
+          "text": "/ˈɛəɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/air-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "kế hoạch",
+    "options": ["plan", "need", "high", "whom"],
+    "answer": {
+      "word": "plan",
+      "phonetics": [
+        {
+          "text": "/plæn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/plan-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nóng",
+    "options": ["man", "tip", "hot", "set"],
+    "answer": {
+      "word": "hot",
+      "phonetics": [
+        {
+          "text": "/hɑt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hot-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "trị giá",
+    "options": ["war", "cost", "knew", "fill"],
+    "answer": {
+      "word": "cost",
+      "phonetics": [
+        {
+          "text": "/ˈkɔst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cost-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "LA",
+    "options": ["find", "la", "rule", "read"],
+    "answer": {
+      "word": "la",
+      "phonetics": [
+        {
+          "text": "/lɑː/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/la-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nói",
+    "options": ["area", "list", "say", "lead"],
+    "answer": {
+      "word": "say",
+      "phonetics": [
+        {
+          "text": "/seɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/say-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Bài kiểm tra",
+    "options": ["don", "test", "ago", "zone"],
+    "answer": {
+      "word": "test",
+      "phonetics": [
+        {
+          "text": "/test/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/test-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đến",
+    "options": ["come", "desk", "make", "cold"],
+    "answer": {
+      "word": "come",
+      "phonetics": [
+        {
+          "text": "/kʌm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/come-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "xe đẩy",
+    "options": ["kids", "cart", "able", "skin"],
+    "answer": {
+      "word": "cart",
+      "phonetics": [
+        {
+          "text": "/kɑɹt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cart-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chơi",
+    "options": ["play", "ring", "kit", "bin"],
+    "answer": {
+      "word": "play",
+      "phonetics": [
+        {
+          "text": "/pleɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/play-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thuế",
+    "options": ["tax", "gain", "left", "item"],
+    "answer": {
+      "word": "tax",
+      "phonetics": [
+        {
+          "text": "/tæks/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/tax-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ít hơn",
+    "options": ["fit", "hear", "mode", "less"],
+    "answer": {
+      "word": "less",
+      "phonetics": [
+        {
+          "text": "/lɛs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/less-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "lấy",
+    "options": ["red", "got", "up", "blue"],
+    "answer": {
+      "word": "got",
+      "phonetics": [
+        {
+          "text": "/ɡɑt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/got-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Blog",
+    "options": ["page", "fit", "blog", "song"],
+    "answer": {
+      "word": "blog",
+      "phonetics": [
+        {
+          "text": "/blɑɡ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/blog-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cho phép",
+    "options": ["some", "able", "wire", "let"],
+    "answer": {
+      "word": "let",
+      "phonetics": [
+        {
+          "text": "/lɛt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/let-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "công viên",
+    "options": ["park", "own", "ever", "drop"],
+    "answer": {
+      "word": "park",
+      "phonetics": [
+        {
+          "text": "[paːk]",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/park-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bên",
+    "options": ["mix", "side", "such", "read"],
+    "answer": {
+      "word": "side",
+      "phonetics": [
+        {
+          "text": "/saɪd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/side-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hành động",
+    "options": ["act", "fish", "plan", "bad"],
+    "answer": {
+      "word": "act",
+      "phonetics": [
+        {
+          "text": "/æk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/act-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "màu đỏ",
+    "options": ["slow", "once", "bit", "red"],
+    "answer": {
+      "word": "red",
+      "phonetics": [
+        {
+          "text": "/ɹɛd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/red-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đưa cho",
+    "options": ["sort", "race", "give", "thus"],
+    "answer": {
+      "word": "give",
+      "phonetics": [
+        {
+          "text": "/ɡɪv/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/give-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bán",
+    "options": ["six", "sell", "told", "vote"],
+    "answer": {
+      "word": "sell",
+      "phonetics": [
+        {
+          "text": "/sɛl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/sell-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chìa khóa",
+    "options": ["key", "ago", "path", "bar"],
+    "answer": {
+      "word": "key",
+      "phonetics": [
+        {
+          "text": "/ki/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/key-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thân hình",
+    "options": ["body", "like", "nice", "ups"],
+    "answer": {
+      "word": "body",
+      "phonetics": [
+        {
+          "text": "/ˈbɑdi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/body-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "một vài",
+    "options": ["few", "he", "mind", "song"],
+    "answer": {
+      "word": "few",
+      "phonetics": [
+        {
+          "text": "/fju/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/few-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "phía đông",
+    "options": ["fish", "east", "by", "desk"],
+    "answer": {
+      "word": "east",
+      "phonetics": [
+        {
+          "text": "/iːst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/east-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tuổi",
+    "options": ["debt", "age", "then", "baby"],
+    "answer": {
+      "word": "age",
+      "phonetics": [
+        {
+          "text": "/eɪd͡ʒ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/age-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Câu lạc bộ",
+    "options": ["club", "bus", "made", "flag"],
+    "answer": {
+      "word": "club",
+      "phonetics": [
+        {
+          "text": "/klʌb/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/club-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đường",
+    "options": ["hit", "may", "rank", "road"],
+    "answer": {
+      "word": "road",
+      "phonetics": [
+        {
+          "text": "/ɹoʊd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/road-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "quà",
+    "options": ["gift", "la", "say", "wed"],
+    "answer": {
+      "word": "gift",
+      "phonetics": [
+        {
+          "text": "/ɡɪft/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/gift-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cứng",
+    "options": ["term", "hard", "also", "stay"],
+    "answer": {
+      "word": "hard",
+      "phonetics": [
+        {
+          "text": "/hɑɹd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hard-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chi trả",
+    "options": ["role", "pay", "hi", "girl"],
+    "answer": {
+      "word": "pay",
+      "phonetics": [
+        {
+          "text": "/peɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/pay-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Bốn",
+    "options": ["open", "job", "four", "roll"],
+    "answer": {
+      "word": "four",
+      "phonetics": [
+        {
+          "text": "/fɔɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/four-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chiến tranh",
+    "options": ["war", "goes", "bag", "sat"],
+    "answer": {
+      "word": "war",
+      "phonetics": [
+        {
+          "text": "/wɔɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/war-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "màu xanh da trời",
+    "options": ["base", "blue", "debt", "la"],
+    "answer": {
+      "word": "blue",
+      "phonetics": [
+        {
+          "text": "/blu/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/blue-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["cap", "easy", "bad", "gave"],
+    "answer": {
+      "word": "easy",
+      "phonetics": [
+        {
+          "text": "/ˈizi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/easy-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "fax",
+    "options": ["only", "fax", "am", "low"],
+    "answer": {
+      "word": "fax",
+      "phonetics": [
+        {
+          "text": "/fæks/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fax-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chưa",
+    "options": ["yet", "bag", "row", "heat"],
+    "answer": {
+      "word": "yet",
+      "phonetics": [
+        {
+          "text": "/jɛt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/yet-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ngôi sao",
+    "options": ["star", "golf", "cape", "met"],
+    "answer": {
+      "word": "star",
+      "phonetics": [
+        {
+          "text": "/stɑɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/star-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tay",
+    "options": ["hand", "port", "walk", "one"],
+    "answer": {
+      "word": "hand",
+      "phonetics": [
+        {
+          "text": "/hænd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hand-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mặt trời",
+    "options": ["type", "the", "wars", "sun"],
+    "answer": {
+      "word": "sun",
+      "phonetics": [
+        {
+          "text": "/sʌn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/sun-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhận dạng",
+    "options": ["gay", "shop", "id", "job"],
+    "answer": {
+      "word": "id",
+      "phonetics": [
+        {
+          "text": "/ɪd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/id-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "giữ",
+    "options": ["keep", "lost", "unit", "part"],
+    "answer": {
+      "word": "keep",
+      "phonetics": [
+        {
+          "text": "/kiːp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/keep-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Đứa bé",
+    "options": ["bell", "saw", "salt", "baby"],
+    "answer": {
+      "word": "baby",
+      "phonetics": [
+        {
+          "text": "/ˈbeɪbi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/baby-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chạy",
+    "options": ["stay", "inn", "ever", "run"],
+    "answer": {
+      "word": "run",
+      "phonetics": [
+        {
+          "text": "/ɹʌn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/run-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thuật ngữ",
+    "options": ["song", "act", "term", "ads"],
+    "answer": {
+      "word": "term",
+      "phonetics": [
+        {
+          "text": "/tɝm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/term-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đặt",
+    "options": ["role", "high", "lee", "put"],
+    "answer": {
+      "word": "put",
+      "phonetics": [
+        {
+          "text": "/pʊt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/put-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thử",
+    "options": ["ray", "try", "best", "bed"],
+    "answer": {
+      "word": "try",
+      "phonetics": [
+        {
+          "text": "/tɹaɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/try-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cái đầu",
+    "options": ["toy", "head", "no", "buy"],
+    "answer": {
+      "word": "head",
+      "phonetics": [
+        {
+          "text": "/hɛd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/head-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tế bào",
+    "options": ["life", "self", "cell", "bad"],
+    "answer": {
+      "word": "cell",
+      "phonetics": [
+        {
+          "text": "/sɛl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cell-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bản thân",
+    "options": ["self", "mail", "king", "log"],
+    "answer": {
+      "word": "self",
+      "phonetics": [
+        {
+          "text": "/sɛlf/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/self-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "xa",
+    "options": ["fire", "rise", "drug", "away"],
+    "answer": {
+      "word": "away",
+      "phonetics": [
+        {
+          "text": "/əˈweɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/away-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "một lần",
+    "options": ["both", "team", "saw", "once"],
+    "answer": {
+      "word": "once",
+      "phonetics": [
+        {
+          "text": "/wʌn(t)s/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/once-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đăng nhập",
+    "options": ["log", "form", "lot", "deal"],
+    "answer": {
+      "word": "log",
+      "phonetics": [
+        {
+          "text": "/lɑɡ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/log-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Chắc chắn",
+    "options": ["poor", "sure", "mix", "next"],
+    "answer": {
+      "word": "sure",
+      "phonetics": [
+        {
+          "text": "/ʃɔɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/sure-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["baby", "cars", "deep", "am"],
+    "answer": {
+      "word": "cars",
+      "phonetics": [
+        {
+          "text": "/ˈkɑɹz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cars-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "kể",
+    "options": ["tell", "host", "ink", "mi"],
+    "answer": {
+      "word": "tell",
+      "phonetics": [
+        {
+          "text": "/tɛl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/tell-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["army", "teen", "read", "able"],
+    "answer": {
+      "word": "able",
+      "phonetics": [
+        {
+          "text": "/ˈeɪ.bl̩/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/able-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "vui vẻ",
+    "options": ["fat", "fact", "show", "fun"],
+    "answer": {
+      "word": "fun",
+      "phonetics": [
+        {
+          "text": "/fʌn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fun-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "vàng",
+    "options": ["huge", "ring", "none", "gold"],
+    "answer": {
+      "word": "gold",
+      "phonetics": [
+        {
+          "text": "/ɡoʊld/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/gold-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nghệ thuật",
+    "options": ["why", "role", "only", "arts"],
+    "answer": {
+      "word": "arts",
+      "phonetics": [
+        {
+          "text": "/ɑɹts/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/arts-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhiều",
+    "options": ["lot", "call", "roll", "wind"],
+    "answer": {
+      "word": "lot",
+      "phonetics": [
+        {
+          "text": "/lɑt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/lot-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hỏi",
+    "options": ["ask", "war", "arms", "wed"],
+    "answer": {
+      "word": "ask",
+      "phonetics": [
+        {
+          "text": "/eəsk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ask-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "quá khứ",
+    "options": ["past", "wars", "firm", "go"],
+    "answer": {
+      "word": "past",
+      "phonetics": [
+        {
+          "text": "/pæst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/past-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "quá hạn",
+    "options": ["fix", "led", "blow", "due"],
+    "answer": {
+      "word": "due",
+      "phonetics": [
+        {
+          "text": "/du/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/due-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "năm",
+    "options": ["mark", "ink", "vote", "five"],
+    "answer": {
+      "word": "five",
+      "phonetics": [
+        {
+          "text": "/faɪv/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/five-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "trên",
+    "options": ["moon", "data", "past", "upon"],
+    "answer": {
+      "word": "upon",
+      "phonetics": [
+        {
+          "text": "/əˈpɑn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/upon-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đất",
+    "options": ["arms", "land", "note", "pick"],
+    "answer": {
+      "word": "land",
+      "phonetics": [
+        {
+          "text": "/lænd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/land-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bao giờ",
+    "options": ["win", "ever", "fun", "held"],
+    "answer": {
+      "word": "ever",
+      "phonetics": [
+        {
+          "text": "/ˈɛvɚ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ever-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["hear", "john", "ago", "dark"],
+    "answer": {
+      "word": "ago",
+      "phonetics": [
+        {
+          "text": "/əˈɡoʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ago-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["race", "say", "he", "word"],
+    "answer": {
+      "word": "word",
+      "phonetics": [
+        {
+          "text": "/wɝd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/word-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["bag", "by", "stop", "bill"],
+    "answer": {
+      "word": "bill",
+      "phonetics": [
+        {
+          "text": "/bɪl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bill-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["kids", "safe", "file", "wed"],
+    "answer": {
+      "word": "kids",
+      "phonetics": [
+        {
+          "text": "/kɪ(d)z/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/kids-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["true", "rest", "goes", "loss"],
+    "answer": {
+      "word": "true",
+      "phonetics": [
+        {
+          "text": "/tɹu/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/true-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "khác",
+    "options": ["cup", "post", "west", "else"],
+    "answer": {
+      "word": "else",
+      "phonetics": [
+        {
+          "text": "/ɛls/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/else-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đánh dấu",
+    "options": ["eye", "war", "huge", "mark"],
+    "answer": {
+      "word": "mark",
+      "phonetics": [
+        {
+          "text": "/mɑɹk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/mark-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đá",
+    "options": ["ad", "zone", "sets", "rock"],
+    "answer": {
+      "word": "rock",
+      "phonetics": [
+        {
+          "text": "/ɹɑk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/rock-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "xấu",
+    "options": ["wall", "bank", "feed", "bad"],
+    "answer": {
+      "word": "bad",
+      "phonetics": [
+        {
+          "text": "/beəd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bad-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Lời khuyên",
+    "options": ["army", "tips", "call", "yeah"],
+    "answer": {
+      "word": "tips",
+      "phonetics": [
+        {
+          "text": "/tɪps/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/tips-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Thêm vào đó",
+    "options": ["side", "boat", "plus", "lot"],
+    "answer": {
+      "word": "plus",
+      "phonetics": [
+        {
+          "text": "/plʌs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/plus-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhanh",
+    "options": ["vote", "ring", "side", "fast"],
+    "answer": {
+      "word": "fast",
+      "phonetics": [
+        {
+          "text": "/fæst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fast-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sự thật",
+    "options": ["hi", "fact", "drop", "here"],
+    "answer": {
+      "word": "fact",
+      "phonetics": [
+        {
+          "text": "/fækt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fact-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["ten", "unit", "mean", "how"],
+    "answer": {
+      "word": "unit",
+      "phonetics": [
+        {
+          "text": "/ˈjuː.nɪt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/unit-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "gặp",
+    "options": ["rain", "cape", "wind", "meet"],
+    "answer": {
+      "word": "meet",
+      "phonetics": [
+        {
+          "text": "/mit/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/meet-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["in", "far", "make", "seem"],
+    "answer": {
+      "word": "far",
+      "phonetics": [
+        {
+          "text": "/fɑɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/far-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cảm thấy",
+    "options": ["tell", "view", "shop", "feel"],
+    "answer": {
+      "word": "feel",
+      "phonetics": [
+        {
+          "text": "/fiːl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/feel-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["rise", "bank", "too", "die"],
+    "answer": {
+      "word": "bank",
+      "phonetics": [
+        {
+          "text": "/bæŋk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bank-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "rủi ro",
+    "options": ["camp", "sun", "risk", "ones"],
+    "answer": {
+      "word": "risk",
+      "phonetics": [
+        {
+          "text": "/ɹɪsk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/risk-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["full", "map", "home", "town"],
+    "answer": {
+      "word": "town",
+      "phonetics": [
+        {
+          "text": "/taʊn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/town-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "con gái",
+    "options": ["girl", "two", "am", "help"],
+    "answer": {
+      "word": "girl",
+      "phonetics": [
+        {
+          "text": "/ɡɝl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/girl-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đồ chơi",
+    "options": ["toys", "mass", "chat", "fail"],
+    "answer": {
+      "word": "toys",
+      "phonetics": [
+        {
+          "text": "/tɔɪz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/toys-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "golf",
+    "options": ["duty", "golf", "heat", "care"],
+    "answer": {
+      "word": "golf",
+      "phonetics": [
+        {
+          "text": "/ɡɑlf/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/golf-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["loan", "felt", "send", "tour"],
+    "answer": {
+      "word": "loan",
+      "phonetics": [
+        {
+          "text": "/loʊn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/loan-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "rộng",
+    "options": ["full", "each", "wide", "arts"],
+    "answer": {
+      "word": "wide",
+      "phonetics": [
+        {
+          "text": "/waɪd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/wide-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "loại",
+    "options": ["j", "year", "null", "sort"],
+    "answer": {
+      "word": "sort",
+      "phonetics": [
+        {
+          "text": "/sɔɹt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/sort-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bước chân",
+    "options": ["step", "tea", "run", "read"],
+    "answer": {
+      "word": "step",
+      "phonetics": [
+        {
+          "text": "/stɛp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/step-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["none", "case", "arms", "fail"],
+    "answer": {
+      "word": "none",
+      "phonetics": [
+        {
+          "text": "/nɒn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/none-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["base", "yet", "wish", "lake"],
+    "answer": {
+      "word": "lake",
+      "phonetics": [
+        {
+          "text": "/leɪk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/lake-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["club", "away", "fire", "chat"],
+    "answer": {
+      "word": "fire",
+      "phonetics": [
+        {
+          "text": "/ˈfaɪɚ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fire-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["chat", "told", "tape", "site"],
+    "answer": {
+      "word": "chat",
+      "phonetics": [
+        {
+          "text": "/tʃæt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/chat-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sự mất mát",
+    "options": ["few", "land", "loss", "sent"],
+    "answer": {
+      "word": "loss",
+      "phonetics": [
+        {
+          "text": "/lɔs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/loss-1-us.ogg"
+        }
+      ]
+    }
+  },
+  {
+    "question": "khuôn mặt",
+    "options": ["face", "do", "don", "stop"],
+    "answer": {
+      "word": "face",
+      "phonetics": [
+        {
+          "text": "/feɪs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/face-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "dầu",
+    "options": ["drop", "spot", "kind", "oil"],
+    "answer": {
+      "word": "oil",
+      "phonetics": [
+        {
+          "text": "/ɔɪl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/oil-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["male", "zone", "bit", "face"],
+    "answer": {
+      "word": "bit",
+      "phonetics": [
+        {
+          "text": "/bɪt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bit-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "căn cứ",
+    "options": ["sell", "base", "join", "wire"],
+    "answer": {
+      "word": "base",
+      "phonetics": [
+        {
+          "text": "/beɪs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/base-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "gần",
+    "options": ["near", "who", "low", "flat"],
+    "answer": {
+      "word": "near",
+      "phonetics": [
+        {
+          "text": "/nɪɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/near-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ở lại",
+    "options": ["on", "mark", "zero", "stay"],
+    "answer": {
+      "word": "stay",
+      "phonetics": [
+        {
+          "text": "/steɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/stay-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "xoay",
+    "options": ["ad", "turn", "del", "add"],
+    "answer": {
+      "word": "turn",
+      "phonetics": [
+        {
+          "text": "/tɝn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/turn-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nghĩa là",
+    "options": ["fit", "bear", "mean", "role"],
+    "answer": {
+      "word": "mean",
+      "phonetics": [
+        {
+          "text": "/miːn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/mean-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhà vua",
+    "options": ["best", "same", "king", "men"],
+    "answer": {
+      "word": "king",
+      "phonetics": [
+        {
+          "text": "/kiŋ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/king-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["wind", "bell", "bank", "copy"],
+    "answer": {
+      "word": "copy",
+      "phonetics": [
+        {
+          "text": "/ˈkɑpi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/copy-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["drug", "yet", "each", "main"],
+    "answer": {
+      "word": "drug",
+      "phonetics": [
+        {
+          "text": "/dɹʌɡ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/drug-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tiền mặt",
+    "options": ["girl", "cash", "army", "seem"],
+    "answer": {
+      "word": "cash",
+      "phonetics": [
+        {
+          "text": "/kæʃ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cash-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "vịnh",
+    "options": ["game", "bay", "flat", "ways"],
+    "answer": {
+      "word": "bay",
+      "phonetics": [
+        {
+          "text": "/beɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bay-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "quảng cáo",
+    "options": ["shot", "sat", "ad", "role"],
+    "answer": {
+      "word": "ad",
+      "phonetics": [
+        {
+          "text": "/æd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ad-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đã xem",
+    "options": ["seen", "etc", "next", "boat"],
+    "answer": {
+      "word": "seen",
+      "phonetics": [
+        {
+          "text": "/ˈsiːn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/seen-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Cổng",
+    "options": ["port", "turn", "fact", "son"],
+    "answer": {
+      "word": "port",
+      "phonetics": [
+        {
+          "text": "/pɔɹt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/port-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "dừng lại",
+    "options": ["stop", "edge", "bird", "aim"],
+    "answer": {
+      "word": "stop",
+      "phonetics": [
+        {
+          "text": "/stɑp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/stop-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thanh",
+    "options": ["knew", "bar", "keep", "been"],
+    "answer": {
+      "word": "bar",
+      "phonetics": [
+        {
+          "text": "/bɑɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bar-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chó",
+    "options": ["will", "any", "dog", "gene"],
+    "answer": {
+      "word": "dog",
+      "phonetics": [
+        {
+          "text": "/dɔɡ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/dog-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sớm",
+    "options": ["over", "soon", "text", "the"],
+    "answer": {
+      "word": "soon",
+      "phonetics": [
+        {
+          "text": "/suːn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/soon-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cầm",
+    "options": ["well", "here", "once", "held"],
+    "answer": {
+      "word": "held",
+      "phonetics": [
+        {
+          "text": "/ˈhɛld/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/held-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tâm trí",
+    "options": ["an", "kind", "save", "mind"],
+    "answer": {
+      "word": "mind",
+      "phonetics": [
+        {
+          "text": "/maɪnd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/mind-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mất",
+    "options": ["thus", "wear", "lost", "risk"],
+    "answer": {
+      "word": "lost",
+      "phonetics": [
+        {
+          "text": "/lɔst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/lost-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chuyến du lịch",
+    "options": ["cat", "land", "my", "tour"],
+    "answer": {
+      "word": "tour",
+      "phonetics": [
+        {
+          "text": "/tɔː(ɹ)/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/tour-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Menu",
+    "options": ["shop", "zero", "menu", "yeah"],
+    "answer": {
+      "word": "menu",
+      "phonetics": [
+        {
+          "text": "/ˈmɛnju/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/menu-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mong",
+    "options": ["a", "add", "hope", "wed"],
+    "answer": {
+      "word": "hope",
+      "phonetics": [
+        {
+          "text": "/hoʊp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hope-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ước",
+    "options": ["wild", "feet", "deal", "wish"],
+    "answer": {
+      "word": "wish",
+      "phonetics": [
+        {
+          "text": "/wɪʃ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/wish-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "vai trò",
+    "options": ["camp", "role", "west", "huge"],
+    "answer": {
+      "word": "role",
+      "phonetics": [
+        {
+          "text": "/ɹəʊl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/role-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["came", "test", "plus", "here"],
+    "answer": {
+      "word": "came",
+      "phonetics": [
+        {
+          "text": "/keɪm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/came-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "khỏe",
+    "options": ["fine", "you", "own", "miss"],
+    "answer": {
+      "word": "fine",
+      "phonetics": [
+        {
+          "text": "/faɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fine-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "giờ",
+    "options": ["then", "too", "fly", "hour"],
+    "answer": {
+      "word": "hour",
+      "phonetics": [
+        {
+          "text": "/ˈaʊɚ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hour-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "khí",
+    "options": ["nine", "can", "gas", "fax"],
+    "answer": {
+      "word": "gas",
+      "phonetics": [
+        {
+          "text": "/ɡæs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/gas-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Sáu",
+    "options": ["six", "send", "if", "lead"],
+    "answer": {
+      "word": "six",
+      "phonetics": [
+        {
+          "text": "/sɪks/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/six-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Bush",
+    "options": ["bush", "bear", "life", "sent"],
+    "answer": {
+      "word": "bush",
+      "phonetics": [
+        {
+          "text": "/bʊʃ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bush-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "to lớn",
+    "options": ["trip", "size", "huge", "end"],
+    "answer": {
+      "word": "huge",
+      "phonetics": [
+        {
+          "text": "/hjuːd͡ʒ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/huge-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đã ngồi",
+    "options": ["man", "the", "hair", "sat"],
+    "answer": {
+      "word": "sat",
+      "phonetics": [
+        {
+          "text": "/sæt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/sat-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Zip",
+    "options": ["ends", "zip", "an", "team"],
+    "answer": {
+      "word": "zip",
+      "phonetics": [
+        {
+          "text": "/zɪp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/zip-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["bid", "blog", "tea", "laws"],
+    "answer": {
+      "word": "bid",
+      "phonetics": [
+        {
+          "text": "/bɪd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bid-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "loại",
+    "options": ["kind", "like", "paid", "arms"],
+    "answer": {
+      "word": "kind",
+      "phonetics": [
+        {
+          "text": "/kaɪnd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/kind-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "di chuyển",
+    "options": ["bus", "eyes", "move", "stay"],
+    "answer": {
+      "word": "move",
+      "phonetics": [
+        {
+          "text": "/muːv/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/move-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Đẹp",
+    "options": ["head", "more", "duty", "nice"],
+    "answer": {
+      "word": "nice",
+      "phonetics": [
+        {
+          "text": "/naɪs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/nice-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đã gửi",
+    "options": ["root", "race", "sent", "pay"],
+    "answer": {
+      "word": "sent",
+      "phonetics": [
+        {
+          "text": "/sɛnt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/sent-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["band", "am", "ray", "gets"],
+    "answer": {
+      "word": "band",
+      "phonetics": [
+        {
+          "text": "/bænd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/band-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chỉ huy",
+    "options": ["lead", "duty", "nor", "saw"],
+    "answer": {
+      "word": "lead",
+      "phonetics": [
+        {
+          "text": "/lɛd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/lead-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đi",
+    "options": ["born", "line", "sure", "went"],
+    "answer": {
+      "word": "went",
+      "phonetics": [
+        {
+          "text": "/wɛnt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/went-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "CHÀO",
+    "options": ["able", "love", "far", "hi"],
+    "answer": {
+      "word": "hi",
+      "phonetics": [
+        {
+          "text": "/haɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hi-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cách thức",
+    "options": ["up", "van", "age", "mode"],
+    "answer": {
+      "word": "mode",
+      "phonetics": [
+        {
+          "text": "/moʊd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/mode-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Thứ tư",
+    "options": ["wed", "bell", "wars", "lots"],
+    "answer": {
+      "word": "wed",
+      "phonetics": [
+        {
+          "text": "/ˈwɛd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/wed-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nam giới",
+    "options": ["over", "key", "male", "part"],
+    "answer": {
+      "word": "male",
+      "phonetics": [
+        {
+          "text": "/meɪl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/male-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["copy", "what", "days", "took"],
+    "answer": {
+      "word": "took",
+      "phonetics": [
+        {
+          "text": "/tuːk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/took-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Nhà trọ",
+    "options": ["idea", "inn", "same", "item"],
+    "answer": {
+      "word": "inn",
+      "phonetics": [
+        {
+          "text": "/ɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/inn-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Bài hát",
+    "options": ["song", "ever", "paid", "bear"],
+    "answer": {
+      "word": "song",
+      "phonetics": [
+        {
+          "text": "/sɑŋ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/song-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "muộn",
+    "options": ["late", "stop", "core", "lee"],
+    "answer": {
+      "word": "late",
+      "phonetics": [
+        {
+          "text": "/leɪt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/late-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ngã",
+    "options": ["fall", "acid", "ten", "red"],
+    "answer": {
+      "word": "fall",
+      "phonetics": [
+        {
+          "text": "/fɔl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fall-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ý tưởng",
+    "options": ["bit", "mean", "its", "idea"],
+    "answer": {
+      "word": "idea",
+      "phonetics": [
+        {
+          "text": "/aɪˈdi.ə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/idea-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thắng",
+    "options": ["runs", "boy", "win", "am"],
+    "answer": {
+      "word": "win",
+      "phonetics": [
+        {
+          "text": "/wɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/win-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "giường",
+    "options": ["turn", "it", "team", "bed"],
+    "answer": {
+      "word": "bed",
+      "phonetics": [
+        {
+          "text": "/bɛd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bed-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đồi",
+    "options": ["hill", "size", "win", "trip"],
+    "answer": {
+      "word": "hill",
+      "phonetics": [
+        {
+          "text": "/hɪl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hill-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thỏa thuận",
+    "options": ["j", "port", "deal", "felt"],
+    "answer": {
+      "word": "deal",
+      "phonetics": [
+        {
+          "text": "/diːl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/deal-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "giữ",
+    "options": ["hear", "hold", "die", "went"],
+    "answer": {
+      "word": "hold",
+      "phonetics": [
+        {
+          "text": "/hoʊld/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hold-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "an toàn",
+    "options": ["hold", "got", "gave", "safe"],
+    "answer": {
+      "word": "safe",
+      "phonetics": [
+        {
+          "text": "/seɪf/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/safe-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cho ăn",
+    "options": ["role", "hey", "feed", "blog"],
+    "answer": {
+      "word": "feed",
+      "phonetics": [
+        {
+          "text": "/ˈfiːd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/feed-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cắt",
+    "options": ["make", "men", "cut", "role"],
+    "answer": {
+      "word": "cut",
+      "phonetics": [
+        {
+          "text": "/kʌt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cut-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sảnh",
+    "options": ["task", "self", "hall", "file"],
+    "answer": {
+      "word": "hall",
+      "phonetics": [
+        {
+          "text": "/hɔl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hall-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tàu thủy",
+    "options": ["hold", "main", "ship", "fort"],
+    "answer": {
+      "word": "ship",
+      "phonetics": [
+        {
+          "text": "/ʃɪp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ship-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "trả",
+    "options": ["cap", "paid", "live", "date"],
+    "answer": {
+      "word": "paid",
+      "phonetics": [
+        {
+          "text": "/ˈpeɪd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/paid-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tóc",
+    "options": ["stay", "pick", "hair", "soon"],
+    "answer": {
+      "word": "hair",
+      "phonetics": [
+        {
+          "text": "/hɛ(ə)ɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hair-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "KIT",
+    "options": ["post", "kit", "no", "late"],
+    "answer": {
+      "word": "kit",
+      "phonetics": [
+        {
+          "text": "/kɪt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/kit-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cây",
+    "options": ["sell", "able", "tree", "find"],
+    "answer": {
+      "word": "tree",
+      "phonetics": [
+        {
+          "text": "/tɹi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/tree-us.ogg"
+        }
+      ]
+    }
+  },
+  {
+    "question": "do đó",
+    "options": ["thus", "lost", "flow", "toy"],
+    "answer": {
+      "word": "thus",
+      "phonetics": [
+        {
+          "text": "/ˈðʌs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/thus-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tường",
+    "options": ["blue", "wall", "my", "die"],
+    "answer": {
+      "word": "wall",
+      "phonetics": [
+        {
+          "text": "/wɔl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/wall-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "con trai",
+    "options": ["sell", "sold", "acid", "boy"],
+    "answer": {
+      "word": "boy",
+      "phonetics": [
+        {
+          "text": "/bɔːə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/boy-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "rượu",
+    "options": ["felt", "wine", "lack", "note"],
+    "answer": {
+      "word": "wine",
+      "phonetics": [
+        {
+          "text": "/waɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/wine-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bỏ phiếu",
+    "options": ["del", "vote", "love", "cell"],
+    "answer": {
+      "word": "vote",
+      "phonetics": [
+        {
+          "text": "/voʊt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/vote-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cách",
+    "options": ["ones", "ways", "load", "head"],
+    "answer": {
+      "word": "ways",
+      "phonetics": [
+        {
+          "text": "/weɪz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ways-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "con trai",
+    "options": ["desk", "tape", "ago", "son"],
+    "answer": {
+      "word": "son",
+      "phonetics": [
+        {
+          "text": "/sɒn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/son-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "luật lệ",
+    "options": ["rule", "atom", "on", "call"],
+    "answer": {
+      "word": "rule",
+      "phonetics": [
+        {
+          "text": "/ɹuːl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/rule-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Tối đa",
+    "options": ["over", "max", "lord", "got"],
+    "answer": {
+      "word": "max",
+      "phonetics": [
+        {
+          "text": "/mæks/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/max-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nói",
+    "options": ["van", "told", "hand", "made"],
+    "answer": {
+      "word": "told",
+      "phonetics": [
+        {
+          "text": "/toʊld/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/told-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bàn chân",
+    "options": ["act", "just", "feet", "king"],
+    "answer": {
+      "word": "feet",
+      "phonetics": [
+        {
+          "text": "/fiːt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/feet-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thùng",
+    "options": ["bin", "good", "file", "gay"],
+    "answer": {
+      "word": "bin",
+      "phonetics": [
+        {
+          "text": "/bin/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bin-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Cửa",
+    "options": ["door", "led", "full", "root"],
+    "answer": {
+      "word": "door",
+      "phonetics": [
+        {
+          "text": "/dɔɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/door-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "vượt qua",
+    "options": ["next", "trip", "pass", "runs"],
+    "answer": {
+      "word": "pass",
+      "phonetics": [
+        {
+          "text": "[pʰaːs]",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/pass-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Van",
+    "options": ["file", "van", "wish", "eat"],
+    "answer": {
+      "word": "van",
+      "phonetics": [
+        {
+          "text": "/væn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/van-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "lệ phí",
+    "options": ["fees", "such", "saw", "farm"],
+    "answer": {
+      "word": "fees",
+      "phonetics": [
+        {
+          "text": "/fiːz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fees-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "da",
+    "options": ["stop", "town", "mode", "skin"],
+    "answer": {
+      "word": "skin",
+      "phonetics": [
+        {
+          "text": "/skɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/skin-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["if", "ads", "in", "bad"],
+    "answer": {
+      "word": "ads",
+      "phonetics": [
+        {
+          "text": "/ædz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ads-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhẫn",
+    "options": ["mode", "ring", "its", "rent"],
+    "answer": {
+      "word": "ring",
+      "phonetics": [
+        {
+          "text": "/ɹɪŋ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ring-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhạc pop",
+    "options": ["tips", "pop", "wild", "back"],
+    "answer": {
+      "word": "pop",
+      "phonetics": [
+        {
+          "text": "/pɑp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/pop-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Các chàng trai",
+    "options": ["boys", "fee", "cup", "seat"],
+    "answer": {
+      "word": "boys",
+      "phonetics": [
+        {
+          "text": "/bɔɪz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/boys-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sâu",
+    "options": ["deep", "let", "unit", "bit"],
+    "answer": {
+      "word": "deep",
+      "phonetics": [
+        {
+          "text": "/diːp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/deep-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nghỉ ngơi",
+    "options": ["men", "air", "palm", "rest"],
+    "answer": {
+      "word": "rest",
+      "phonetics": [
+        {
+          "text": "/ɹɛst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/rest-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đánh",
+    "options": ["hit", "week", "dan", "land"],
+    "answer": {
+      "word": "hit",
+      "phonetics": [
+        {
+          "text": "/hɪt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hit-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["date", "ends", "fish", "ray"],
+    "answer": {
+      "word": "fish",
+      "phonetics": [
+        {
+          "text": "/fɪʃ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fish-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mắt",
+    "options": ["top", "eye", "tax", "etc"],
+    "answer": {
+      "word": "eye",
+      "phonetics": [
+        {
+          "text": "/aɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/eye-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sinh",
+    "options": ["it", "born", "no", "hill"],
+    "answer": {
+      "word": "born",
+      "phonetics": [
+        {
+          "text": "/ˈbɔɹn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/born-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "loài",
+    "options": ["call", "bird", "come", "race"],
+    "answer": {
+      "word": "race",
+      "phonetics": [
+        {
+          "text": "/ɹeɪs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/race-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "vân vân",
+    "options": ["went", "fail", "open", "etc"],
+    "answer": {
+      "word": "etc",
+      "phonetics": [
+        {
+          "text": "/ˌɛt ˈsɛt(ə)ɹə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/etc-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "món nợ",
+    "options": ["good", "even", "may", "debt"],
+    "answer": {
+      "word": "debt",
+      "phonetics": [
+        {
+          "text": "/dɛt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/debt-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cốt lõi",
+    "options": ["core", "item", "hand", "such"],
+    "answer": {
+      "word": "core",
+      "phonetics": [
+        {
+          "text": "/kɔɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/core-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bộ",
+    "options": ["hot", "sets", "came", "j"],
+    "answer": {
+      "word": "sets",
+      "phonetics": [
+        {
+          "text": "/sɛts/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/sets-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "phí",
+    "options": ["data", "case", "em", "fee"],
+    "answer": {
+      "word": "fee",
+      "phonetics": [
+        {
+          "text": "/fiː/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fee-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thuê",
+    "options": ["fear", "told", "life", "rent"],
+    "answer": {
+      "word": "rent",
+      "phonetics": [
+        {
+          "text": "/ɹɛnt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/rent-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tối tăm",
+    "options": ["go", "dark", "bus", "sent"],
+    "answer": {
+      "word": "dark",
+      "phonetics": [
+        {
+          "text": "/dɑɹk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/dark-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chủ nhà",
+    "options": ["van", "host", "send", "cent"],
+    "answer": {
+      "word": "host",
+      "phonetics": [
+        {
+          "text": "/hoʊst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/host-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hội chợ",
+    "options": ["call", "rare", "fair", "bus"],
+    "answer": {
+      "word": "fair",
+      "phonetics": [
+        {
+          "text": "/fɛəɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fair-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Nhận",
+    "options": ["hide", "two", "fear", "gets"],
+    "answer": {
+      "word": "gets",
+      "phonetics": [
+        {
+          "text": "/ɡɛts/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/gets-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mập",
+    "options": ["o", "life", "fat", "inn"],
+    "answer": {
+      "word": "fat",
+      "phonetics": [
+        {
+          "text": "/fæt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fat-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cái cưa",
+    "options": ["hill", "hide", "save", "saw"],
+    "answer": {
+      "word": "saw",
+      "phonetics": [
+        {
+          "text": "/sɔ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/saw-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chết",
+    "options": ["atom", "pass", "time", "dead"],
+    "answer": {
+      "word": "dead",
+      "phonetics": [
+        {
+          "text": "/diːd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/dead-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["boat", "copy", "been", "trip"],
+    "answer": {
+      "word": "trip",
+      "phonetics": [
+        {
+          "text": "/tɹɪp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/trip-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["camp", "mi", "acid", "best"],
+    "answer": {
+      "word": "mi",
+      "phonetics": [
+        {
+          "text": "/miː/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/mi-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["firm", "rule", "own", "poor"],
+    "answer": {
+      "word": "poor",
+      "phonetics": [
+        {
+          "text": "/pɔɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/poor-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mắt",
+    "options": ["van", "he", "eyes", "so"],
+    "answer": {
+      "word": "eyes",
+      "phonetics": [
+        {
+          "text": "/aɪz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/eyes-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nông trại",
+    "options": ["easy", "farm", "men", "data"],
+    "answer": {
+      "word": "farm",
+      "phonetics": [
+        {
+          "text": "/fɑːɹm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/farm-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Tom",
+    "options": ["tom", "sure", "link", "law"],
+    "answer": {
+      "word": "tom",
+      "phonetics": [
+        {
+          "text": "/tɑm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/tom-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Chúa",
+    "options": ["much", "bell", "lord", "low"],
+    "answer": {
+      "word": "lord",
+      "phonetics": [
+        {
+          "text": "/lɔɹd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/lord-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "phụ",
+    "options": ["wait", "sub", "get", "tape"],
+    "answer": {
+      "word": "sub",
+      "phonetics": [
+        {
+          "text": "/sʌb/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/sub-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nghe",
+    "options": ["foot", "hear", "play", "per"],
+    "answer": {
+      "word": "hear",
+      "phonetics": [
+        {
+          "text": "/hɪɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hear-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đi",
+    "options": ["goes", "ten", "tip", "dogs"],
+    "answer": {
+      "word": "goes",
+      "phonetics": [
+        {
+          "text": "/ɡoʊz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/goes-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "dẫn đến",
+    "options": ["led", "name", "ink", "rise"],
+    "answer": {
+      "word": "led",
+      "phonetics": [
+        {
+          "text": "/ˈlɛd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/led-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "vợ",
+    "options": ["risk", "map", "hope", "wife"],
+    "answer": {
+      "word": "wife",
+      "phonetics": [
+        {
+          "text": "/waɪf/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/wife-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Mười",
+    "options": ["even", "gold", "term", "ten"],
+    "answer": {
+      "word": "ten",
+      "phonetics": [
+        {
+          "text": "/tɛn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ten-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "vùng",
+    "options": ["zone", "flag", "may", "any"],
+    "answer": {
+      "word": "zone",
+      "phonetics": [
+        {
+          "text": "/zoʊn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/zone-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "con mèo",
+    "options": ["cat", "id", "risk", "see"],
+    "answer": {
+      "word": "cat",
+      "phonetics": [
+        {
+          "text": "/kæt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cat-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chết",
+    "options": ["most", "die", "wide", "farm"],
+    "answer": {
+      "word": "die",
+      "phonetics": [
+        {
+          "text": "/daɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/die-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Jack",
+    "options": ["race", "web", "bell", "jack"],
+    "answer": {
+      "word": "jack",
+      "phonetics": [
+        {
+          "text": "/dʒæk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/jack-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "phẳng",
+    "options": ["last", "don", "flat", "wear"],
+    "answer": {
+      "word": "flat",
+      "phonetics": [
+        {
+          "text": "/flæt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/flat-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chảy",
+    "options": ["yeah", "told", "map", "flow"],
+    "answer": {
+      "word": "flow",
+      "phonetics": [
+        {
+          "text": "/floʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/flow-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "con đường",
+    "options": ["p", "own", "rule", "path"],
+    "answer": {
+      "word": "path",
+      "phonetics": [
+        {
+          "text": "[pʰeəθ]",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/path-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Luật pháp",
+    "options": ["feel", "row", "box", "laws"],
+    "answer": {
+      "word": "laws",
+      "phonetics": [
+        {
+          "text": "/lɔːz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/laws-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thú cưng",
+    "options": ["pet", "load", "boat", "out"],
+    "answer": {
+      "word": "pet",
+      "phonetics": [
+        {
+          "text": "/pɛt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/pet-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["cost", "live", "guy", "chat"],
+    "answer": {
+      "word": "guy",
+      "phonetics": [
+        {
+          "text": "/ɡaɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/guy-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tách",
+    "options": ["cup", "evil", "page", "desk"],
+    "answer": {
+      "word": "cup",
+      "phonetics": [
+        {
+          "text": "/kʌp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cup-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ăn kiêng",
+    "options": ["wish", "goal", "diet", "palm"],
+    "answer": {
+      "word": "diet",
+      "phonetics": [
+        {
+          "text": "/ˈdaɪət/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/diet-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "quân đội",
+    "options": ["pay", "bay", "army", "if"],
+    "answer": {
+      "word": "army",
+      "phonetics": [
+        {
+          "text": "/ˈɑɹ.mi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/army-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Lee",
+    "options": ["band", "debt", "you", "lee"],
+    "answer": {
+      "word": "lee",
+      "phonetics": [
+        {
+          "text": "/liː/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/lee-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Rất nhiều",
+    "options": ["lots", "don", "of", "thus"],
+    "answer": {
+      "word": "lots",
+      "phonetics": [
+        {
+          "text": "/lɑts/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/lots-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "vững chãi",
+    "options": ["fact", "book", "star", "firm"],
+    "answer": {
+      "word": "firm",
+      "phonetics": [
+        {
+          "text": "/fɜɹm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/firm-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhảy",
+    "options": ["flag", "more", "jump", "play"],
+    "answer": {
+      "word": "jump",
+      "phonetics": [
+        {
+          "text": "/dʒʌmp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/jump-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "quả bóng",
+    "options": ["time", "ball", "wear", "only"],
+    "answer": {
+      "word": "ball",
+      "phonetics": [
+        {
+          "text": "/bɔːl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ball-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mục tiêu",
+    "options": ["poor", "its", "goal", "free"],
+    "answer": {
+      "word": "goal",
+      "phonetics": [
+        {
+          "text": "/ɡoʊl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/goal-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đã bán",
+    "options": ["etc", "sold", "came", "own"],
+    "answer": {
+      "word": "sold",
+      "phonetics": [
+        {
+          "text": "/ˈsoʊld/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/sold-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "gió",
+    "options": ["pass", "wind", "ten", "win"],
+    "answer": {
+      "word": "wind",
+      "phonetics": [
+        {
+          "text": "/ˈwaɪnd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/wind-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "lòng bàn tay",
+    "options": ["thus", "grow", "ones", "palm"],
+    "answer": {
+      "word": "palm",
+      "phonetics": [
+        {
+          "text": "/pɑlm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/palm-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "phù hợp",
+    "options": ["ads", "door", "fit", "eat"],
+    "answer": {
+      "word": "fit",
+      "phonetics": [
+        {
+          "text": "/fɪt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fit-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bán tại",
+    "options": ["ex", "cat", "few", "plus"],
+    "answer": {
+      "word": "ex",
+      "phonetics": [
+        {
+          "text": "/ɛks/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ex-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đã gặp",
+    "options": ["seem", "met", "dogs", "size"],
+    "answer": {
+      "word": "met",
+      "phonetics": [
+        {
+          "text": "/mɛt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/met-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nỗi đau",
+    "options": ["help", "pain", "less", "cart"],
+    "answer": {
+      "word": "pain",
+      "phonetics": [
+        {
+          "text": "/peɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/pain-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Ford",
+    "options": ["mass", "live", "land", "ford"],
+    "answer": {
+      "word": "ford",
+      "phonetics": [
+        {
+          "text": "/fɔɹd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ford-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bờ rìa",
+    "options": ["soon", "win", "town", "edge"],
+    "answer": {
+      "word": "edge",
+      "phonetics": [
+        {
+          "text": "/ɛdʒ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/edge-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Root",
+    "options": ["flow", "cold", "root", "born"],
+    "answer": {
+      "word": "root",
+      "phonetics": [
+        {
+          "text": "/ɹuːt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/root-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đá",
+    "options": ["top", "van", "ice", "fast"],
+    "answer": {
+      "word": "ice",
+      "phonetics": [
+        {
+          "text": "/aɪs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ice-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bắn",
+    "options": ["shot", "bird", "say", "mix"],
+    "answer": {
+      "word": "shot",
+      "phonetics": [
+        {
+          "text": "/ʃɑt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/shot-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Xe buýt",
+    "options": ["bus", "blog", "wine", "bug"],
+    "answer": {
+      "word": "bus",
+      "phonetics": [
+        {
+          "text": "/bʌs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bus-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["need", "head", "cold", "kit"],
+    "answer": {
+      "word": "cold",
+      "phonetics": [
+        {
+          "text": "/koʊld/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cold-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cái túi",
+    "options": ["log", "user", "mode", "bag"],
+    "answer": {
+      "word": "bag",
+      "phonetics": [
+        {
+          "text": "/ˈbeɪɡ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bag-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chân",
+    "options": ["tips", "foot", "sell", "bad"],
+    "answer": {
+      "word": "foot",
+      "phonetics": [
+        {
+          "text": "[fʊt̚]",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/foot-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "khối",
+    "options": ["hill", "mass", "guy", "plus"],
+    "answer": {
+      "word": "mass",
+      "phonetics": [
+        {
+          "text": "/mæs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/mass-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhiệt",
+    "options": ["held", "lack", "heat", "web"],
+    "answer": {
+      "word": "heat",
+      "phonetics": [
+        {
+          "text": "/hit/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/heat-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hoang dã",
+    "options": ["roll", "note", "him", "wild"],
+    "answer": {
+      "word": "wild",
+      "phonetics": [
+        {
+          "text": "/waɪld/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/wild-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cô",
+    "options": ["gets", "own", "miss", "term"],
+    "answer": {
+      "word": "miss",
+      "phonetics": [
+        {
+          "text": "/mɪs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/miss-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhiệm vụ",
+    "options": ["dark", "gay", "love", "task"],
+    "answer": {
+      "word": "task",
+      "phonetics": [
+        {
+          "text": "/tæsk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/task-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["gain", "deal", "boat", "nor"],
+    "answer": {
+      "word": "nor",
+      "phonetics": [
+        {
+          "text": "/nɔːɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/nor-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sâu bọ",
+    "options": ["bug", "up", "poor", "open"],
+    "answer": {
+      "word": "bug",
+      "phonetics": [
+        {
+          "text": "/bʌɡ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bug-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mềm mại",
+    "options": ["ad", "mix", "soft", "road"],
+    "answer": {
+      "word": "soft",
+      "phonetics": [
+        {
+          "text": "/sɔft/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/soft-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đi bộ",
+    "options": ["five", "paid", "base", "walk"],
+    "answer": {
+      "word": "walk",
+      "phonetics": [
+        {
+          "text": "/wɔk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/walk-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Chờ đợi",
+    "options": ["cold", "wait", "atom", "gift"],
+    "answer": {
+      "word": "wait",
+      "phonetics": [
+        {
+          "text": "/weɪt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/wait-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhặt",
+    "options": ["pick", "told", "j", "high"],
+    "answer": {
+      "word": "pick",
+      "phonetics": [
+        {
+          "text": "/pɪk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/pick-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Del",
+    "options": ["race", "dogs", "del", "lead"],
+    "answer": {
+      "word": "del",
+      "phonetics": [
+        {
+          "text": "/dɛl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/del-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["van", "load", "gene", "why"],
+    "answer": {
+      "word": "load",
+      "phonetics": [
+        {
+          "text": "/loʊd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/load-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Các bạn",
+    "options": ["guys", "em", "cost", "none"],
+    "answer": {
+      "word": "guys",
+      "phonetics": [
+        {
+          "text": "/ɡaɪz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/guys-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "làm rơi",
+    "options": ["day", "soft", "son", "drop"],
+    "answer": {
+      "word": "drop",
+      "phonetics": [
+        {
+          "text": "/dɹɑp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/drop-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "giàu có",
+    "options": ["dogs", "army", "rich", "knew"],
+    "answer": {
+      "word": "rich",
+      "phonetics": [
+        {
+          "text": "/ɹɪt͡ʃ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/rich-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "có vẻ",
+    "options": ["poor", "seem", "bush", "name"],
+    "answer": {
+      "word": "seem",
+      "phonetics": [
+        {
+          "text": "/siːm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/seem-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thuê",
+    "options": ["user", "cold", "wear", "hire"],
+    "answer": {
+      "word": "hire",
+      "phonetics": [
+        {
+          "text": "/haɪɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hire-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đã đưa cho",
+    "options": ["even", "fax", "gave", "next"],
+    "answer": {
+      "word": "gave",
+      "phonetics": [
+        {
+          "text": "/ɡeɪv/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/gave-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "những người",
+    "options": ["row", "snow", "here", "ones"],
+    "answer": {
+      "word": "ones",
+      "phonetics": [
+        {
+          "text": "/wʌnz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ones-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thứ hạng",
+    "options": ["rank", "debt", "each", "null"],
+    "answer": {
+      "word": "rank",
+      "phonetics": [
+        {
+          "text": "/ɹæŋk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/rank-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "inch",
+    "options": ["inch", "hide", "box", "can"],
+    "answer": {
+      "word": "inch",
+      "phonetics": [
+        {
+          "text": "/ɪntʃ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/inch-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tuyết",
+    "options": ["air", "snow", "act", "ex"],
+    "answer": {
+      "word": "snow",
+      "phonetics": [
+        {
+          "text": "/snoʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/snow-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "trại",
+    "options": ["dark", "not", "bath", "camp"],
+    "answer": {
+      "word": "camp",
+      "phonetics": [
+        {
+          "text": "[kʰɛəmp]",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/camp-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đổ đầy",
+    "options": ["two", "cost", "fill", "easy"],
+    "answer": {
+      "word": "fill",
+      "phonetics": [
+        {
+          "text": "/fɪl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fill-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["all", "fort", "lead", "map"],
+    "answer": {
+      "word": "fort",
+      "phonetics": [
+        {
+          "text": "/fɔɹt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fort-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "gen",
+    "options": ["gene", "eye", "been", "ride"],
+    "answer": {
+      "word": "gene",
+      "phonetics": [
+        {
+          "text": "/dʒiːn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/gene-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Đĩa",
+    "options": ["give", "disc", "bc", "la"],
+    "answer": {
+      "word": "disc",
+      "phonetics": [
+        {
+          "text": "/dɪsk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/disc-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thuyền",
+    "options": ["arts", "boat", "hip", "song"],
+    "answer": {
+      "word": "boat",
+      "phonetics": [
+        {
+          "text": "/boʊt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/boat-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "biểu tượng",
+    "options": ["good", "lake", "bar", "icon"],
+    "answer": {
+      "word": "icon",
+      "phonetics": [
+        {
+          "text": "/ˈaɪ.kɑːn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/icon-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "kết thúc",
+    "options": ["ends", "soon", "home", "lord"],
+    "answer": {
+      "word": "ends",
+      "phonetics": [
+        {
+          "text": "/ɛndz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ends-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "dàn diễn viên",
+    "options": ["cast", "deal", "well", "dan"],
+    "answer": {
+      "word": "cast",
+      "phonetics": [
+        {
+          "text": "/kæst/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cast-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cảm thấy",
+    "options": ["evil", "felt", "war", "type"],
+    "answer": {
+      "word": "felt",
+      "phonetics": [
+        {
+          "text": "/fɛlt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/felt-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "linh hồn",
+    "options": ["tell", "ink", "soul", "wine"],
+    "answer": {
+      "word": "soul",
+      "phonetics": [
+        {
+          "text": "/soʊl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/soul-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "lá cờ",
+    "options": ["shop", "need", "star", "flag"],
+    "answer": {
+      "word": "flag",
+      "phonetics": [
+        {
+          "text": "/flæɡ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/flag-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "em",
+    "options": ["fish", "back", "vote", "em"],
+    "answer": {
+      "word": "em",
+      "phonetics": [
+        {
+          "text": "/ɛm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/em-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nguyên tử",
+    "options": ["tax", "bad", "atom", "box"],
+    "answer": {
+      "word": "atom",
+      "phonetics": [
+        {
+          "text": "/ˈatəm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/atom-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sắt",
+    "options": ["lee", "too", "fun", "iron"],
+    "answer": {
+      "word": "iron",
+      "phonetics": [
+        {
+          "text": "/ˈaɪɚn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/iron-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Vô hiệu",
+    "options": ["risk", "dogs", "user", "void"],
+    "answer": {
+      "word": "void",
+      "phonetics": [
+        {
+          "text": "/vɔɪd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/void-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Trộn",
+    "options": ["idea", "mix", "mind", "lost"],
+    "answer": {
+      "word": "mix",
+      "phonetics": [
+        {
+          "text": "/ˈmɪks/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/mix-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Đĩa",
+    "options": ["thus", "or", "disk", "a"],
+    "answer": {
+      "word": "disk",
+      "phonetics": [
+        {
+          "text": "/dɪsk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/disk-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "sửa chữa",
+    "options": ["face", "fire", "mix", "fix"],
+    "answer": {
+      "word": "fix",
+      "phonetics": [
+        {
+          "text": "/ˈfɪks/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fix-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bàn làm việc",
+    "options": ["text", "fat", "desk", "ago"],
+    "answer": {
+      "word": "desk",
+      "phonetics": [
+        {
+          "text": "/dɛsk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/desk-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "phó",
+    "options": ["hire", "vice", "will", "tip"],
+    "answer": {
+      "word": "vice",
+      "phonetics": [
+        {
+          "text": "/vaɪs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/vice-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tia",
+    "options": ["ray", "body", "son", "dogs"],
+    "answer": {
+      "word": "ray",
+      "phonetics": [
+        {
+          "text": "/ɹeɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ray-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nhiệm vụ",
+    "options": ["idea", "duty", "meet", "wars"],
+    "answer": {
+      "word": "duty",
+      "phonetics": [
+        {
+          "text": "/duːti/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/duty-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "con gấu",
+    "options": ["buy", "gay", "tree", "bear"],
+    "answer": {
+      "word": "bear",
+      "phonetics": [
+        {
+          "text": "/bɑɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bear-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["no", "open", "etc", "gain"],
+    "answer": {
+      "word": "gain",
+      "phonetics": [
+        {
+          "text": "/ɡeɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/gain-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thiếu",
+    "options": ["lack", "life", "pass", "test"],
+    "answer": {
+      "word": "lack",
+      "phonetics": [
+        {
+          "text": "/læk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/lack-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "khô",
+    "options": ["ones", "made", "dry", "ads"],
+    "answer": {
+      "word": "dry",
+      "phonetics": [
+        {
+          "text": "/dɹaɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/dry-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "biết",
+    "options": ["knew", "full", "cent", "kind"],
+    "answer": {
+      "word": "knew",
+      "phonetics": [
+        {
+          "text": "/ˈn(j)u/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/knew-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["con", "hot", "gets", "lack"],
+    "answer": {
+      "word": "con",
+      "phonetics": [
+        {
+          "text": "/kɑn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/con-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "UPS",
+    "options": ["easy", "ups", "toy", "bill"],
+    "answer": {
+      "word": "ups",
+      "phonetics": [
+        {
+          "text": "/ʌps/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ups-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thổi",
+    "options": ["need", "sent", "fine", "blow"],
+    "answer": {
+      "word": "blow",
+      "phonetics": [
+        {
+          "text": "/bloʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/blow-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["meet", "road", "sun", "clip"],
+    "answer": {
+      "word": "clip",
+      "phonetics": [
+        {
+          "text": "/klɪp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/clip-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "dây điện",
+    "options": ["wire", "age", "gets", "knew"],
+    "answer": {
+      "word": "wire",
+      "phonetics": [
+        {
+          "text": "/ˈwaɪɚ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/wire-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["deal", "o", "tape", "five"],
+    "answer": {
+      "word": "tape",
+      "phonetics": [
+        {
+          "text": "/teɪ̯p/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/tape-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "axit",
+    "options": ["spot", "pick", "loss", "acid"],
+    "answer": {
+      "word": "acid",
+      "phonetics": [
+        {
+          "text": "/ˈæs.ɪd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/acid-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "xu",
+    "options": ["upon", "cent", "van", "new"],
+    "answer": {
+      "word": "cent",
+      "phonetics": [
+        {
+          "text": "/sɛnt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cent-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "vô giá trị",
+    "options": ["fit", "cars", "row", "null"],
+    "answer": {
+      "word": "null",
+      "phonetics": [
+        {
+          "text": "/nʌl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/null-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "không",
+    "options": ["load", "iron", "zero", "call"],
+    "answer": {
+      "word": "zero",
+      "phonetics": [
+        {
+          "text": "/ˈzi(ˌ)ɹoʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/zero-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["she", "took", "dogs", "bc"],
+    "answer": {
+      "word": "bc",
+      "phonetics": [
+        {
+          "text": "/biːˈsiː/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bc-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cuộn",
+    "options": ["roll", "flow", "this", "vote"],
+    "answer": {
+      "word": "roll",
+      "phonetics": [
+        {
+          "text": "/ɹoʊl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/roll-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bồn tắm",
+    "options": ["bath", "sign", "la", "cast"],
+    "answer": {
+      "word": "bath",
+      "phonetics": [
+        {
+          "text": "[bæθ⁓bɛəθ⁓beəθ]",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bath-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Beta",
+    "options": ["beta", "ford", "dogs", "blog"],
+    "answer": {
+      "word": "beta",
+      "phonetics": [
+        {
+          "text": "/ˈbeɪtə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/beta-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "thất bại",
+    "options": ["fail", "seat", "dark", "left"],
+    "answer": {
+      "word": "fail",
+      "phonetics": [
+        {
+          "text": "/feɪl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fail-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mặc",
+    "options": ["hire", "blog", "wear", "camp"],
+    "answer": {
+      "word": "wear",
+      "phonetics": [
+        {
+          "text": "/wɛə(ɹ)/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/wear-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mẹ",
+    "options": ["max", "mom", "eat", "days"],
+    "answer": {
+      "word": "mom",
+      "phonetics": [
+        {
+          "text": "/mɑm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/mom-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hiếm",
+    "options": ["gain", "knew", "rare", "area"],
+    "answer": {
+      "word": "rare",
+      "phonetics": [
+        {
+          "text": "/ɹɛəɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/rare-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hàng ngang",
+    "options": ["hire", "mode", "son", "row"],
+    "answer": {
+      "word": "row",
+      "phonetics": [
+        {
+          "text": "/ˈɹoʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/row-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tăng lên",
+    "options": ["hire", "fun", "text", "rise"],
+    "answer": {
+      "word": "rise",
+      "phonetics": [
+        {
+          "text": "/ɹaɪs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/rise-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chim",
+    "options": ["kit", "blue", "want", "bird"],
+    "answer": {
+      "word": "bird",
+      "phonetics": [
+        {
+          "text": "/bɝd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bird-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "quý bà",
+    "options": ["task", "wife", "gift", "lady"],
+    "answer": {
+      "word": "lady",
+      "phonetics": [
+        {
+          "text": "/ˈleɪdi/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/lady-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ăn",
+    "options": ["eat", "no", "less", "eyes"],
+    "answer": {
+      "word": "eat",
+      "phonetics": [
+        {
+          "text": "/it/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/eat-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ghế",
+    "options": ["seat", "plan", "top", "mind"],
+    "answer": {
+      "word": "seat",
+      "phonetics": [
+        {
+          "text": "/siːt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/seat-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mục tiêu",
+    "options": ["shot", "mark", "aim", "left"],
+    "answer": {
+      "word": "aim",
+      "phonetics": [
+        {
+          "text": "/eɪm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/aim-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Cape",
+    "options": ["air", "act", "cape", "ford"],
+    "answer": {
+      "word": "cape",
+      "phonetics": [
+        {
+          "text": "/keɪp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cape-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mẹo",
+    "options": ["tip", "hire", "past", "an"],
+    "answer": {
+      "word": "tip",
+      "phonetics": [
+        {
+          "text": "/tɪp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/tip-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "của tôi",
+    "options": ["came", "mine", "felt", "rain"],
+    "answer": {
+      "word": "mine",
+      "phonetics": [
+        {
+          "text": "/maɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/mine-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "ai",
+    "options": ["whom", "step", "off", "foot"],
+    "answer": {
+      "word": "whom",
+      "phonetics": [
+        {
+          "text": "/huːm/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/whom-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "toán học",
+    "options": ["math", "wild", "off", "bush"],
+    "answer": {
+      "word": "math",
+      "phonetics": [
+        {
+          "text": "/mæθ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/math-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Dan",
+    "options": ["more", "dan", "cell", "etc"],
+    "answer": {
+      "word": "dan",
+      "phonetics": [
+        {
+          "text": "/dæn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/dan-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Chó",
+    "options": ["week", "lake", "told", "dogs"],
+    "answer": {
+      "word": "dogs",
+      "phonetics": [
+        {
+          "text": "/dɔɡz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/dogs-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "mặt trăng",
+    "options": ["here", "moon", "lost", "wars"],
+    "answer": {
+      "word": "moon",
+      "phonetics": [
+        {
+          "text": "/muːn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/moon-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bay",
+    "options": ["eyes", "true", "cup", "fly"],
+    "answer": {
+      "word": "fly",
+      "phonetics": [
+        {
+          "text": "/flaɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fly-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nỗi sợ",
+    "options": ["data", "fear", "user", "sub"],
+    "answer": {
+      "word": "fear",
+      "phonetics": [
+        {
+          "text": "/fɪəɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/fear-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chiến tranh",
+    "options": ["eyes", "wars", "this", "born"],
+    "answer": {
+      "word": "wars",
+      "phonetics": [
+        {
+          "text": "/wɔɹz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/wars-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "giữ",
+    "options": ["act", "ask", "cash", "kept"],
+    "answer": {
+      "word": "kept",
+      "phonetics": [
+        {
+          "text": "/ˈkɛpt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/kept-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Chào",
+    "options": ["cash", "rock", "join", "hey"],
+    "answer": {
+      "word": "hey",
+      "phonetics": [
+        {
+          "text": "/heɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hey-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "tiết tấu",
+    "options": ["miss", "beat", "inch", "hand"],
+    "answer": {
+      "word": "beat",
+      "phonetics": [
+        {
+          "text": "/biːt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/beat-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Vũ khí",
+    "options": ["send", "led", "hand", "arms"],
+    "answer": {
+      "word": "arms",
+      "phonetics": [
+        {
+          "text": "/ɑɹmz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/arms-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "trà",
+    "options": ["dan", "true", "type", "tea"],
+    "answer": {
+      "word": "tea",
+      "phonetics": [
+        {
+          "text": "/ti/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/tea-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "bầu trời",
+    "options": ["wild", "rent", "call", "sky"],
+    "answer": {
+      "word": "sky",
+      "phonetics": [
+        {
+          "text": "/skaɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/sky-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "trốn",
+    "options": ["hide", "em", "nor", "tree"],
+    "answer": {
+      "word": "hide",
+      "phonetics": [
+        {
+          "text": "/haɪd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hide-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Đồ chơi",
+    "options": ["feed", "root", "toy", "hope"],
+    "answer": {
+      "word": "toy",
+      "phonetics": [
+        {
+          "text": "/tɔɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/toy-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chậm",
+    "options": ["slow", "off", "top", "mine"],
+    "answer": {
+      "word": "slow",
+      "phonetics": [
+        {
+          "text": "/sloʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/slow-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hông",
+    "options": ["we", "oil", "hip", "core"],
+    "answer": {
+      "word": "hip",
+      "phonetics": [
+        {
+          "text": "/hɪp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hip-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chín",
+    "options": ["nine", "city", "face", "work"],
+    "answer": {
+      "word": "nine",
+      "phonetics": [
+        {
+          "text": "/naɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/nine-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "điểm",
+    "options": ["shot", "easy", "spot", "ship"],
+    "answer": {
+      "word": "spot",
+      "phonetics": [
+        {
+          "text": "/spɑt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/spot-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "phát triển",
+    "options": ["row", "grow", "try", "led"],
+    "answer": {
+      "word": "grow",
+      "phonetics": [
+        {
+          "text": "/ɡɹoʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/grow-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chấm",
+    "options": ["ask", "yet", "dot", "mom"],
+    "answer": {
+      "word": "dot",
+      "phonetics": [
+        {
+          "text": "/dɑt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/dot-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "cơn mưa",
+    "options": ["pain", "turn", "rain", "am"],
+    "answer": {
+      "word": "rain",
+      "phonetics": [
+        {
+          "text": "/ɹeɪn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/rain-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "âm trầm",
+    "options": ["ever", "away", "bass", "arts"],
+    "answer": {
+      "word": "bass",
+      "phonetics": [
+        {
+          "text": "/beɪs/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bass-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "hố",
+    "options": ["hole", "self", "wait", "miss"],
+    "answer": {
+      "word": "hole",
+      "phonetics": [
+        {
+          "text": "/hoʊl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hole-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "lái",
+    "options": ["bin", "clip", "make", "ride"],
+    "answer": {
+      "word": "ride",
+      "phonetics": [
+        {
+          "text": "/ɹaɪd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ride-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "đôi",
+    "options": ["loss", "many", "pair", "gay"],
+    "answer": {
+      "word": "pair",
+      "phonetics": [
+        {
+          "text": "/pɛɹ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/pair-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["able", "don", "jack", "rock"],
+    "answer": {
+      "word": "don",
+      "phonetics": [
+        {
+          "text": "/dɑn/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/don-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Không dịch được",
+    "options": ["dark", "two", "runs", "list"],
+    "answer": {
+      "word": "runs",
+      "phonetics": [
+        {
+          "text": "/ɹʌnz/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/runs-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "vâng",
+    "options": ["play", "cars", "goal", "yeah"],
+    "answer": {
+      "word": "yeah",
+      "phonetics": [
+        {
+          "text": "/ˈjæ.ə/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/yeah-1-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "độc ác",
+    "options": ["king", "atom", "true", "evil"],
+    "answer": {
+      "word": "evil",
+      "phonetics": [
+        {
+          "text": "/ˈivəl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/evil-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "nắp",
+    "options": ["do", "cap", "bear", "rain"],
+    "answer": {
+      "word": "cap",
+      "phonetics": [
+        {
+          "text": "/kæp/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/cap-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "Mực",
+    "options": ["date", "arts", "team", "ink"],
+    "answer": {
+      "word": "ink",
+      "phonetics": [
+        {
+          "text": "/iŋk/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/ink-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "muối",
+    "options": ["desk", "tax", "ice", "salt"],
+    "answer": {
+      "word": "salt",
+      "phonetics": [
+        {
+          "text": "/sɑlt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/salt-us.mp3"
+        }
+      ]
+    }
+  },
+  {
+    "question": "chuông",
+    "options": ["up", "bell", "bid", "p"],
+    "answer": {
+      "word": "bell",
+      "phonetics": [
+        {
+          "text": "/bɛl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/bell-us.mp3"
+        }
+      ]
+    }
+  }
+]
