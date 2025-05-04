@@ -33,16 +33,36 @@ async function handleNewMessage(prompt) {
     return { statusCode: 500, message: "Có lỗi xảy ra, vui lòng thử lại sau." };
   }
 }
-
 async function handleImageAndPrompt(req, res) {
   try {
-    const { image, prompt } = req.body;
+    console.log("Request body:", req.body);
+    console.log("Request file:", req.file);
 
-    if (!image || !prompt) {
-      return res.status(400).json({ error: "Thiếu ảnh hoặc prompt" });
+    let imageData, prompt;
+
+    // Handling file upload
+    if (req.file) {
+      prompt = req.body.prompt;
+      imageData = fs.readFileSync(req.file.path);
+      fs.unlink(req.file.path, (err) => {
+        if (err) console.error("Error deleting temp file:", err);
+      });
+    }
+    // Handling base64 image input
+    else {
+      const { image, prompt: jsonPrompt } = req.body;
+      prompt = jsonPrompt;
+
+      if (image) {
+        imageData = image.includes(",")
+          ? Buffer.from(image.split(",")[1], "base64")
+          : Buffer.from(image, "base64");
+      }
     }
 
-    const imageData = Buffer.from(image.split(",")[1], "base64");
+    if (!imageData || !prompt) {
+      return res.status(400).json({ error: "Thiếu ảnh hoặc prompt" });
+    }
 
     const imagePart = {
       inlineData: {
@@ -52,33 +72,32 @@ async function handleImageAndPrompt(req, res) {
     };
 
     try {
-      console.log("Bắt đầu gọi API...");
+      console.log("Calling API...");
       const result = await model.generateContent([prompt, imagePart]);
-      console.log("Kết quả API:", result);
+      console.log("API result:", result);
 
-      const generatedText = result.response.text();
+      let generatedText = result.response.text();
 
-      res.status(200).json({
-        message: "Xử lý thành công",
-        generatedText,
-      });
+      // Remove the part before and including "```json\n" and the text after \n\n
+      generatedText = generatedText.replace(/```json\n/, ""); // Remove the "```json\n"
+      generatedText = generatedText.split("\n```\n\n")[0]; // Keep everything before the first \n\n
+
+      res.status(200).json({ message: "Xử lý thành công", generatedText });
     } catch (apiError) {
-      console.error("Lỗi API:", apiError);
+      console.error("API Error:", apiError);
       if (apiError.message.includes("Unable to process input image")) {
         return res.status(400).json({
-          error:
-            "Không thể xử lý ảnh đầu vào. Vui lòng thử lại với một ảnh khác.",
+          error: "Không thể xử lý ảnh đầu vào. Vui lòng thử lại với ảnh khác.",
         });
       }
       throw apiError;
     }
   } catch (error) {
-    console.error("Lỗi khi xử lý ảnh và prompt:", error);
-    res
-      .statusCode(500)
-      .json({ message: "Có lỗi xảy ra, vui lòng thử lại sau." });
+    console.error("Error processing image and prompt:", error);
+    res.status(500).json({ message: "Có lỗi xảy ra, vui lòng thử lại sau." });
   }
 }
+
 async function promptAnswer(req, res) {
   try {
     const prompt = req.body.prompt;
@@ -155,7 +174,7 @@ async function speechToText(req, res) {
 
     // Gửi request POST sang Flask server với headers rõ ràng hơn
     const flaskRes = await axios.post(
-      "http://192.168.31.225:5001/transcribe",
+      "https://adequate-live-shepherd.ngrok-free.app/transcribe",
       form,
       {
         headers: form.getHeaders(),

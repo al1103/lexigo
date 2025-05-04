@@ -15,7 +15,7 @@ const upload = multer({
 });
 
 router.post("/chat", handleNewMessage);
-router.post("/image-prompt", handleImageAndPrompt);
+router.post("/image-prompt", upload.single("image"), handleImageAndPrompt);
 router.post("/promptAnswer", promptAnswer);
 router.post("/speech-to-text", upload.single("audio"), speechToText);
 
