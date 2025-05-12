@@ -80,7 +80,7 @@ async function handleImageAndPrompt(req, res) {
 
       // Remove the part before and including "```json\n" and the text after \n\n
       generatedText = generatedText.replace(/```json\n/, ""); // Remove the "```json\n"
-      generatedText = generatedText.split("\n```\n\n")[0]; // Keep everything before the first \n\n
+      generatedText = generatedText.split("\n```")[0]; // Keep everything before the first \n\n
 
       res.status(200).json({ message: "Xử lý thành công", generatedText });
     } catch (apiError) {
@@ -98,53 +98,68 @@ async function handleImageAndPrompt(req, res) {
   }
 }
 
+let conversationHistory = [];
+
 async function promptAnswer(req, res) {
   try {
     const prompt = req.body.prompt;
+    const reset = req.body.reset === true;
+    if (reset) {
+      conversationHistory = [];
+      console.log("Đã reset lịch sử hội thoại");
+    }
 
     if (!prompt) {
       return res.status(400).json({ error: "Bạn chưa nhập câu hỏi." });
     }
 
-    let result;
-    try {
-      const openaiResponse = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: prompt }],
-      });
-      result = {
-        response: { text: () => openaiResponse.choices[0].message.content },
-      };
-    } catch (error) {
-      console.error("Lỗi khi gọi API OpenAI:", error);
-      if (error.statusCode === 429) {
-        return res.status(429).json({
-          error:
-            "Bạn đã vượt quá hạn mức hiện tại, vui lòng kiểm tra chi tiết kế hoạch và hóa đơn của bạn.",
-        });
-      }
-      throw error;
+    let formattedPrompt = "";
+
+    // Định dạng lịch sử hội thoại thành một chuỗi văn bản
+    if (conversationHistory.length === 0) {
+      // Nếu là lần đầu tiên, thêm hướng dẫn hệ thống vào chuỗi prompt
+      formattedPrompt = `Create an English conversation practice. Topic: ${prompt}. I will be Person B, and you will be Person A. Only speak your dialogue line without any labels, instructions, or explanations. Wait for my reply before continuing.`;
+    } else {
+      // Nếu đã có lịch sử, chuyển đổi lịch sử thành định dạng văn bản
+      formattedPrompt =
+        conversationHistory
+          .map((msg) => {
+            if (msg.role === "user") return "User: " + msg.content;
+            if (msg.role === "assistant") return msg.content;
+            return msg.content;
+          })
+          .join("\n\n") +
+        "\n\nUser: " +
+        prompt;
+
+      console.log("Formatted prompt:", formattedPrompt);
     }
+    console.log("Formatted prompt:", formattedPrompt);
 
-    let answer = result.response.text();
+    try {
+      const result = await model.generateContent(formattedPrompt);
+      let answer = result.response.text();
 
-    answer = answer.replace(/\n\n/g, "\n");
-    answer = answer.replace(/^##\s/gm, "### ");
-    answer = answer.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-    answer = answer.replace(/\*(.*?)\*/g, "<em>$1</em>");
-    answer = answer.replace(/```(.*?)```/g, "<code>$1</code>");
+      answer = answer.replace(/\n/g, "");
 
-    res.status(200).json({
-      answer,
-      message: "Câu trả lời được tạo thành công.",
-    });
+      // Lưu lại câu trả lời vào lịch sử
+      conversationHistory.push({ role: "user", content: prompt });
+      conversationHistory.push({ role: "assistant", content: answer });
+
+      res.status(200).json({
+        answer,
+        message: "Câu trả lời được tạo thành công.",
+      });
+    } catch (error) {
+      console.error("Lỗi khi sinh câu trả lời:", error);
+      res.status(500).json({ message: "Có lỗi xảy ra, vui lòng thử lại sau." });
+    }
   } catch (error) {
-    console.error("Lỗi khi sinh câu trả lời:", error);
-    res
-      .statusCode(500)
-      .json({ message: "Có lỗi xảy ra, vui lòng thử lại sau." });
+    console.error("Lỗi khi xử lý request:", error);
+    res.status(500).json({ message: "Có lỗi xảy ra, vui lòng thử lại sau." });
   }
 }
+
 async function speechToText(req, res) {
   try {
     console.log("Request body:", req.body);
