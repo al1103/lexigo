@@ -1,13 +1,23 @@
 const express = require("express");
 const usersRouter = require("./userRoutes");
 const aiRoutes = require("./aiRoutes");
+const vocabRoutes = require("./vocabRoutes");
+const lessonRoutes = require("./lessonRoutes");
+const statsRoutes = require("./statsRoutes");
+const uploadRoutes = require("./uploadRoutes");
 
 function routes(app) {
   // User management
   app.use("/api/users", usersRouter);
   app.use("/api/ai", aiRoutes);
 
-  // // Error handling middleware
+  // English learning API routes
+  app.use("/api/vocabulary", vocabRoutes);
+  app.use("/api/lessons", lessonRoutes);
+  app.use("/api/stats", statsRoutes);
+  app.use("/api/uploads", uploadRoutes);
+
+  // Error handling middleware
   app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(err.statusCode || 500).json({
@@ -20,7 +30,7 @@ function routes(app) {
   // 404 handler
   app.use((req, res) => {
     res.status(404).json({
-      statusCode: 500,
+      statusCode: 404,
       message: "Không tìm thấy tài nguyên",
     });
   });

@@ -1,13 +1,29 @@
 const express = require("express");
 const router = express.Router();
 const uploadController = require("../controllers/uploadController");
-const upload = require("../middleware/multer");
-const { auth } = require("../middleware/roleAuth"); // Optional: authentication
+const { authenticateToken } = require("../middleware/auth");
 
-// Public upload route - không yêu cầu đăng nhập
-router.post("/image", upload.single("image"), uploadController.uploadImage);
+// Upload a single file
+router.post(
+  "/file",
+  authenticateToken,
+  uploadController.handleSingleUpload,
+  uploadController.uploadSingleFile
+);
 
-// Protected upload route - yêu cầu đăng nhập
-// router.post("/image", auth, upload.single("image"), uploadController.uploadImage);
+// Upload multiple files
+router.post(
+  "/files",
+  authenticateToken,
+  uploadController.handleMultipleUploads,
+  uploadController.uploadMultipleFiles
+);
+
+// Delete a file
+router.delete(
+  "/file",
+  authenticateToken,
+    uploadController.deleteFile
+);
 
 module.exports = router;

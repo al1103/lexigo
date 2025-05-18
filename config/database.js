@@ -8,7 +8,7 @@ const config = {
   password: process.env.DB_PASSWORD || "123123Abc.",
   port: process.env.DB_PORT || 5432,
   // If running locally, comment this 1 line ssl.
-  ssl: { rejectUnauthorized: false },
+  // ssl: { rejectUnauthorized: false },
   connectionTimeoutMillis: 5000,
   idleTimeoutMillis: 30000,
 };

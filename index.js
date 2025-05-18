@@ -43,27 +43,38 @@ pool.query("SELECT NOW()", (err, res) => {
   }
 });
 
-function startServer() {
-  // Kiểm tra kết nối Cloudinary
-  cloudinary.api.ping((error, result) => {
-    if (error) {
-      console.error("❌ Cloudinary connection failed:", error);
-    } else {
-      console.log("✅ Cloudinary connection successful");
+async function startServer() {
+  try {
+    // Initialize database models
+    if (process.env.INITIALIZE_DB === "true") {
+      console.log("Initializing database models...");
+      console.log("Database models initialized successfully!");
     }
-  });
 
-  routes(app);
+    // Check Cloudinary connection
+    cloudinary.api.ping((error, result) => {
+      if (error) {
+        console.error("❌ Cloudinary connection failed:", error);
+      } else {
+        console.log("✅ Cloudinary connection successful");
+      }
+    });
 
-  app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send("Đã xảy ra lỗi!");
-  });
+    routes(app);
 
-  const PORT = process.env.PORT || 9999;
-  server.listen(PORT, () => {
-    console.log(`🚀 Server đang chạy trên cổng ${PORT}`);
-  });
+    app.use((err, req, res, next) => {
+      console.error(err.stack);
+      res.status(500).send("Đã xảy ra lỗi!");
+    });
+
+    const PORT = process.env.PORT || 9999;
+    server.listen(PORT, () => {
+      console.log(`🚀 Server đang chạy trên cổng ${PORT}`);
+    });
+  } catch (error) {
+    console.error("❌ Error starting server:", error);
+    process.exit(1);
+  }
 }
 
 // Handle graceful shutdown
