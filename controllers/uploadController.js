@@ -35,7 +35,7 @@ const handleSingleUpload = (req, res, next) => {
         message: err.message
       });
     }
-    
+
     // File uploaded successfully to memory, continue
     next();
   });
@@ -52,7 +52,7 @@ const handleMultipleUploads = (req, res, next) => {
         message: err.message
       });
     }
-    
+
     // Files uploaded successfully to memory, continue
     next();
   });
@@ -70,10 +70,10 @@ const uploadSingleFile = async (req, res) => {
 
     // Get file type (image, video, audio)
     const fileType = req.file.mimetype.split('/')[0];
-    
+
     // Create a readable stream from buffer
     const fileStream = Readable.from(req.file.buffer);
-    
+
     // Create a promise to handle the stream upload
     const streamUpload = (stream) => {
       return new Promise((resolve, reject) => {
@@ -81,7 +81,7 @@ const uploadSingleFile = async (req, res) => {
           folder: req.query.folder || 'uploads',
           resource_type: fileType
         };
-        
+
         const uploadStream = cloudinary.uploader.upload_stream(
           uploadOptions,
           (error, result) => {
@@ -92,14 +92,14 @@ const uploadSingleFile = async (req, res) => {
             }
           }
         );
-        
+
         stream.pipe(uploadStream);
       });
     };
 
     // Perform the upload
     const result = await streamUpload(fileStream);
-    
+
     res.status(201).json({
       success: true,
       message: 'File uploaded successfully',
@@ -132,15 +132,15 @@ const uploadMultipleFiles = async (req, res) => {
     }
 
     const uploadResults = [];
-    
+
     // Process each file
     for (const file of req.files) {
       // Get file type (image, video, audio)
       const fileType = file.mimetype.split('/')[0];
-      
+
       // Create a readable stream from buffer
       const fileStream = Readable.from(file.buffer);
-      
+
       // Create a promise to handle the stream upload
       const streamUpload = (stream) => {
         return new Promise((resolve, reject) => {
@@ -148,7 +148,7 @@ const uploadMultipleFiles = async (req, res) => {
             folder: req.query.folder || 'uploads',
             resource_type: fileType
           };
-          
+
           const uploadStream = cloudinary.uploader.upload_stream(
             uploadOptions,
             (error, result) => {
@@ -159,14 +159,14 @@ const uploadMultipleFiles = async (req, res) => {
               }
             }
           );
-          
+
           stream.pipe(uploadStream);
         });
       };
 
       // Perform the upload
       const result = await streamUpload(fileStream);
-      
+
       uploadResults.push({
         url: result.secure_url,
         public_id: result.public_id,
@@ -175,7 +175,7 @@ const uploadMultipleFiles = async (req, res) => {
         original_filename: file.originalname
       });
     }
-    
+
     res.status(201).json({
       success: true,
       message: `${uploadResults.length} files uploaded successfully`,
@@ -195,17 +195,17 @@ const uploadMultipleFiles = async (req, res) => {
 const deleteFile = async (req, res) => {
   try {
     const { public_id, resource_type = 'image' } = req.body;
-    
+
     if (!public_id) {
       return res.status(400).json({
         success: false,
         message: 'Public ID is required'
       });
     }
-    
+
     // Delete the file
     const result = await cloudinary.uploader.destroy(public_id, { resource_type });
-    
+
     if (result.result === 'ok') {
       res.status(200).json({
         success: true,
@@ -227,10 +227,42 @@ const deleteFile = async (req, res) => {
   }
 };
 
+// Test connection API
+const testConnection = async (req, res) => {
+  try {
+    // Test Cloudinary connection
+    const testResult = await cloudinary.api.ping();
+
+    res.status(200).json({
+      success: true,
+      message: 'Upload service is working correctly',
+      data: {
+        cloudinary_status: 'connected',
+        timestamp: new Date().toISOString(),
+        service: 'Upload Controller',
+        ping_result: testResult
+      }
+    });
+  } catch (error) {
+    console.error('Error testing connection:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Upload service connection failed',
+      error: error.message,
+      data: {
+        cloudinary_status: 'disconnected',
+        timestamp: new Date().toISOString(),
+        service: 'Upload Controller'
+      }
+    });
+  }
+};
+
 module.exports = {
   handleSingleUpload,
   handleMultipleUploads,
   uploadSingleFile,
   uploadMultipleFiles,
-  deleteFile
-}; 
+  deleteFile,
+  testConnection
+};

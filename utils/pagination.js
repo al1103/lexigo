@@ -39,6 +39,7 @@ function createPagination(options = {}) {
   };
 }
 
+// Function nhận req object
 function getPaginationParams(req) {
   let page = parseInt(req.query.page) || 1;
   let limit = parseInt(req.query.limit) || 10;
@@ -52,4 +53,23 @@ function getPaginationParams(req) {
   return { page, limit, sortBy, sortOrder, offset: (page - 1) * limit };
 }
 
-module.exports = { createPagination, getPaginationParams };
+// Function nhận page và limit trực tiếp
+function getPaginationParamsSimple(page = 1, limit = 10) {
+  page = Math.max(1, parseInt(page) || 1);
+  limit = Math.max(1, Math.min(100, parseInt(limit) || 10));
+
+  const offset = (page - 1) * limit;
+
+  return {
+    page,
+    limit,
+    offset,
+    limit: limit // alias for consistency
+  };
+}
+
+module.exports = {
+  createPagination,
+  getPaginationParams,
+  getPaginationParamsSimple
+};

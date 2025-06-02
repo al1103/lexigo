@@ -28,7 +28,7 @@ exports.getReferralShareContent = async (req, res) => {
 
     if (!userResult) {
       return res.status(404).json({
-        statusCode: 500,
+        status: 500,
         message: "Người dùng không tồn tại",
       });
     }
@@ -40,12 +40,12 @@ exports.getReferralShareContent = async (req, res) => {
     );
 
     res.status(200).json({
-      statusCode: 200,
+      status: 200,
       data: sharingContent,
     });
   } catch (error) {
     res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Không thể tạo nội dung chia sẻ",
       error: error.message,
     });

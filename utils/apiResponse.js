@@ -1,16 +1,16 @@
 class ApiResponse {
-  static success(res, statusCode, message, data = null) {
-    return res.status(statusCode).json({
-      statusCode,
+  static success(res, status, message, data = null) {
+    return res.status(status).json({
+      status,
       message,
       data,
       success: true,
     });
   }
 
-  static error(res, statusCode, message, error = null) {
-    return res.status(statusCode).json({
-      statusCode,
+  static error(res, status, message, error = null) {
+    return res.status(status).json({
+      status,
       message,
       error,
       success: false,

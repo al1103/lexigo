@@ -34,7 +34,7 @@ exports.register = async (req, res) => {
     // Basic validation
     if (!username || !email || !password || !fullName) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Vui lòng điền đầy đủ thông tin",
       });
     }
@@ -43,7 +43,7 @@ exports.register = async (req, res) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Email không hợp lệ",
       });
     }
@@ -51,14 +51,14 @@ exports.register = async (req, res) => {
     // Validate password strength (min 6 characters)
     if (password.length < 6) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Mật khẩu phải có ít nhất 6 ký tự",
       });
     }
 
     // Check if username or email already exists
     const existingUserQuery = `
-      SELECT 1 FROM users 
+      SELECT 1 FROM users
       WHERE username = $1 OR email = $2
     `;
     const existingUserResult = await pool.query(existingUserQuery, [
@@ -68,7 +68,7 @@ exports.register = async (req, res) => {
 
     if (existingUserResult.rows.length > 0) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Email hoặc tên đăng nhập đã được sử dụng",
       });
     }
@@ -107,8 +107,8 @@ exports.register = async (req, res) => {
     // Check if verification_codes table exists and has the correct column name
     try {
       const tableInfoQuery = `
-        SELECT column_name 
-        FROM information_schema.columns 
+        SELECT column_name
+        FROM information_schema.columns
         WHERE table_name = 'verification_codes'
       `;
       const tableInfo = await pool.query(tableInfoQuery);
@@ -173,20 +173,20 @@ exports.register = async (req, res) => {
     } catch (emailError) {
       console.error("Error sending verification email:", emailError);
       return res.status(500).json({
-        statusCode: 500,
+        status: 500,
         message: "Không thể gửi email xác thực. Vui lòng thử lại sau.",
       });
     }
 
     return res.status(200).json({
-      statusCode: 200,
+      status: 200,
       message: "Vui lòng kiểm tra email để lấy mã xác nhận",
       data: { email, code },
     });
   } catch (error) {
     console.error("Lỗi đăng ký:", error);
     return res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Đã xảy ra lỗi trong quá trình đăng ký",
       error: error.message,
     });
@@ -201,14 +201,14 @@ exports.verifyRegistration = async (req, res) => {
     // Basic validation
     if (!email) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Email là bắt buộc",
       });
     }
 
     if (!code) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Mã xác nhận là bắt buộc",
       });
     }
@@ -217,8 +217,8 @@ exports.verifyRegistration = async (req, res) => {
 
     // Check the column name in verification_codes table
     const tableInfoQuery = `
-      SELECT column_name 
-      FROM information_schema.columns 
+      SELECT column_name
+      FROM information_schema.columns
       WHERE table_name = 'verification_codes'
     `;
     const tableInfo = await client.query(tableInfoQuery);
@@ -247,7 +247,7 @@ exports.verifyRegistration = async (req, res) => {
 
     // Get the verification record using the correct column name
     const verificationResult = await client.query(
-      `SELECT * FROM verification_codes 
+      `SELECT * FROM verification_codes
        WHERE email = $1 AND code = $2 AND ${expirationColumnName} > NOW()`,
       [email, code]
     );
@@ -263,7 +263,7 @@ exports.verifyRegistration = async (req, res) => {
     // Check if verification code exists and is valid
     if (verificationResult.rows.length === 0) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Mã xác nhận không chính xác hoặc đã hết hạn",
       });
     }
@@ -287,7 +287,7 @@ exports.verifyRegistration = async (req, res) => {
     } catch (parseError) {
       console.error("Error parsing user data:", parseError);
       return res.status(500).json({
-        statusCode: 500,
+        status: 500,
         message: "Lỗi xử lý dữ liệu đăng ký",
       });
     }
@@ -309,7 +309,7 @@ exports.verifyRegistration = async (req, res) => {
 
       // THÊM KIỂM TRA NÀY: Kiểm tra lại xem username/email đã tồn tại chưa
       const checkExistingQuery = `
-        SELECT 1 FROM users 
+        SELECT 1 FROM users
         WHERE username = $1 OR email = $2
       `;
       const checkExistingResult = await client.query(checkExistingQuery, [
@@ -320,7 +320,7 @@ exports.verifyRegistration = async (req, res) => {
       if (checkExistingResult.rows.length > 0) {
         await client.query("ROLLBACK");
         return res.status(400).json({
-          statusCode: 400,
+          status: 400,
           message: "Email hoặc tên đăng nhập đã được sử dụng trong hệ thống",
         });
       }
@@ -350,7 +350,7 @@ exports.verifyRegistration = async (req, res) => {
       // Insert the new user into database
       const insertUserQuery = `
         INSERT INTO users (
-          user_id, username, email, password, 
+          user_id, username, email, password,
           full_name, phone_number, address, referral_code,
           referred_by, role, created_at, updated_at
         ) VALUES (
@@ -385,8 +385,8 @@ exports.verifyRegistration = async (req, res) => {
 
         // Then get all ancestors of the referrer up to level 4
         const ancestorsResult = await client.query(
-          `SELECT ancestor_id, level 
-           FROM referral_tree 
+          `SELECT ancestor_id, level
+           FROM referral_tree
            WHERE user_id = $1 AND level <= 4`,
           [referrerId]
         );
@@ -404,8 +404,8 @@ exports.verifyRegistration = async (req, res) => {
         const signupBonus = 50000;
 
         await client.query(
-          `UPDATE users 
-           SET wallet_balance = wallet_balance + $1 
+          `UPDATE users
+           SET wallet_balance = wallet_balance + $1
            WHERE user_id = $2`,
           [signupBonus, referrerId]
         );
@@ -422,8 +422,8 @@ exports.verifyRegistration = async (req, res) => {
 
         // Check if the status column exists in referrals table
         const referralsColumnsResult = await client.query(`
-          SELECT column_name 
-          FROM information_schema.columns 
+          SELECT column_name
+          FROM information_schema.columns
           WHERE table_name = 'referrals'
         `);
 
@@ -431,7 +431,7 @@ exports.verifyRegistration = async (req, res) => {
           (row) => row.column_name === "status"
         )
           ? "status"
-          : "statusCode";
+          : "status";
 
         console.log(
           `Using column name: ${statusColumnName} for referrals status`
@@ -462,7 +462,7 @@ exports.verifyRegistration = async (req, res) => {
 
       // Return success response
       return res.status(201).json({
-        statusCode: 200,
+        status: 200,
         message: "Đăng ký thành công",
         data: {
           userId,
@@ -483,19 +483,19 @@ exports.verifyRegistration = async (req, res) => {
         // Unique violation
         if (dbError.constraint && dbError.constraint.includes("username")) {
           return res.status(400).json({
-            statusCode: 400,
+            status: 400,
             message: "Tên đăng nhập đã tồn tại",
           });
         } else if (dbError.constraint && dbError.constraint.includes("email")) {
           return res.status(400).json({
-            statusCode: 400,
+            status: 400,
             message: "Email đã tồn tại",
           });
         }
       }
 
       return res.status(500).json({
-        statusCode: 500,
+        status: 500,
         message: "Đăng ký thất bại",
         error: dbError.message,
       });
@@ -509,7 +509,7 @@ exports.verifyRegistration = async (req, res) => {
 
     console.error("Lỗi xác nhận đăng ký:", error);
     return res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Đã xảy ra lỗi. Vui lòng thử lại sau.",
       error: error.message,
     });
@@ -525,7 +525,7 @@ exports.login = async (req, res) => {
 
     if (!user) {
       return res.status(401).json({
-        statusCode: 401,
+        status: 401,
         message: "Thông tin đăng nhập không chính xác",
       });
     }
@@ -540,7 +540,7 @@ exports.login = async (req, res) => {
     await UserModel.saveRefreshToken(user.userId, refreshToken);
 
     return res.status(200).json({
-      statusCode: 200,
+      status: 200,
       message: "Đăng nhập thành công",
       accessToken,
       refreshToken,
@@ -555,7 +555,7 @@ exports.login = async (req, res) => {
   } catch (error) {
     console.error("Lỗi đăng nhập:", error);
     return res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Đã xảy ra lỗi trong quá trình đăng nhập",
     });
   }
@@ -594,12 +594,12 @@ exports.getReferralInfo = async (req, res) => {
     const referralInfo = await UserModel.getReferralInfo(userId);
 
     res.status(200).json({
-      statusCode: 200,
+      status: 200,
       data: referralInfo,
     });
   } catch (error) {
     res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Không thể lấy thông tin giới thiệu",
       error: error.message,
     });
@@ -613,7 +613,7 @@ exports.updateCommissionRates = async (req, res) => {
 
     if (!rates || !Array.isArray(rates)) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Cần cung cấp dữ liệu tỷ lệ hoa hồng hợp lệ",
       });
     }
@@ -634,7 +634,7 @@ exports.updateCommissionRates = async (req, res) => {
         }
 
         await client.query(
-          `UPDATE referral_commission_rates 
+          `UPDATE referral_commission_rates
            SET rate = $1, updated_at = NOW()
            WHERE level = $2`,
           [rate.rate, rate.level]
@@ -644,7 +644,7 @@ exports.updateCommissionRates = async (req, res) => {
       await client.query("COMMIT");
 
       res.status(200).json({
-        statusCode: 200,
+        status: 200,
         message: "Cập nhật tỷ lệ hoa hồng thành công",
       });
     } catch (error) {
@@ -656,7 +656,7 @@ exports.updateCommissionRates = async (req, res) => {
   } catch (error) {
     console.error("Error updating commission rates:", error);
     res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Không thể cập nhật tỷ lệ hoa hồng",
       error: error.message,
     });
@@ -673,13 +673,13 @@ exports.getReferralNetwork = async (req, res) => {
     const parsedLevel = parseInt(level);
     if (isNaN(parsedLevel) || parsedLevel < 1 || parsedLevel > 5) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Cấp độ phải từ 1 đến 5",
       });
     }
 
     const query = `
-      SELECT 
+      SELECT
         u.user_id,
         u.username,
         u.full_name,
@@ -687,7 +687,7 @@ exports.getReferralNetwork = async (req, res) => {
         u.created_at,
         rt.level,
         (SELECT COUNT(*) FROM referral_tree WHERE ancestor_id = u.user_id AND level = 1) as direct_referrals,
-        (SELECT COALESCE(SUM(amount), 0) FROM wallet_transactions 
+        (SELECT COALESCE(SUM(amount), 0) FROM wallet_transactions
          WHERE user_id = $1 AND reference_id = u.user_id AND transaction_type = 'referral_commission') as commission_earned
       FROM referral_tree rt
       JOIN users u ON rt.user_id = u.user_id
@@ -698,7 +698,7 @@ exports.getReferralNetwork = async (req, res) => {
     const result = await pool.query(query, [userId, parsedLevel]);
 
     res.status(200).json({
-      statusCode: 200,
+      status: 200,
       data: {
         level: parsedLevel,
         members: result.rows,
@@ -707,7 +707,7 @@ exports.getReferralNetwork = async (req, res) => {
   } catch (error) {
     console.error("Error getting referral network:", error);
     res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Không thể lấy thông tin mạng lưới giới thiệu",
       error: error.message,
     });
@@ -722,13 +722,13 @@ exports.getWalletTransactions = async (req, res) => {
     const result = await UserModel.getWalletTransactions(userId, page, limit);
 
     res.status(200).json({
-      statusCode: 200,
+      status: 200,
       data: result.transactions,
       pagination: result.pagination,
     });
   } catch (error) {
     res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Không thể lấy lịch sử giao dịch",
       error: error.message,
     });
@@ -748,7 +748,7 @@ exports.withdrawFromWallet = async (req, res) => {
       !accountHolder
     ) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Vui lòng nhập đầy đủ thông tin rút tiền",
       });
     }
@@ -760,7 +760,7 @@ exports.withdrawFromWallet = async (req, res) => {
     });
 
     res.status(200).json({
-      statusCode: 200,
+      status: 200,
       message: result.message,
       data: {
         transactionId: result.transactionId,
@@ -769,7 +769,7 @@ exports.withdrawFromWallet = async (req, res) => {
     });
   } catch (error) {
     res.status(400).json({
-      statusCode: 400,
+      status: 400,
       message: error.message,
     });
   }
@@ -781,7 +781,7 @@ exports.forgotPassword = async (req, res) => {
 
     if (!email) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Email là bắt buộc",
       });
     }
@@ -790,7 +790,7 @@ exports.forgotPassword = async (req, res) => {
     const user = await UserModel.getUserByEmail(email);
     if (!user) {
       return res.status(404).json({
-        statusCode: 404,
+        status: 404,
         message: "Không tìm thấy tài khoản với email này",
       });
     }
@@ -826,13 +826,13 @@ exports.forgotPassword = async (req, res) => {
     console.log(`Verification code for password reset: ${code}`);
 
     return res.status(200).json({
-      statusCode: 200,
+      status: 200,
       message: "Mã xác nhận đã được gửi đến email của bạn",
     });
   } catch (error) {
     console.error("Lỗi quên mật khẩu:", error);
     return res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Đã xảy ra lỗi. Vui lòng thử lại sau.",
     });
   }
@@ -844,28 +844,28 @@ exports.resetPassword = async (req, res) => {
 
     if (!email || !code || !newPassword) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Thiếu thông tin cần thiết",
       });
     }
 
     if (newPassword.length < 6) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Mật khẩu phải có ít nhất 6 ký tự",
       });
     }
 
     // Kiểm tra mã xác nhận
     const verificationResult = await pool.query(
-      `SELECT * FROM verification_codes 
+      `SELECT * FROM verification_codes
        WHERE email = $1 AND code = $2 AND expiration_time > NOW()`,
       [email, code]
     );
 
     if (verificationResult.rows.length === 0) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Mã xác nhận không hợp lệ hoặc đã hết hạn",
       });
     }
@@ -876,7 +876,7 @@ exports.resetPassword = async (req, res) => {
 
     // Cập nhật mật khẩu trong cơ sở dữ liệu
     const updateResult = await pool.query(
-      `UPDATE users 
+      `UPDATE users
        SET password = $1, updated_at = NOW()
        WHERE email = $2
        RETURNING user_id, email`,
@@ -885,7 +885,7 @@ exports.resetPassword = async (req, res) => {
 
     if (updateResult.rows.length === 0) {
       return res.status(404).json({
-        statusCode: 404,
+        status: 404,
         message: "Không tìm thấy tài khoản với email này",
       });
     }
@@ -896,13 +896,13 @@ exports.resetPassword = async (req, res) => {
     ]);
 
     return res.status(200).json({
-      statusCode: 200,
+      status: 200,
       message: "Mật khẩu đã được cập nhật thành công",
     });
   } catch (error) {
     console.error("Lỗi đặt lại mật khẩu:", error);
     return res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Đã xảy ra lỗi. Vui lòng thử lại sau.",
     });
   }
@@ -918,7 +918,7 @@ exports.getReferralShareContent = async (req, res) => {
 
     if (!user) {
       return res.status(404).json({
-        statusCode: 404,
+        status: 404,
         message: "Người dùng không tồn tại",
       });
     }
@@ -937,13 +937,13 @@ exports.getReferralShareContent = async (req, res) => {
     };
 
     res.status(200).json({
-      statusCode: 200,
+      status: 200,
       data: sharingContent,
     });
   } catch (error) {
     console.error("Lỗi lấy nội dung chia sẻ:", error);
     res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Không thể tạo nội dung chia sẻ",
       error: error.message,
     });
@@ -958,7 +958,7 @@ exports.getUserProfile = async (req, res) => {
 
     if (!user) {
       return res.status(404).json({
-        statusCode: 500,
+        status: 500,
         message: "Không tìm thấy thông tin người dùng",
       });
     }
@@ -968,13 +968,13 @@ exports.getUserProfile = async (req, res) => {
 
     // Đảm bảo address được bao gồm trong response
     res.status(200).json({
-      statusCode: 200,
+      status: 200,
       data: [userProfile], // address đã được bao gồm trong userProfile
     });
   } catch (error) {
     console.error("Lỗi lấy thông tin người dùng:", error);
     res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Không thể lấy thông tin người dùng",
       error: error.message,
     });
@@ -995,20 +995,20 @@ exports.updateUserProfile = async (req, res) => {
 
     if (!updatedUserData) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Không có thông tin nào được cập nhật",
       });
     }
 
     res.status(200).json({
-      statusCode: 200,
+      status: 200,
       message: "Cập nhật thông tin thành công",
       data: updatedUserData,
     });
   } catch (error) {
     console.error("Lỗi cập nhật thông tin người dùng:", error);
     res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Không thể cập nhật thông tin người dùng",
       error: error.message,
     });
@@ -1019,7 +1019,7 @@ exports.uploadAvatar = async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({
-        statusCode: 400,
+        status: 400,
         message: "Không có file được upload",
       });
     }
@@ -1043,13 +1043,13 @@ exports.uploadAvatar = async (req, res) => {
 
     if (!updatedUser) {
       return res.status(400).json({
-        statusCode: 500,
+        status: 500,
         message: "Không thể cập nhật avatar",
       });
     }
 
     return res.status(200).json({
-      statusCode: 200,
+      status: 200,
       message: "Upload avatar thành công",
       data: {
         avatar: cloudinaryResult.secure_url,
@@ -1067,7 +1067,7 @@ exports.uploadAvatar = async (req, res) => {
     }
 
     res.status(500).json({
-      statusCode: 500,
+      status: 500,
       message: "Lỗi khi upload avatar",
       error: error.message,
     });

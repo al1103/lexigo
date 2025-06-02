@@ -5,6 +5,7 @@ const vocabRoutes = require("./vocabRoutes");
 const lessonRoutes = require("./lessonRoutes");
 const statsRoutes = require("./statsRoutes");
 const uploadRoutes = require("./uploadRoutes");
+const wordRoutes = require("./word"); // Thêm dòng này
 
 function routes(app) {
   // User management
@@ -14,14 +15,22 @@ function routes(app) {
   // English learning API routes
   app.use("/api/vocabulary", vocabRoutes);
   app.use("/api/lessons", lessonRoutes);
+  app.use("/api/words", wordRoutes); // Sửa từ word-lean thành words
+
   app.use("/api/stats", statsRoutes);
   app.use("/api/uploads", uploadRoutes);
+
+  // Test connection route
+  app.get('/test', (req, res) => {
+    console.log("Test connection route hit");
+    res.json({ message: "API is working!" });
+  });
 
   // Error handling middleware
   app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(err.statusCode || 500).json({
-      statusCode: 500,
+    res.status(err.status || 500).json({
+      status: 500,
       message: err.message || "Đã xảy ra lỗi!",
       ...(process.env.NODE_ENV === "development" && { stack: err.stack }),
     });
@@ -30,7 +39,7 @@ function routes(app) {
   // 404 handler
   app.use((req, res) => {
     res.status(404).json({
-      statusCode: 404,
+      status: 404,
       message: "Không tìm thấy tài nguyên",
     });
   });
