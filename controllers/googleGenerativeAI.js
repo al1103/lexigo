@@ -218,13 +218,24 @@ async function promptAnswer(req, res) {
       return res.status(400).json({ error: "Bạn chưa nhập câu hỏi." });
     }
 
-    // System prompt để đảm bảo câu trả lời ngắn gọn
-    const systemPrompt = `You are Person A in an English conversation. Follow these rules:
-- Reply with 1-4 short, natural sentences (max 40 words total)
-- Always stay on the topic
-- Never ask questions or explain
-- If the user goes off-topic, gently guide the conversation back
-`;
+    // System prompt được cải tiến để đảm bảo câu trả lời ngắn gọn
+    const systemPrompt = `You are Person A in an English conversation. STRICT RULES:
+- ALWAYS reply with EXACTLY ONE sentence (maximum 8 words)
+- NEVER ask questions
+- NEVER use punctuation except period
+- Stay natural and conversational
+- Keep responses extremely brief
+- If user goes off-topic, gently redirect with a short response
+
+Examples:
+User: "Let's talk about food"
+You: "I love Italian pasta."
+
+User: "What's your favorite movie?"
+You: "I enjoy action movies."
+
+User: "How are you today?"
+You: "I'm doing great today."`;
 
     let formattedPrompt = "";
 
@@ -233,23 +244,26 @@ async function promptAnswer(req, res) {
       formattedPrompt = `${systemPrompt}
 
 Topic: ${prompt}
-You are starting a conversation about this topic. Give a short, simple response to begin.`;
+Give ONE short sentence response to start conversation about this topic.`;
     } else {
       // Các lần sau: duy trì system prompt + lịch sử + user input mới
       const historyText = conversationHistory
         .map((msg) => {
           if (msg.role === "user") return "User: " + msg.content;
-          if (msg.role === "assistant") return "Assistant: " + msg.content;
+          if (msg.role === "assistant") return "You: " + msg.content;
           return msg.content;
         })
+        .slice(-6) // Chỉ giữ 6 message gần nhất để tránh context quá dài
         .join("\n");
 
       formattedPrompt = `${systemPrompt}
 
-Conversation history:
+Recent conversation:
 ${historyText}
 
-User: ${prompt}`;
+User: ${prompt}
+
+Remember: Reply with EXACTLY ONE short sentence (max 8 words). No questions.`;
     }
     console.log("Formatted prompt:", formattedPrompt);
 
@@ -257,14 +271,35 @@ User: ${prompt}`;
       const result = await model.generateContent(formattedPrompt);
       let answer = result.response.text();
 
-      answer = answer.replace(/\n/g, "");
+      // Làm sạch response
+      answer = answer
+        .replace(/\n/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      // Cắt ngắn nếu quá dài (backup safety)
+      const sentences = answer.split(/[.!?]+/);
+      if (sentences.length > 1) {
+        answer = sentences[0].trim() + ".";
+      }
+
+      // Giới hạn độ dài tối đa
+      const words = answer.split(" ");
+      if (words.length > 10) {
+        answer = words.slice(0, 10).join(" ") + ".";
+      }
 
       // Lưu lại câu trả lời vào lịch sử
       conversationHistory.push({ role: "user", content: prompt });
       conversationHistory.push({ role: "assistant", content: answer });
 
+      // Giới hạn lịch sử conversation (chỉ giữ 20 message gần nhất)
+      if (conversationHistory.length > 20) {
+        conversationHistory = conversationHistory.slice(-20);
+      }
+
       res.status(200).json({
-        data: answer ,
+        data: answer,
         message: "Câu trả lời được tạo thành công.",
       });
     } catch (error) {
@@ -306,7 +341,7 @@ async function speechToText(req, res) {
 
     // Gửi request POST sang Flask server với headers rõ ràng hơn
     const flaskRes = await axios.post(
-      "http://192.168.31.225:5001/transcribe",
+      "https://zilongapi.loca.lt/transcribe",
       form,
       {
         headers: form.getHeaders(),
@@ -317,7 +352,7 @@ async function speechToText(req, res) {
     // Xóa file tạm sau khi gửi
     fs.unlink(req.file.path, (err) => {
       if (err) console.error("Không thể xóa file tạm:", err);
-    });b
+    });
 
     // Trả kết quả về client
     res.status(200).json({
@@ -370,7 +405,7 @@ async function comparePronunciation(req, res) {
 
     // Gửi request POST sang Flask server
     const flaskRes = await axios.post(
-      "http://127.0.0.1:5001/compare-pronunciation",
+      "http://127.0.0.1:5000/compare-pronunciation",
       form,
       {
         headers: form.getHeaders(),

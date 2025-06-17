@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const { pool } = require("../config/database");
 const { getPaginationParamsSimple } = require("../utils/pagination");
 
-
 exports.wordlearn = async (req, res) => {
   try {
     const { page = 1, limit = 10 } = req.query;
@@ -48,8 +47,6 @@ exports.wordlearn = async (req, res) => {
       message: "Failed to fetch words",
     });
   }
-
-
 };
 
 // Lấy danh sách quiz
