@@ -1073,3 +1073,85 @@ exports.uploadAvatar = async (req, res) => {
     });
   }
 };
+
+const userController = {
+  // Get user progress
+  getUserProgress: async (req, res) => {
+    try {
+      const { user_id } = req.params;
+
+      // User stats
+      const userQuery = `
+        SELECT username, level, total_points, streak_days
+        FROM users
+        WHERE id = $1
+      `;
+      const userResult = await pool.query(userQuery, [user_id]);
+
+      // Lessons progress
+      const progressQuery = `
+        SELECT l.id, l.title, l.difficulty_level,
+               COALESCE(up.score, 0) as score,
+               COALESCE(up.is_completed, false) as is_completed
+        FROM lessons l
+        LEFT JOIN user_progress up ON l.id = up.lesson_id AND up.user_id = $1
+        WHERE l.is_published = true
+        ORDER BY l.id
+      `;
+      const progressResult = await pool.query(progressQuery, [user_id]);
+
+      // Recent attempts
+      const attemptsQuery = `
+        SELECT qa.*, l.title
+        FROM quiz_attempts qa
+        JOIN lessons l ON qa.lesson_id = l.id
+        WHERE qa.user_id = $1
+        ORDER BY qa.completed_at DESC
+        LIMIT 5
+      `;
+      const attemptsResult = await pool.query(attemptsQuery, [user_id]);
+
+      res.status(200).json({
+        status: "success",
+        data: {
+          user: userResult.rows[0],
+          lessons: progressResult.rows,
+          recent_attempts: attemptsResult.rows,
+        },
+      });
+    } catch (error) {
+      console.error("Error getting user progress:", error);
+      res.status(500).json({
+        status: "error",
+        message: "Failed to get user progress",
+      });
+    }
+  },
+
+  // Get leaderboard
+  getLeaderboard: async (req, res) => {
+    try {
+      const query = `
+        SELECT username, level, total_points, streak_days
+        FROM users
+        ORDER BY total_points DESC, streak_days DESC
+        LIMIT 10
+      `;
+
+      const result = await pool.query(query);
+
+      res.status(200).json({
+        status: "success",
+        data: result.rows,
+      });
+    } catch (error) {
+      console.error("Error getting leaderboard:", error);
+      res.status(500).json({
+        status: "error",
+        message: "Failed to get leaderboard",
+      });
+    }
+  },
+};
+
+module.exports = userController;

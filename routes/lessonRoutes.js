@@ -3,34 +3,82 @@ const router = express.Router();
 const lessonController = require('../controllers/lessonController');
 const { authenticateToken } = require('../middleware/auth');
 
-// Initialize tables - admin only
+// ===============================
+// LESSON CRUD ROUTES
+// ===============================
+
+// Initialize lesson tables (Admin only)
 router.post('/init', authenticateToken, lessonController.initializeLessonTables);
 
-// Lesson routes
+// Create new lesson
 router.post('/', authenticateToken, lessonController.createLesson);
-router.get('/', authenticateToken, lessonController.getAllLessons);
-router.get('/:id', authenticateToken, lessonController.getLessonById);
+
+// Get all lessons with filters
+router.get('/', lessonController.getAllLessons);
+
+// Get lesson by ID
+router.get('/:id', lessonController.getLessonById);
+
+// Update lesson
 router.put('/:id', authenticateToken, lessonController.updateLesson);
+
+// Delete lesson
 router.delete('/:id', authenticateToken, lessonController.deleteLesson);
 
-// Lesson section routes
+// ===============================
+// QUIZ SUBMISSION (Simple approach)
+// ===============================
+
+// Submit quiz answers
+router.post('/submit', authenticateToken, lessonController.submitQuiz);
+
+// ===============================
+// LESSON SECTION ROUTES (Placeholders)
+// ===============================
+
+// Add lesson section
 router.post('/sections', authenticateToken, lessonController.addLessonSection);
+
+// Update lesson section
 router.put('/sections/:id', authenticateToken, lessonController.updateLessonSection);
+
+// Delete lesson section
 router.delete('/sections/:id', authenticateToken, lessonController.deleteLessonSection);
 
-// Quiz routes
-router.post('/quizzes', authenticateToken, lessonController.createQuiz);
-router.get('/quizzes/:id', authenticateToken, lessonController.getQuizById);
+// ===============================
+// QUIZ ROUTES
+// ===============================
 
-// User progress routes
+// Create quiz for lesson
+router.post('/quiz', authenticateToken, lessonController.createQuiz);
+
+// Get quiz by ID (with optional answers)
+router.get('/quiz/:id', lessonController.getQuizById);
+
+// ===============================
+// USER PROGRESS ROUTES
+// ===============================
+
+// Update user progress for a lesson
 router.put('/progress/:userId/:lessonId', authenticateToken, lessonController.updateUserProgress);
-router.get('/progress/:userId', authenticateToken, lessonController.getUserProgress);
-router.get('/progress/:userId/:lessonId', authenticateToken, lessonController.getUserProgress);
 
-// Quiz attempt routes
-router.post('/quiz-attempts/:userId/:quizId', authenticateToken, lessonController.startQuizAttempt);
-router.post('/quiz-attempts/:attemptId/responses', authenticateToken, lessonController.submitQuizResponse);
-router.put('/quiz-attempts/:attemptId/complete', authenticateToken, lessonController.completeQuizAttempt);
-router.get('/quiz-attempts/:userId', authenticateToken, lessonController.getUserQuizResults);
+// Get user progress (specific lesson or all lessons)
+router.get('/progress/:userId/:lessonId?', authenticateToken, lessonController.getUserProgress);
 
-module.exports = router; 
+// ===============================
+// QUIZ ATTEMPT ROUTES
+// ===============================
+
+// Start quiz attempt
+router.post('/quiz/:quizId/attempts/:userId/start', authenticateToken, lessonController.startQuizAttempt);
+
+// Submit quiz response
+router.post('/quiz/attempts/:attemptId/response', authenticateToken, lessonController.submitQuizResponse);
+
+// Complete quiz attempt
+router.put('/quiz/attempts/:attemptId/complete', authenticateToken, lessonController.completeQuizAttempt);
+
+// Get user quiz results
+router.get('/quiz/results/:userId', authenticateToken, lessonController.getUserQuizResults);
+
+module.exports = router;
