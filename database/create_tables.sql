@@ -89,3 +89,19 @@ CREATE INDEX IF NOT EXISTS idx_words_category ON words(category_id);
 CREATE INDEX IF NOT EXISTS idx_words_difficulty ON words(difficulty_level);
 CREATE INDEX IF NOT EXISTS idx_quiz_questions_quiz ON quiz_questions(quiz_id);
 CREATE INDEX IF NOT EXISTS idx_quiz_options_question ON quiz_options(question_id);
+-- Tạo bảng user_bookmarks
+CREATE TABLE IF NOT EXISTS user_bookmarks (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    question_id INTEGER NOT NULL,
+    lesson_id INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (question_id) REFERENCES quiz_questions(id) ON DELETE CASCADE,
+    FOREIGN KEY (lesson_id) REFERENCES lessons(id) ON DELETE CASCADE,
+    UNIQUE(user_id, question_id) -- Một user chỉ bookmark 1 câu hỏi 1 lần
+);
+
+-- Tạo index để tối ưu query
+CREATE INDEX idx_user_bookmarks_user_id ON user_bookmarks(user_id);
+CREATE INDEX idx_user_bookmarks_lesson_id ON user_bookmarks(lesson_id);

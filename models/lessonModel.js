@@ -269,7 +269,7 @@ const lessonModel = {
   },
 
   // Submit quiz and calculate score
-  submitQuiz: async (userId, lessonId, answers) => {
+  submitQuiz: async (userId, lessonId, answers, bookmarkedQuestions = []) => {
     try {
       // Get correct answers
       const questionsQuery = `
@@ -306,6 +306,19 @@ const lessonModel = {
       `;
       const attemptResult = await pool.query(attemptQuery, [userId, lessonId, score, totalQuestions, correctCount]);
 
+      // Save bookmarked questions
+      if (bookmarkedQuestions && bookmarkedQuestions.length > 0) {
+        const bookmarkQuery = `
+          INSERT INTO user_bookmarks (user_id, question_id, lesson_id, created_at)
+          VALUES ($1, $2, $3, CURRENT_TIMESTAMP)
+          ON CONFLICT (user_id, question_id) DO NOTHING
+        `;
+
+        for (const questionId of bookmarkedQuestions) {
+          await pool.query(bookmarkQuery, [userId, questionId, lessonId]);
+        }
+      }
+
       // Update user progress
       const progressQuery = `
         INSERT INTO user_progress (user_id, lesson_id, score, is_completed, completed_at)
@@ -334,7 +347,8 @@ const lessonModel = {
         correctCount,
         totalQuestions,
         pointsEarned,
-        passed: score >= 70
+        passed: score >= 70,
+        bookmarkedCount: bookmarkedQuestions ? bookmarkedQuestions.length : 0
       };
     } catch (error) {
       throw error;
@@ -592,7 +606,121 @@ const lessonModel = {
     } catch (error) {
       throw error;
     }
-  }
+  },
+
+  // Get user bookmarks
+  getUserBookmarks: async (userId, lessonId = null) => {
+    try {
+      let query = `
+        SELECT
+          ub.question_id,
+          ub.lesson_id,
+          ub.created_at,
+          qq.question_text,
+          qq.option_a,
+          qq.option_b,
+          qq.option_c,
+          qq.option_d,
+          qq.correct_answer,
+          qq.explanation,
+          l.title as lesson_title
+        FROM user_bookmarks ub
+        JOIN quiz_questions qq ON ub.question_id = qq.id
+        JOIN lessons l ON ub.lesson_id = l.id
+        WHERE ub.user_id = $1
+      `;
+
+      let queryParams = [userId];
+
+      if (lessonId) {
+        query += ' AND ub.lesson_id = $2';
+        queryParams.push(lessonId);
+      }
+
+      query += ' ORDER BY ub.created_at DESC';
+
+      const result = await pool.query(query, queryParams);
+      return result.rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // Remove bookmark
+  removeBookmark: async (userId, questionId) => {
+    try {
+      const query = `
+        DELETE FROM user_bookmarks
+        WHERE user_id = $1 AND question_id = $2
+        RETURNING question_id
+      `;
+
+      const result = await pool.query(query, [userId, questionId]);
+      return result.rows[0] || null;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // Get multiple lessons by IDs with questions and answers
+  getLessonsByIds: async (lessonIds) => {
+    try {
+      // Convert array to string for SQL IN clause
+      const idsPlaceholder = lessonIds.map((_, index) => `$${index + 1}`).join(',');
+
+      // Get lessons
+      const lessonsQuery = `
+        SELECT id, title, description, difficulty_level, total_questions, is_published, created_at
+        FROM lessons
+        WHERE id IN (${idsPlaceholder}) AND is_published = true
+        ORDER BY id
+      `;
+      const lessonsResult = await pool.query(lessonsQuery, lessonIds);
+
+      if (lessonsResult.rows.length === 0) {
+        return [];
+      }
+
+      // Get all questions for these lessons
+      const questionsQuery = `
+        SELECT
+          lesson_id,
+          id,
+          question_text,
+          option_a,
+          option_b,
+          option_c,
+          option_d,
+          correct_answer,
+          explanation
+        FROM quiz_questions
+        WHERE lesson_id IN (${idsPlaceholder})
+        ORDER BY lesson_id, id
+      `;
+      const questionsResult = await pool.query(questionsQuery, lessonIds);
+
+      // Group questions by lesson_id
+      const questionsByLesson = {};
+      questionsResult.rows.forEach(question => {
+        if (!questionsByLesson[question.lesson_id]) {
+          questionsByLesson[question.lesson_id] = [];
+        }
+
+        const { lesson_id, ...questionData } = question;
+        questionsByLesson[question.lesson_id].push(questionData);
+      });
+
+      // Combine lessons with their questions
+      const result = lessonsResult.rows.map(lesson => ({
+        lesson: lesson,
+        questions: questionsByLesson[lesson.id] || []
+      }));
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 module.exports = lessonModel;

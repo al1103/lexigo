@@ -153,7 +153,7 @@ const lessonController = {
   // Submit quiz (simple approach)
   submitQuiz: async (req, res) => {
     try {
-      const { lesson_id, answers } = req.body;
+      const { lesson_id, answers, bookmarked_questions } = req.body;
       const user_id = req.user?.id || 1; // From auth middleware or default
 
       if (!lesson_id || !answers || !Array.isArray(answers)) {
@@ -163,7 +163,7 @@ const lessonController = {
         });
       }
 
-      const result = await lessonModel.submitQuiz(user_id, lesson_id, answers);
+      const result = await lessonModel.submitQuiz(user_id, lesson_id, answers, bookmarked_questions);
 
       res.status(200).json({
         status: 'success',
@@ -386,7 +386,70 @@ const lessonController = {
       console.error('Error fetching user quiz results:', error);
       res.status(500).json({ success: false, message: 'Error fetching user quiz results' });
     }
-  }
+  },
+
+  // Get user bookmarks
+  getUserBookmarks: async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const { lessonId } = req.query;
+
+      const bookmarks = await lessonModel.getUserBookmarks(parseInt(userId), lessonId ? parseInt(lessonId) : null);
+
+      res.status(200).json({
+        success: true,
+        data: bookmarks
+      });
+    } catch (error) {
+      console.error('Error fetching user bookmarks:', error);
+      res.status(500).json({ success: false, message: 'Error fetching user bookmarks' });
+    }
+  },
+
+  // Remove bookmark
+  removeBookmark: async (req, res) => {
+    try {
+      const { userId, questionId } = req.params;
+
+      const result = await lessonModel.removeBookmark(parseInt(userId), parseInt(questionId));
+
+      res.status(200).json({
+        success: true,
+        message: 'Bookmark removed successfully',
+        data: result
+      });
+    } catch (error) {
+      console.error('Error removing bookmark:', error);
+      res.status(500).json({ success: false, message: 'Error removing bookmark' });
+    }
+  },
+
+  // Get multiple lessons by IDs
+  getLessonsByIds: async (req, res) => {
+    try {
+      const { lesson_ids } = req.body;
+
+      if (!lesson_ids || !Array.isArray(lesson_ids) || lesson_ids.length === 0) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'lesson_ids array is required and cannot be empty'
+        });
+      }
+
+      const result = await lessonModel.getLessonsByIds(lesson_ids);
+
+      res.status(200).json({
+        status: 'success',
+        data: result
+      });
+    } catch (error) {
+      console.error('Error getting lessons:', error);
+      res.status(500).json({
+        status: 'error',
+        message: 'Failed to get lessons'
+      });
+    }
+  },
 };
 
 module.exports = lessonController;

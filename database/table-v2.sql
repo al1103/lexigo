@@ -68,6 +68,33 @@ CREATE TABLE quiz_attempts (
     correct_answers INTEGER NOT NULL,
     completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+CREATE TABLE IF NOT EXISTS categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    icon VARCHAR(50),
+    color VARCHAR(7), -- Hex color code
+    is_active BOOLEAN DEFAULT TRUE,
+    sort_order INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Bảng Words - Từ vựng
+CREATE TABLE IF NOT EXISTS words (
+    id SERIAL PRIMARY KEY,
+    word VARCHAR(100) NOT NULL,
+    pronunciation VARCHAR(100), -- IPA pronunciation
+    meaning VARCHAR(500) NOT NULL,
+    definition TEXT,
+    example_sentence TEXT,
+    category_id INTEGER,
+    difficulty_level VARCHAR(20) DEFAULT 'easy' CHECK (difficulty_level IN ('easy', 'medium', 'hard')),
+    audio_url VARCHAR(255),
+    image_url VARCHAR(255),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+);
 
 -- Triggers
 CREATE TRIGGER trigger_users_updated_at

@@ -81,4 +81,17 @@ router.put('/quiz/attempts/:attemptId/complete', authenticateToken, lessonContro
 // Get user quiz results
 router.get('/quiz/results/:userId', authenticateToken, lessonController.getUserQuizResults);
 
+// ===============================
+// BOOKMARK ROUTES
+// ===============================
+
+// Get user bookmarks
+router.get('/bookmarks/:userId', authenticateToken, lessonController.getUserBookmarks);
+
+// Remove bookmark
+router.delete('/bookmarks/:userId/:questionId', authenticateToken, lessonController.removeBookmark);
+
+// Get multiple lessons by IDs
+router.post('/batch', lessonController.getLessonsByIds);
+
 module.exports = router;
