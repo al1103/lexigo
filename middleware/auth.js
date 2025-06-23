@@ -1,56 +1,77 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+const UserModel = require('../models/user_model');
+const ApiResponse = require('../utils/apiResponse');
 
-const authenticateToken = (req, res, next) => {
+const authenticateToken = async (req, res, next) => {
   try {
-      next();
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
 
-    // Get token from Authorization header
-    // const authHeader = req.headers['authorization'];
-    // const token = authHeader && authHeader.split(' ')[1];
+    if (!token) {
+      return ApiResponse.error(res, 401, 'Access token is required');
+    }
 
-    // if (!token) {
-    //   return res.status(401).json({
-    //     success: false,
-    //     message: 'Access denied. No token provided.'
-    //   });
-    // }
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'lexigo_secret_key');
 
-    // // Verify token
-    // jwt.verify(token, process.env.JWT_SECRET || 'your_jwt_secret', (err, decoded) => {
-    //   if (err) {
-    //     return res.status(403).json({
-    //       success: false,
-    //       message: 'Invalid token.'
-    //     });
-    //   }
+    // Get user from database to ensure they still exist
+    const user = await UserModel.findById(decoded.userId);
 
-    //   // Add user info to request
-    //   req.user = decoded;
-    //   next();
-    // });
+    if (!user) {
+      return ApiResponse.error(res, 401, 'User not found');
+    }
+
+    // Add user info to request object
+    req.user = {
+      userId: user.id,
+      username: user.username,
+      email: user.email,
+      level: user.level
+    };
+
+    next();
   } catch (error) {
-    console.error('Authentication error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error during authentication'
-    });
+    console.error('Auth middleware error:', error);
+
+    if (error.name === 'JsonWebTokenError') {
+      return ApiResponse.error(res, 401, 'Invalid token');
+    } else if (error.name === 'TokenExpiredError') {
+      return ApiResponse.error(res, 401, 'Token expired');
+    } else {
+      return ApiResponse.error(res, 500, 'Authentication failed');
+    }
   }
 };
 
-// Optional middleware to check if user has admin role
-const isAdmin = (req, res, next) => {
-  if (!req.user || req.user.role !== 'admin') {
-    return res.status(403).json({
-      success: false,
-      message: 'Access denied. Admin rights required.'
-    });
-  }
+// Optional auth - không throw error nếu không có token
+const optionalAuth = async (req, res, next) => {
+  try {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
 
-  next();
+    if (!token) {
+      req.user = null;
+      return next();
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'lexigo_secret_key');
+    const user = await UserModel.findById(decoded.userId);
+
+    req.user = user ? {
+      userId: user.id,
+      username: user.username,
+      email: user.email,
+      level: user.level
+    } : null;
+
+    next();
+  } catch (error) {
+    req.user = null;
+    next();
+  }
 };
 
 module.exports = {
   authenticateToken,
-  isAdmin
+  optionalAuth
 };

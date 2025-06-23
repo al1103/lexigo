@@ -7,6 +7,7 @@ const {
   promptAnswer,
   speechToText,
   comparePronunciation,
+  getVocabularyInfo
 } = require("../controllers/googleGenerativeAI");
 
 // Set up multer for file upload
@@ -17,7 +18,7 @@ const upload = multer({
 
 router.post("/chat", handleNewMessage);
 router.post("/image-prompt", upload.single("image"), handleImageAndPrompt);
-
+router.post('/vocabulary', getVocabularyInfo);
 router.post("/promptAnswer", promptAnswer);
 router.post("/speech-to-text", upload.single("audio"), speechToText);
 router.post("/comparepronunciation", upload.single("audio"), comparePronunciation );

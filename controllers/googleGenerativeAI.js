@@ -4,12 +4,69 @@ const fs = require("fs");
 const axios = require("axios");
 const FormData = require("form-data");
 const { uploadImage } = require("../utils/uploadImage");
+const SpeakingModel = require("../models/speaking_model");
+
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const modelPreventive = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+
+// Service function để xử lý lưu kết quả speaking
+async function saveSpeakingResult(userId, resultData) {
+  try {
+    const {
+      accuracy_level,
+      overall_score,
+      reference_ipa,
+      reference_text,
+      spoken_ipa,
+      spoken_text,
+      word_analysis
+    } = resultData;
+
+    // Generate session ID
+    const sessionId = `speaking_${Date.now()}_${userId}`;
+
+    const totalWords = word_analysis ? word_analysis.length : 0;
+    const correctWords = word_analysis ?
+      word_analysis.filter(w => w.status === 'correct').length : 0;
+
+    // Lưu kết quả chính
+    const speakingResult = await SpeakingModel.saveSpeakingResult({
+      userId,
+      sessionId,
+      referenceText: reference_text,
+      referenceIpa: reference_ipa,
+      spokenText: spoken_text,
+      spokenIpa: spoken_ipa,
+      overallScore: overall_score,
+      accuracyLevel: accuracy_level,
+      totalWords,
+      correctWords
+    });
+
+    // Lưu phân tích từng từ
+    if (word_analysis && word_analysis.length > 0) {
+      await SpeakingModel.saveWordAnalysis(speakingResult.id, word_analysis);
+    }
+
+    // Cập nhật thống kê user (bao gồm streak và points)
+    const updateResult = await SpeakingModel.updateUserSpeakingStats(userId, overall_score || 0);
+
+    return {
+      success: true,
+      speakingResultId: speakingResult.id,
+      sessionId,
+      pointsEarned: updateResult.pointsEarned,
+      currentStreak: updateResult.streak
+    };
+  } catch (error) {
+    console.error('Error saving speaking result:', error);
+    throw error;
+  }
+}
 
 async function handleNewMessage(prompt) {
   try {
@@ -28,7 +85,7 @@ async function handleNewMessage(prompt) {
       .text()
       .split("\n")
       .filter((s) => s.trim() !== "");
-    return { status: 200, suggestions };
+    return { status: '200', suggestions };
   } catch (error) {
     console.error("Lỗi khi xử lý tin nhắn mới:", error);
     return { status: 500, message: "Có lỗi xảy ra, vui lòng thử lại sau." };
@@ -43,19 +100,26 @@ async function handleImageAndPrompt(req, res) {
 
     let imageData, prompt, uploadedImageUrl = null;
 
-    const defaultPrompt = `Please analyze the image and detect all visible objects.
-For each object, return a JSON object with the following structure.
+    const defaultPrompt = `You are a visual recognition expert.
+
+Your task is to detect **only clearly visible, distinct physical objects** in the image.
+
+Output a valid JSON array, with no extra text or formatting. For each object, return:
+
+- \`name\`: the object's name in clear, simple English (e.g., "vase", "flower", "chair")
+- \`score\`: a float confidence score from 0.0 to 1.0
+- \`boundingPoly\`: an object with 4 \`vertices\`, each containing \`x\` and \`y\` coordinates (as percentages between 0.0 and 1.0) relative to image width and height
 
 IMPORTANT:
-- Your response must be ONLY valid JSON array, no other text, no markdown formatting, no code blocks.
-- Coordinates must be in percentage (0.0 to 1.0) relative to image dimensions, NOT absolute pixels.
-- For example: if object is at top-left corner, x and y should be around 0.0-0.1
-- If object is at bottom-right corner, x and y should be around 0.9-1.0
-- Does not return objects where x and y equal 1.0
-Return EXACTLY in this format:
+- Return **only objects you are highly confident about (score ≥ 0.85)**
+- Do not include background textures, shadows, or ambiguous items
+- Each \`boundingPoly.vertices\` must contain 4 points in clockwise order starting from the top-left
+- Do not return any object if any x or y coordinate is exactly 1.0
+
+Here is the required format (return your full result in this exact format):
 [
   {
-    "name": "Object name in English",
+    "name": "object name",
     "score": 0.95,
     "boundingPoly": {
       "vertices": [
@@ -68,18 +132,21 @@ Return EXACTLY in this format:
   }
 ]
 
-Where:
-- x: horizontal position as percentage (0.0 = left edge, 1.0 = right edge)
-- y: vertical position as percentage (0.0 = top edge, 1.0 = bottom edge)
-- score: confidence between 0.0 and 1.0
-- vertices: 4 corners of bounding box in clockwise order starting from top-left
-
-Only include objects that are clearly visible. Use simple English names.`;
+`;
 
     // Handling file upload
     if (req.file) {
       prompt = req.body.prompt || defaultPrompt;
       imageData = fs.readFileSync(req.file.path);
+
+      // Upload ảnh lên cloud storage để lấy URL
+      try {
+        uploadedImageUrl = await uploadImage(req.file.path);
+        console.log("Uploaded image URL:", uploadedImageUrl);
+      } catch (uploadError) {
+        console.error("Error uploading image:", uploadError);
+        // Vẫn tiếp tục xử lý ngay cả khi upload thất bại
+      }
     } else {
       return res.status(400).json({
         error: "Thiếu dữ liệu ảnh. Vui lòng gửi file, base64 hoặc URL ảnh."
@@ -148,10 +215,11 @@ Only include objects that are clearly visible. Use simple English names.`;
           });
         }
 
-        return res.status(200).json({
+        return res.status('200').json({
           message: "Xử lý thành công",
           data: [],
           rawResponse: generatedText,
+          imageUrl: uploadedImageUrl
         });
       }
 
@@ -163,9 +231,10 @@ Only include objects that are clearly visible. Use simple English names.`;
         });
       }
 
-      res.status(200).json({
+      res.status('200').json({
         message: "Xử lý thành công",
         data: parsedData,
+        imageUrl: uploadedImageUrl
       });
     } catch (apiError) {
       console.error("API Error:", apiError);
@@ -180,7 +249,7 @@ Only include objects that are clearly visible. Use simple English names.`;
       if (apiError.message.includes("Unable to process input image")) {
         return res.status(400).json({
           error: "Không thể xử lý ảnh đầu vào. Vui lòng thử lại với ảnh khác.",
-          uploadedImageUrl: uploadedImageUrl
+          imageUrl: uploadedImageUrl
         });
       }
       throw apiError;
@@ -198,7 +267,7 @@ Only include objects that are clearly visible. Use simple English names.`;
     res.status(500).json({
       message: "Có lỗi xảy ra, vui lòng thử lại sau.",
       error: error.message,
-      uploadedImageUrl: uploadedImageUrl || null
+      imageUrl: uploadedImageUrl
     });
   }
 }
@@ -298,7 +367,7 @@ Remember: Reply with EXACTLY ONE short sentence (max 8 words). No questions.`;
         conversationHistory = conversationHistory.slice(-20);
       }
 
-      res.status(200).json({
+      res.status('200').json({
         data: answer,
         message: "Câu trả lời được tạo thành công.",
       });
@@ -355,7 +424,7 @@ async function speechToText(req, res) {
     });
 
     // Trả kết quả về client
-    res.status(200).json({
+    res.status('200').json({
       data: flaskRes.data,
       message: "Chuyển đổi âm thanh thành công.",
     });
@@ -385,11 +454,15 @@ async function comparePronunciation(req, res) {
         .json({ error: "Thiếu văn bản tham chiếu để so sánh." });
     }
 
+    // Extract optional parameters for database saving
+    const userId = req.body.user_id ? parseInt(req.body.user_id) : null;
+
     // Thêm log để debug
     console.log("File path:", req.file.path);
     console.log("File exists:", fs.existsSync(req.file.path));
     console.log("File size:", fs.statSync(req.file.path).size);
     console.log("Reference text:", req.body.reference_text);
+    console.log("User ID:", userId);
 
     // Chuẩn bị form-data để gửi sang Flask server
     const form = new FormData();
@@ -422,10 +495,26 @@ async function comparePronunciation(req, res) {
       });
     }
 
+    const responseData = flaskRes.data;
+
+    // Save to database if user_id is provided
+    let dbResult = null;
+    if (userId) {
+      try {
+        dbResult = await saveSpeakingResult(userId, responseData);
+        console.log("Speaking result saved to database:", dbResult);
+      } catch (dbError) {
+        console.error("Error saving to database:", dbError);
+        // Continue with response even if database save fails
+      }
+    }
+
     // Trả kết quả về client
-    res.status(200).json({
-      data: flaskRes.data,
+    res.status('200').json({
+      data: responseData,
       message: "So sánh phát âm thành công.",
+      saved: dbResult ? true : false,
+      sessionId: dbResult?.sessionId
     });
   } catch (error) {
     console.error("Lỗi khi so sánh phát âm:", error);
@@ -444,10 +533,172 @@ async function comparePronunciation(req, res) {
   }
 }
 
+// API endpoints để lấy lịch sử và thống kê
+async function getSpeakingHistory(req, res) {
+  try {
+    const userId = req.params.userId;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    const result = await SpeakingModel.getSpeakingHistory(userId, page, limit);
+
+    res.status('200').json({
+      message: "Lấy lịch sử speaking thành công",
+      ...result
+    });
+  } catch (error) {
+    console.error("Lỗi khi lấy lịch sử speaking:", error);
+    res.status(500).json({
+      message: "Có lỗi xảy ra khi lấy lịch sử speaking",
+      error: error.message
+    });
+  }
+}
+
+async function getSpeakingStats(req, res) {
+  try {
+    const userId = req.params.userId;
+    const stats = await SpeakingModel.getSpeakingStats(userId);
+
+    if (!stats) {
+      return res.status(404).json({
+        message: "Không tìm thấy thống kê cho người dùng này"
+      });
+    }
+
+    res.status('200').json({
+      message: "Lấy thống kê speaking thành công",
+      data: stats
+    });
+  } catch (error) {
+    console.error("Lỗi khi lấy thống kê speaking:", error);
+    res.status(500).json({
+      message: "Có lỗi xảy ra khi lấy thống kê speaking",
+      error: error.message
+    });
+  }
+}
+
+async function getVocabularyInfo(req, res) {
+  try {
+    const { word } = req.body;
+
+    if (!word) {
+      return res.status(400).json({
+        error: "Vui lòng cung cấp từ vựng cần tra cứu."
+      });
+    }
+
+    const vocabularyPrompt = `You are an English vocabulary expert. For the word "${word}", provide information in this EXACT JSON format:
+
+{
+  "word": "${word}",
+  "pronunciations": [
+    {
+      "ipa": "/IPA transcription/",
+      "audio": ""
+    }
+  ],
+  "meanings": [
+    {
+      "partOfSpeech": "noun/verb/adjective/etc",
+      "vietnamese": "Vietnamese translation",
+      "definition": "English definition",
+      "examples": [
+        {
+          "english": "Example sentence in English using the word.",
+          "vietnamese": "Vietnamese translation of the example sentence."
+        }
+      ]
+    },
+    {
+      "partOfSpeech": "noun/verb/adjective/etc",
+      "vietnamese": "Another Vietnamese meaning if applicable",
+      "definition": "Another English definition",
+      "examples": [
+        {
+          "english": "Another example sentence in English using the word.",
+          "vietnamese": "Vietnamese translation of the second example sentence."
+        }
+      ]
+    }
+  ]
+}
+
+IMPORTANT RULES:
+- Return ONLY valid JSON, no extra text
+- Provide 2 different meanings if the word has multiple meanings
+- If the word has only one common meaning, provide 2 different examples for that meaning
+- Each example sentence should be natural and practical
+- Always include accurate IPA pronunciation
+- Use clear, simple Vietnamese translations
+- Make example sentences relevant to daily life or common contexts
+- Include part of speech for each meaning`;
+
+    let result;
+    try {
+      result = await model.generateContent(vocabularyPrompt);
+    } catch (error) {
+      console.log("Switching to preventive model due to error:", error.message);
+      result = await modelPreventive.generateContent(vocabularyPrompt);
+    }
+
+    let vocabularyInfo = result.response.text().trim();
+
+    // Clean the response from AI
+    vocabularyInfo = vocabularyInfo
+      .replace(/```json\s*/g, "")
+      .replace(/```\s*/g, "")
+      .replace(/^[^{]*/, "") // Remove text before first {
+      .replace(/[^}]*$/, "") // Remove text after last }
+      .trim();
+
+    let parsedData;
+    try {
+      parsedData = JSON.parse(vocabularyInfo);
+    } catch (parseError) {
+      console.error("JSON parse error:", parseError);
+      console.error("Failed to parse:", vocabularyInfo);
+
+      // Fallback: return a basic structure if parsing fails
+      return res.status('200').json({
+        message: "Tra cứu từ vựng thành công",
+        data: {
+          word: word,
+          pronunciations: [{ ipa: "", audio: "" }],
+          meanings: [{
+            partOfSpeech: "",
+            vietnamese: "",
+            definition: "",
+            examples: [{ english: "", vietnamese: "" }]
+          }]
+        },
+        rawResponse: vocabularyInfo
+      });
+    }
+
+    res.status('200').json({
+      message: "Tra cứu từ vựng thành công",
+      word: word,
+      data: parsedData
+    });
+
+  } catch (error) {
+    console.error("Lỗi khi tra cứu từ vựng:", error);
+    res.status(500).json({
+      message: "Có lỗi xảy ra khi tra cứu từ vựng, vui lòng thử lại sau.",
+      error: error.message
+    });
+  }
+}
+
 module.exports = {
   promptAnswer,
   speechToText,
   handleNewMessage,
   handleImageAndPrompt,
   comparePronunciation,
+  getVocabularyInfo,
+  getSpeakingHistory,
+  getSpeakingStats,
 };

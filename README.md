@@ -74,7 +74,7 @@ Returns transcribed text and pronunciation feedback in JSON format.
 
 | Status Code | Meaning                     |
 | ----------- | --------------------------- |
-| 200         | Success                     |
+| '200'       | Success                     |
 | 400         | Bad Request (Invalid input) |
 | 500         | Internal Server Error       |
 

@@ -207,7 +207,7 @@ const deleteFile = async (req, res) => {
     const result = await cloudinary.uploader.destroy(public_id, { resource_type });
 
     if (result.result === 'ok') {
-      res.status(200).json({
+      res.status('200').json({
         success: true,
         message: 'File deleted successfully'
       });
@@ -233,7 +233,7 @@ const testConnection = async (req, res) => {
     // Test Cloudinary connection
     const testResult = await cloudinary.api.ping();
 
-    res.status(200).json({
+    res.status('200').json({
       success: true,
       message: 'Upload service is working correctly',
       data: {

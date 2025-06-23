@@ -1,24 +1,19 @@
 const express = require("express");
 const usersRouter = require("./userRoutes");
 const aiRoutes = require("./aiRoutes");
-const vocabRoutes = require("./vocabRoutes");
-const lessonRoutes = require("./lessonRoutes");
-const statsRoutes = require("./statsRoutes");
-const uploadRoutes = require("./uploadRoutes");
-const wordRoutes = require("./word"); // Thêm dòng này
+const quizRoutes = require("./quizRoutes");
+const speakingRoutes = require("./speakingRoutes");
+const levelRoutes = require("./levelRoutes"); // Thêm dòng này
 
 function routes(app) {
   // User management
   app.use("/api/users", usersRouter);
   app.use("/api/ai", aiRoutes);
 
-  // English learning API routes
-  app.use("/api/vocabulary", vocabRoutes);
-  app.use("/api/lessons", lessonRoutes);
-  app.use("/api/words", wordRoutes); // Sửa từ word-lean thành words
-
-  app.use("/api/stats", statsRoutes);
-  app.use("/api/uploads", uploadRoutes);
+  // Main features
+  app.use("/api/quiz", quizRoutes);
+  app.use("/api/speaking", speakingRoutes);
+  app.use("/api/levels", levelRoutes); // Thêm dòng này
 
   // Test connection route
   app.get('/test', (req, res) => {

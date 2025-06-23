@@ -5,28 +5,42 @@ const { getPaginationParamsSimple } = require("../utils/pagination");
 
 exports.wordlearn = async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req.query;
+    const { page = 1, limit = 10, difficulty_level } = req.query;
     const { offset, limit: paginationLimit } = getPaginationParamsSimple(page, limit);
 
+    // Build where conditions
+    let whereConditions = ['(w.is_active = TRUE OR w.is_active IS NULL)'];
+    let queryParams = [];
+    let paramIndex = 1;
+
+    if (difficulty_level) {
+      whereConditions.push(`w.difficulty_level = $${paramIndex}`);
+      queryParams.push(difficulty_level);
+      paramIndex++;
+    }
+
+    const whereClause = whereConditions.join(' AND ');
+
     // Đếm tổng số từ để có pagination chính xác
-    const countQuery = `SELECT COUNT(*) as total FROM words WHERE is_active = TRUE`;
-    const countResult = await pool.query(countQuery);
+    const countQuery = `SELECT COUNT(*) as total FROM words w WHERE ${whereClause}`;
+    const countResult = await pool.query(countQuery, queryParams);
     const totalWords = parseInt(countResult.rows[0].total);
 
     const query = `
       SELECT w.id, w.word, w.pronunciation, w.meaning, w.definition,
              w.example_sentence, w.difficulty_level, w.audio_url, w.image_url,
-             c.name as category_name, c.color as category_color
+             l.level_name, l.level_code, l.color as level_color
       FROM words w
-      LEFT JOIN categories c ON w.category_id = c.id
-      WHERE w.is_active = TRUE
+      LEFT JOIN levels l ON l.level_code = w.difficulty_level
+      WHERE ${whereClause}
       ORDER BY w.created_at DESC
-      LIMIT $1 OFFSET $2
+      LIMIT $${paramIndex} OFFSET $${paramIndex + 1}
     `;
 
-    const result = await pool.query(query, [paginationLimit, offset]);
+    queryParams.push(paginationLimit, offset);
+    const result = await pool.query(query, queryParams);
 
-    res.status(200).json({
+    res.status('200').json({
       status: "success",
       data: {
         words: result.rows,
@@ -49,19 +63,19 @@ exports.wordlearn = async (req, res) => {
   }
 };
 
-// Lấy danh sách quiz
+// Lấy danh sách quiz - LOẠI BỎ CATEGORY
 exports.getQuizzes = async (req, res) => {
   try {
-    const { page = 1, limit = 10, lesson_id, quiz_type, difficulty } = req.query;
+    const { page = 1, limit = 10, level_id, quiz_type, difficulty } = req.query;
     const { offset, limit: paginationLimit } = getPaginationParamsSimple(page, limit);
 
     let whereConditions = ['q.is_active = TRUE'];
     let queryParams = [];
     let paramIndex = 1;
 
-    if (lesson_id) {
-      whereConditions.push(`q.lesson_id = $${paramIndex}`);
-      queryParams.push(lesson_id);
+    if (level_id) {
+      whereConditions.push(`q.level_id = $${paramIndex}`);
+      queryParams.push(level_id);
       paramIndex++;
     }
 
@@ -71,13 +85,19 @@ exports.getQuizzes = async (req, res) => {
       paramIndex++;
     }
 
+    if (difficulty) {
+      whereConditions.push(`q.difficulty_level = $${paramIndex}`);
+      queryParams.push(difficulty);
+      paramIndex++;
+    }
+
     const whereClause = whereConditions.length > 0 ? `WHERE ${whereConditions.join(' AND ')}` : '';
 
     // Đếm tổng số quiz
     const countQuery = `
       SELECT COUNT(*) as total
       FROM quizzes q
-      LEFT JOIN lessons l ON q.lesson_id = l.id
+      LEFT JOIN levels l ON q.level_id = l.id
       ${whereClause}
     `;
     const countResult = await pool.query(countQuery, queryParams);
@@ -85,10 +105,10 @@ exports.getQuizzes = async (req, res) => {
 
     const query = `
       SELECT q.id, q.title, q.description, q.quiz_type, q.time_limit,
-             q.total_questions, q.passing_score,
-             l.title as lesson_title, l.difficulty_level as lesson_difficulty
+             q.total_questions, q.passing_score, q.difficulty_level,
+             l.level_name, l.level_code, l.color as level_color
       FROM quizzes q
-      LEFT JOIN lessons l ON q.lesson_id = l.id
+      LEFT JOIN levels l ON q.level_id = l.id
       ${whereClause}
       ORDER BY q.created_at DESC
       LIMIT $${paramIndex} OFFSET $${paramIndex + 1}
@@ -97,7 +117,7 @@ exports.getQuizzes = async (req, res) => {
     queryParams.push(paginationLimit, offset);
     const result = await pool.query(query, queryParams);
 
-    res.status(200).json({
+    res.status('200').json({
       status: "success",
       data: {
         quizzes: result.rows,
@@ -120,7 +140,7 @@ exports.getQuizzes = async (req, res) => {
   }
 };
 
-// Lấy chi tiết quiz với câu hỏi
+// Lấy chi tiết quiz với câu hỏi - LOẠI BỎ CATEGORY
 exports.getQuizById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -128,10 +148,10 @@ exports.getQuizById = async (req, res) => {
     // Lấy thông tin quiz
     const quizQuery = `
       SELECT q.id, q.title, q.description, q.quiz_type, q.time_limit,
-             q.total_questions, q.passing_score,
-             l.title as lesson_title, l.difficulty_level
+             q.total_questions, q.passing_score, q.difficulty_level,
+             l.level_name, l.level_code, l.color as level_color
       FROM quizzes q
-      LEFT JOIN lessons l ON q.lesson_id = l.id
+      LEFT JOIN levels l ON q.level_id = l.id
       WHERE q.id = $1 AND q.is_active = TRUE
     `;
     const quizResult = await pool.query(quizQuery, [id]);
@@ -175,7 +195,7 @@ exports.getQuizById = async (req, res) => {
       options: optionsResult.rows.filter(option => option.question_id === question.id)
     }));
 
-    res.status(200).json({
+    res.status('200').json({
       status: "success",
       data: {
         quiz: {
@@ -193,17 +213,20 @@ exports.getQuizById = async (req, res) => {
   }
 };
 
-// Lấy câu hỏi ngẫu nhiên cho practice
+// Lấy câu hỏi ngẫu nhiên cho practice - LOẠI BỎ CATEGORY
 exports.getRandomQuestions = async (req, res) => {
   try {
     const {
       limit = 10,
       difficulty_level,
-      category_id,
+      level_id,
       question_type = 'multiple_choice'
     } = req.query;
 
-    let whereConditions = ['w.is_active = TRUE', 'qq.question_type = $1'];
+    let whereConditions = [
+      '(w.is_active = TRUE OR w.is_active IS NULL)',
+      'qq.question_type = $1'
+    ];
     let queryParams = [question_type];
     let paramIndex = 2;
 
@@ -213,9 +236,9 @@ exports.getRandomQuestions = async (req, res) => {
       paramIndex++;
     }
 
-    if (category_id) {
-      whereConditions.push(`w.category_id = $${paramIndex}`);
-      queryParams.push(category_id);
+    if (level_id) {
+      whereConditions.push(`w.level_id = $${paramIndex}`);
+      queryParams.push(level_id);
       paramIndex++;
     }
 
@@ -225,10 +248,10 @@ exports.getRandomQuestions = async (req, res) => {
       SELECT qq.id, qq.question_text, qq.question_type, qq.correct_answer,
              qq.explanation, qq.points,
              w.word, w.pronunciation, w.meaning, w.difficulty_level,
-             c.name as category_name
+             l.level_name, l.level_code, l.color as level_color
       FROM quiz_questions qq
       JOIN words w ON qq.word_id = w.id
-      LEFT JOIN categories c ON w.category_id = c.id
+      LEFT JOIN levels l ON w.level_id = l.id
       WHERE ${whereClause}
       ORDER BY RANDOM()
       LIMIT $${paramIndex}
@@ -257,7 +280,7 @@ exports.getRandomQuestions = async (req, res) => {
       options: optionsResult.rows.filter(option => option.question_id === question.id)
     }));
 
-    res.status(200).json({
+    res.status('200').json({
       status: "success",
       data: {
         questions: questions,

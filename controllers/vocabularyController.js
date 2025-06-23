@@ -14,13 +14,13 @@ const vocabularyController = {
       const result = await pool.query(checkQuery);
 
       if (result.rows.length >= 3) {
-        return res.status(200).json({
+        return res.status('200').json({
           status: 'success',
           message: 'Vocabulary tables already exist'
         });
       }
 
-      res.status(200).json({
+      res.status('200').json({
         status: 'success',
         message: 'Vocabulary tables initialized successfully'
       });
@@ -112,7 +112,7 @@ const vocabularyController = {
         });
       }
 
-      res.status(200).json({
+      res.status('200').json({
         status: 'success',
         data: result.rows[0]
       });
@@ -183,7 +183,7 @@ const vocabularyController = {
       queryParams.push(limit, offset);
       const result = await pool.query(query, queryParams);
 
-      res.status(200).json({
+      res.status('200').json({
         status: 'success',
         data: {
           data: result.rows,
@@ -259,7 +259,7 @@ const vocabularyController = {
         });
       }
 
-      res.status(200).json({
+      res.status('200').json({
         status: 'success',
         message: 'Vocabulary updated successfully',
         data: result.rows[0]
@@ -293,7 +293,7 @@ const vocabularyController = {
         });
       }
 
-      res.status(200).json({
+      res.status('200').json({
         status: 'success',
         message: 'Vocabulary deleted successfully',
         data: result.rows[0]
@@ -356,7 +356,7 @@ const vocabularyController = {
 
       const result = await pool.query(query);
 
-      res.status(200).json({
+      res.status('200').json({
         status: 'success',
         data: result.rows
       });
