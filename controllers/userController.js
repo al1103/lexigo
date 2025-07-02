@@ -200,6 +200,7 @@ const userController = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
+      console.log("Login attempt with email:", email);
 
       // Validation
       if (!email || !password) {

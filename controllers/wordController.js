@@ -1,5 +1,4 @@
 require("dotenv").config();
-const jwt = require("jsonwebtoken");
 const { pool } = require("../config/database");
 const { getPaginationParamsSimple } = require("../utils/pagination");
 

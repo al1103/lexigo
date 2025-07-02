@@ -7,7 +7,7 @@ const levelRoutes = require("./levelRoutes"); // Thêm dòng này
 
 function routes(app) {
   // User management
-  app.use("/api/users", usersRouter);
+  app.use("/api", usersRouter);
   app.use("/api/ai", aiRoutes);
 
   // Main features

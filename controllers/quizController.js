@@ -63,11 +63,12 @@ const quizController = {
           const remainingNeeded = targetTotal - activeSession.answered_questions;
 
           if (remainingNeeded > 0) {
-            // Lấy câu hỏi còn lại
+            // Lấy câu hỏi còn lại VỚI BOOKMARK STATUS
             questions = await quizModel.getRemainingQuestions(
               activeSession.id,
               level.level_code,
-              remainingNeeded
+              remainingNeeded,
+              userId // Thêm userId parameter
             );
 
             // Nếu session chưa có total_questions, cập nhật nó
@@ -95,9 +96,13 @@ const quizController = {
         console.log('🆕 Creating new session...');
         session = await quizModel.createQuizSession(userId, level_id, level.level_code);
 
-        // Lấy câu hỏi mới
+        // Lấy câu hỏi mới VỚI BOOKMARK STATUS
         const requestedCount = Math.min(question_count, totalAvailableQuestions);
-        questions = await quizModel.getQuestionsByLevel(level.level_code, requestedCount);
+        questions = await quizModel.getQuestionsByLevel(
+          level.level_code,
+          requestedCount,
+          userId // Thêm userId parameter
+        );
 
         // Cập nhật total_questions cho session mới
         if (questions.length > 0) {
@@ -117,18 +122,32 @@ const quizController = {
 
       return ApiResponse.success(res, '200', responseMessage, {
         session_id: session.id,
-        current_progress: currentProgress,
-        remaining_questions: questions.length,
-
+        session_info: {
+          is_resuming: isResuming,
+          current_progress: currentProgress,
+          remaining_questions: questions.length,
+          total_available_questions: totalAvailableQuestions
+        },
         contents: questions.map(q => ({
           question_id: q.question_id,
           question_text: q.question_text,
-          word: q.word,
-          meaning: q.meaning,
-          pronunciation: q.pronunciation,
-          example_sentence: q.example_sentence,
-          options: q.options,
-          points: q.points
+          question_type: q.question_type,
+          points: q.points,
+          word: {
+            id: q.word_id,
+            word: q.word,
+            pronunciation: q.pronunciation,
+            meaning: q.meaning,
+            definition: q.definition,
+            example_sentence: q.example_sentence,
+            audio_url: q.audio_url,
+            image_url: q.image_url,
+            // BOOKMARK INFORMATION (simplified)
+            is_bookmarked: q.is_bookmarked,
+            bookmark_notes: q.bookmark_notes
+            // Loại bỏ bookmarked_at vì không có column này
+          },
+          options: q.options
         }))
       });
     } catch (error) {

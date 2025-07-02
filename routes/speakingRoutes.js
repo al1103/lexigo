@@ -13,7 +13,7 @@ const upload = multer({
 // Speaking session routes
 router.get('/words', authenticateToken, speakingController.getWordsForSpeaking);
 router.post('/start-session', authenticateToken, speakingController.startSpeakingSession);
-router.post('/compare-pronunciation', authenticateToken, upload.single('audio'), speakingController.comparePronunciation);
+// router.post('/compare-pronunciation', authenticateToken, upload.single('audio'), speakingController.comparePronunciation);
 // router.post('/complete-session', authenticateToken, speakingController.completeSpeakingSession);
 router.get('/levels', authenticateToken, speakingController.getSpeakingLevels);
 

@@ -1,15 +1,16 @@
 const { pool } = require('../config/database');
 
 const quizModel = {
-  // Lấy câu hỏi theo level - LOẠI BỎ CATEGORY
-  getQuestionsByLevel: async (levelCode, limit = 10) => {
+  // Lấy câu hỏi theo level - SỬA LẠI BOOKMARK QUERY
+  getQuestionsByLevel: async (levelCode, limit = 10, userId = null) => {
     try {
-      console.log('🔍 Getting questions for level:', levelCode, 'limit:', limit);
+      console.log('🔍 Getting questions for level:', levelCode, 'limit:', limit, 'userId:', userId);
 
       const query = `
         SELECT
           qq.id as question_id,
           qq.question_text,
+          qq.question_type,
           qq.difficulty_level,
           qq.explanation,
           qq.points,
@@ -17,30 +18,77 @@ const quizModel = {
           w.word,
           w.meaning,
           w.pronunciation,
+          w.definition,
           w.example_sentence,
-          JSON_AGG(
-            JSON_BUILD_OBJECT(
-              'option_id', qo.id,
-              'option_text', qo.option_text,
-              'is_correct', qo.is_correct,
-              'option_order', qo.option_order
-            ) ORDER BY qo.option_order
-          ) as options
+          w.audio_url,
+          w.image_url,
+          CASE WHEN ub.id IS NOT NULL THEN TRUE ELSE FALSE END as is_bookmarked,
+          ub.notes as bookmark_notes
         FROM quiz_questions qq
         JOIN words w ON qq.word_id = w.id
-        LEFT JOIN quiz_options qo ON qq.id = qo.question_id
+        LEFT JOIN user_bookmarks ub ON w.id = ub.word_id AND ub.user_id = $3
         WHERE qq.difficulty_level = $1
           AND (qq.is_active IS NULL OR qq.is_active = TRUE)
           AND (w.is_active IS NULL OR w.is_active = TRUE)
-        GROUP BY qq.id, w.id
         ORDER BY RANDOM()
         LIMIT $2
       `;
 
-      const result = await pool.query(query, [levelCode, limit]);
-      console.log('📊 Found questions:', result.rows.length);
+      const questionsResult = await pool.query(query, [levelCode, limit, userId]);
 
-      return result.rows;
+      if (questionsResult.rows.length === 0) {
+        return [];
+      }
+
+      // Lấy options cho các câu hỏi
+      const questionIds = questionsResult.rows.map(q => q.question_id);
+      const optionsQuery = `
+        SELECT qo.*
+        FROM quiz_options qo
+        WHERE qo.question_id = ANY($1)
+        ORDER BY qo.question_id, qo.option_order, qo.id
+      `;
+
+      const optionsResult = await pool.query(optionsQuery, [questionIds]);
+
+      // Nhóm options theo question_id
+      const optionsByQuestion = {};
+      optionsResult.rows.forEach(option => {
+        if (!optionsByQuestion[option.question_id]) {
+          optionsByQuestion[option.question_id] = [];
+        }
+        optionsByQuestion[option.question_id].push({
+          id: option.id,
+          option_text: option.option_text,
+          is_correct: option.is_correct,
+          option_order: option.option_order
+        });
+      });
+
+      // Kết hợp questions và options với bookmark info
+      const questionsWithOptions = questionsResult.rows.map(question => ({
+        question_id: question.question_id,
+        question_text: question.question_text,
+        question_type: question.question_type,
+        difficulty_level: question.difficulty_level,
+        explanation: question.explanation,
+        points: question.points,
+        word_id: question.word_id,
+        word: question.word,
+        meaning: question.meaning,
+        pronunciation: question.pronunciation,
+        definition: question.definition,
+        example_sentence: question.example_sentence,
+        audio_url: question.audio_url,
+        image_url: question.image_url,
+        is_bookmarked: question.is_bookmarked,
+        bookmark_notes: question.bookmark_notes,
+        bookmarked_at: null, // Set to null since column doesn't exist
+        options: optionsByQuestion[question.question_id] || []
+      }));
+
+      console.log('📊 Found questions:', questionsWithOptions.length);
+      return questionsWithOptions;
     } catch (error) {
       console.error('❌ Error getting questions by level:', error);
       throw error;
@@ -347,8 +395,8 @@ const quizModel = {
     }
   },
 
-  // Lấy câu hỏi chưa trả lời cho session
-  getRemainingQuestions: async (sessionId, levelCode, totalNeeded) => {
+  // Lấy câu hỏi chưa trả lời cho session - SỬA LẠI BOOKMARK QUERY
+  getRemainingQuestions: async (sessionId, levelCode, totalNeeded, userId = null) => {
     try {
       // Lấy danh sách câu hỏi đã trả lời
       const answeredQuery = `
@@ -375,10 +423,15 @@ const quizModel = {
         queryParams = queryParams.concat(answeredQuestionIds);
       }
 
+      // Thêm userId và limit
+      queryParams.push(userId); // $n
+      queryParams.push(totalNeeded);  // $n+1
+
       const query = `
         SELECT
           qq.id as question_id,
           qq.question_text,
+          qq.question_type,
           qq.difficulty_level,
           qq.explanation,
           qq.points,
@@ -386,28 +439,74 @@ const quizModel = {
           w.word,
           w.meaning,
           w.pronunciation,
+          w.definition,
           w.example_sentence,
-          JSON_AGG(
-            JSON_BUILD_OBJECT(
-              'option_id', qo.id,
-              'option_text', qo.option_text,
-              'is_correct', qo.is_correct,
-              'option_order', qo.option_order
-            ) ORDER BY qo.option_order
-          ) as options
+          w.audio_url,
+          w.image_url,
+          CASE WHEN ub.id IS NOT NULL THEN TRUE ELSE FALSE END as is_bookmarked,
+          ub.notes as bookmark_notes
         FROM quiz_questions qq
         JOIN words w ON qq.word_id = w.id
-        LEFT JOIN quiz_options qo ON qq.id = qo.question_id
+        LEFT JOIN user_bookmarks ub ON w.id = ub.word_id AND ub.user_id = $${queryParams.length - 1}
         ${whereClause}
-        GROUP BY qq.id, w.id
         ORDER BY RANDOM()
-        LIMIT $${queryParams.length + 1}
+        LIMIT $${queryParams.length}
       `;
 
-      queryParams.push(totalNeeded);
+      const questionsResult = await pool.query(query, queryParams);
 
-      const result = await pool.query(query, queryParams);
-      return result.rows;
+      if (questionsResult.rows.length === 0) {
+        return [];
+      }
+
+      // Lấy options cho các câu hỏi
+      const questionIds = questionsResult.rows.map(q => q.question_id);
+      const optionsQuery = `
+        SELECT qo.*
+        FROM quiz_options qo
+        WHERE qo.question_id = ANY($1)
+        ORDER BY qo.question_id, qo.option_order, qo.id
+      `;
+
+      const optionsResult = await pool.query(optionsQuery, [questionIds]);
+
+      // Nhóm options theo question_id
+      const optionsByQuestion = {};
+      optionsResult.rows.forEach(option => {
+        if (!optionsByQuestion[option.question_id]) {
+          optionsByQuestion[option.question_id] = [];
+        }
+        optionsByQuestion[option.question_id].push({
+          id: option.id,
+          option_text: option.option_text,
+          is_correct: option.is_correct,
+          option_order: option.option_order
+        });
+      });
+
+      // Kết hợp questions và options với bookmark info
+      const questionsWithOptions = questionsResult.rows.map(question => ({
+        question_id: question.question_id,
+        question_text: question.question_text,
+        question_type: question.question_type,
+        difficulty_level: question.difficulty_level,
+        explanation: question.explanation,
+        points: question.points,
+        word_id: question.word_id,
+        word: question.word,
+        meaning: question.meaning,
+        pronunciation: question.pronunciation,
+        definition: question.definition,
+        example_sentence: question.example_sentence,
+        audio_url: question.audio_url,
+        image_url: question.image_url,
+        is_bookmarked: question.is_bookmarked,
+        bookmark_notes: question.bookmark_notes,
+        bookmarked_at: null, // Set to null since column doesn't exist
+        options: optionsByQuestion[question.question_id] || []
+      }));
+
+      return questionsWithOptions;
     } catch (error) {
       console.error('❌ Error getting remaining questions:', error);
       throw error;
