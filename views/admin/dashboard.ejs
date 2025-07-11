@@ -1,0 +1,272 @@
+<div class="row">
+    <div class="col-12">
+        <h3><i class="fas fa-tachometer-alt me-2"></i>Dashboard Overview</h3>
+        <p class="text-muted">Welcome to the Lexigo admin dashboard</p>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card">
+            <div class="d-flex align-items-center">
+                <div class="stat-icon bg-primary me-3">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0"><%= stats ? stats.totalUsers || 0 : 0 %></h4>
+                    <small class="text-muted">Total Users</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card">
+            <div class="d-flex align-items-center">
+                <div class="stat-icon bg-success me-3">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0"><%= stats ? stats.newUsersThisWeek || 0 : 0 %></h4>
+                    <small class="text-muted">New Users This Week</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card">
+            <div class="d-flex align-items-center">
+                <div class="stat-icon bg-info me-3">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0"><%= stats ? stats.totalWords || 0 : 0 %></h4>
+                    <small class="text-muted">Total Words</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card">
+            <div class="d-flex align-items-center">
+                <div class="stat-icon bg-warning me-3">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0"><%= stats ? stats.totalQuizSessions || 0 : 0 %></h4>
+                    <small class="text-muted">Quiz Sessions</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional Stats Row -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card">
+            <div class="d-flex align-items-center">
+                <div class="stat-icon bg-secondary me-3">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0"><%= stats ? stats.completedQuizSessions || 0 : 0 %></h4>
+                    <small class="text-muted">Completed Quizzes</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card">
+            <div class="d-flex align-items-center">
+                <div class="stat-icon bg-danger me-3">
+                    <i class="fas fa-microphone"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0"><%= stats ? stats.totalSpeakingSessions || 0 : 0 %></h4>
+                    <small class="text-muted">Speaking Sessions</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card">
+            <div class="d-flex align-items-center">
+                <div class="stat-icon bg-dark me-3">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0"><%= stats ? stats.adminUsers || 0 : 0 %></h4>
+                    <small class="text-muted">Admin Users</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card">
+            <div class="d-flex align-items-center">
+                <div class="stat-icon bg-gradient me-3" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0"><%= stats ? stats.averageQuizScore || 0 : 0 %>%</h4>
+                    <small class="text-muted">Average Quiz Score</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activity -->
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-user-plus me-2"></i>Recent Users</h5>
+            </div>
+            <div class="card-body">
+                <% if (recentUsers && recentUsers.length > 0) { %>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Joined</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% recentUsers.forEach(user => { %>
+                            <tr>
+                                <td><strong><%= user.username || 'N/A' %></strong></td>
+                                <td><%= user.email || 'N/A' %></td>
+                                <td>
+                                    <% if (user.role === 'admin') { %>
+                                        <span class="badge bg-danger">Admin</span>
+                                    <% } else { %>
+                                        <span class="badge bg-primary">User</span>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <small class="text-muted">
+                                        <% if (user.created_at && typeof moment !== 'undefined') { %>
+                                            <%= moment(user.created_at).format('MMM DD, YYYY') %>
+                                        <% } else { %>
+                                            <%= user.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A' %>
+                                        <% } %>
+                                    </small>
+                                </td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+                <% } else { %>
+                <p class="text-muted text-center">No recent users</p>
+                <% } %>
+                <div class="text-center mt-3">
+                    <a href="/admin/users" class="btn btn-outline-primary btn-sm">View All Users</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Recent Quiz Results</h5>
+            </div>
+            <div class="card-body">
+                <% if (recentQuizzes && recentQuizzes.length > 0) { %>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Score</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% recentQuizzes.forEach(quiz => { %>
+                            <tr>
+                                <td><strong><%= quiz.username || 'N/A' %></strong></td>
+                                <td>
+                                    <%
+                                    var scoreColor = 'secondary';
+                                    if (quiz.score >= 80) {
+                                        scoreColor = 'success';
+                                    } else if (quiz.score >= 60) {
+                                        scoreColor = 'warning';
+                                    } else {
+                                        scoreColor = 'danger';
+                                    }
+                                    %>
+                                    <span class="badge bg-<%= scoreColor %>"><%= quiz.score || 0 %>%</span>
+                                </td>
+                                <td>
+                                    <small class="text-muted">
+                                        <% if (quiz.created_at && typeof moment !== 'undefined') { %>
+                                            <%= moment(quiz.created_at).format('MMM DD, YYYY') %>
+                                        <% } else { %>
+                                            <%= quiz.created_at ? new Date(quiz.created_at).toLocaleDateString() : 'N/A' %>
+                                        <% } %>
+                                    </small>
+                                </td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+                <% } else { %>
+                <p class="text-muted text-center">No recent quiz results</p>
+                <% } %>
+                <div class="text-center mt-3">
+                    <a href="/admin/quiz-sessions" class="btn btn-outline-primary btn-sm">View All Quizzes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-tools me-2"></i>Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <a href="/admin/users" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-users me-2"></i>Manage Users
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="/admin/words" class="btn btn-outline-success w-100">
+                            <i class="fas fa-book me-2"></i>Manage Words
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="/admin/speaking-sessions" class="btn btn-outline-info w-100">
+                            <i class="fas fa-microphone me-2"></i>Speaking Words
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="/admin/export/words" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-file-export me-2"></i>Export Words
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

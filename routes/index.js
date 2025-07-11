@@ -4,6 +4,8 @@ const aiRoutes = require("./aiRoutes");
 const quizRoutes = require("./quizRoutes");
 const speakingRoutes = require("./speakingRoutes");
 const levelRoutes = require("./levelRoutes"); // Thêm dòng này
+const RankRouter = require("./ranking");
+const quoteRoutes = require("./quoteRoutes");
 
 function routes(app) {
   // User management
@@ -13,7 +15,9 @@ function routes(app) {
   // Main features
   app.use("/api/quiz", quizRoutes);
   app.use("/api/speaking", speakingRoutes);
+  app.use("/api/ranking", RankRouter);
   app.use("/api/levels", levelRoutes); // Thêm dòng này
+  app.use("/api/quotes", quoteRoutes);
 
   // Test connection route
   app.get('/test', (req, res) => {

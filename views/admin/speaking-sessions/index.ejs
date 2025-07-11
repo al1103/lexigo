@@ -1,0 +1,267 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3><i class="fas fa-microphone me-2"></i>Speaking Words Management</h3>
+    <div>
+        <span class="badge bg-primary fs-6">Total Words: <%= totalWords %></span>
+    </div>
+</div>
+
+<!-- Filters -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="GET" action="/admin/speaking-sessions" class="row g-3">
+            <div class="col-md-3">
+                <label for="difficulty_level" class="form-label">Difficulty</label>
+                <select class="form-select" id="difficulty_level" name="difficulty_level">
+                    <option value="">All Difficulties</option>
+                    <option value="easy" <%= filters.difficulty_level === 'easy' ? 'selected' : '' %>>Easy</option>
+                    <option value="medium" <%= filters.difficulty_level === 'medium' ? 'selected' : '' %>>Medium</option>
+                    <option value="hard" <%= filters.difficulty_level === 'hard' ? 'selected' : '' %>>Hard</option>
+                </select>
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary me-2">
+                    <i class="fas fa-filter me-1"></i> Filter
+                </button>
+                <a href="/admin/speaking-sessions" class="btn btn-outline-secondary">
+                    <i class="fas fa-times me-1"></i> Clear
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <% if (words && words.length > 0) { %>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Word</th>
+                        <th>Meaning</th>
+                        <th>Difficulty</th>
+                        <th>Pronunciation</th>
+                        <th>Audio</th>
+                        <th>Created At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% words.forEach(word => { %>
+                    <tr>
+                        <td><strong>#<%= word.id %></strong></td>
+                        <td>
+                            <strong class="text-primary"><%= word.word %></strong>
+                            <% if (word.example_sentence) { %>
+                            <br><small class="text-muted">e.g., "<%= word.example_sentence.substring(0, 50) %>..."</small>
+                            <% } %>
+                        </td>
+                        <td><%= word.meaning %></td>
+                        <td>
+                            <%
+                                var difficultyColor = 'secondary';
+                                if (word.difficulty_level === 'easy') {
+                                    difficultyColor = 'success';
+                                } else if (word.difficulty_level === 'medium') {
+                                    difficultyColor = 'warning';
+                                } else if (word.difficulty_level === 'hard') {
+                                    difficultyColor = 'danger';
+                                }
+                            %>
+                            <span class="badge bg-<%= difficultyColor %>">
+                                <%= word.difficulty_level ? word.difficulty_level.charAt(0).toUpperCase() + word.difficulty_level.slice(1) : 'Unknown' %>
+                            </span>
+                        </td>
+                        <td>
+                            <% if (word.pronunciation) { %>
+                            <code><%= word.pronunciation %></code>
+                            <% } else { %>
+                            <span class="text-muted">N/A</span>
+                            <% } %>
+                        </td>
+                        <td>
+                            <% if (word.audio_url) { %>
+                            <a href="<%= word.audio_url %>" target="_blank" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-volume-up"></i>
+                            </a>
+                            <% } else { %>
+                            <span class="text-muted">No audio</span>
+                            <% } %>
+                        </td>
+                        <td>
+                            <small class="text-muted">
+                                <%= moment(word.created_at).format('MMM DD, YYYY') %>
+                            </small>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-sm btn-outline-primary"
+                                        onclick="viewWord('<%= word.id %>')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <a href="/admin/words/<%= word.id %>/edit" class="btn btn-sm btn-outline-warning">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <% if (totalPages > 1) { %>
+        <nav aria-label="Speaking words pagination" class="mt-4">
+            <ul class="pagination justify-content-center">
+                <% if (currentPage > 1) { %>
+                <li class="page-item">
+                    <%
+                    const prevPageUrl = new URLSearchParams();
+                    if (filters.difficulty_level) prevPageUrl.set('difficulty_level', filters.difficulty_level);
+                    prevPageUrl.set('page', currentPage - 1);
+                    %>
+                    <a class="page-link" href="/admin/speaking-sessions?<%= prevPageUrl.toString() %>">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </a>
+                </li>
+                <% } %>
+
+                <% for (let i = Math.max(1, currentPage - 2); i <= Math.min(totalPages, currentPage + 2); i++) { %>
+                <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                    <%
+                    const pageUrl = new URLSearchParams();
+                    if (filters.difficulty_level) pageUrl.set('difficulty_level', filters.difficulty_level);
+                    pageUrl.set('page', i);
+                    %>
+                    <a class="page-link" href="/admin/speaking-sessions?<%= pageUrl.toString() %>"><%= i %></a>
+                </li>
+                <% } %>
+
+                <% if (currentPage < totalPages) { %>
+                <li class="page-item">
+                    <%
+                    const nextPageUrl = new URLSearchParams();
+                    if (filters.difficulty_level) nextPageUrl.set('difficulty_level', filters.difficulty_level);
+                    nextPageUrl.set('page', currentPage + 1);
+                    %>
+                    <a class="page-link" href="/admin/speaking-sessions?<%= nextPageUrl.toString() %>">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+                <% } %>
+            </ul>
+        </nav>
+        <% } %>
+
+        <% } else { %>
+        <div class="text-center py-5">
+            <i class="fas fa-book fa-3x text-muted mb-3"></i>
+            <h5 class="text-muted">No speaking words found</h5>
+            <p class="text-muted">
+                <% if (filters.difficulty_level) { %>
+                Try adjusting your filters or <a href="/admin/speaking-sessions">clear all filters</a>.
+                <% } else { %>
+                Speaking words will appear here once they are added to the system.
+                <% } %>
+            </p>
+        </div>
+        <% } %>
+    </div>
+</div>
+
+<!-- Statistics Summary -->
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body text-center">
+                <h4><%= (words && words.length > 0) ? words.filter(w => w.difficulty_level === 'easy').length : 0 %></h4>
+                <small>Easy Words</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body text-center">
+                <h4><%= (words && words.length > 0) ? words.filter(w => w.difficulty_level === 'medium').length : 0 %></h4>
+                <small>Medium Words</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-danger text-white">
+            <div class="card-body text-center">
+                <h4><%= (words && words.length > 0) ? words.filter(w => w.difficulty_level === 'hard').length : 0 %></h4>
+                <small>Hard Words</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body text-center">
+                <h4><%= (words && words.length > 0) ? words.filter(w => w.audio_url).length : 0 %></h4>
+                <small>With Audio</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Word Detail Modal -->
+<div class="modal fade" id="wordModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Word Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="wordModalBody">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function viewWord(wordId) {
+    // Find the word row by looking for the specific ID
+    const rows = document.querySelectorAll('tbody tr');
+    let targetRow = null;
+
+    for (let row of rows) {
+        const idCell = row.querySelector('td:first-child strong');
+        if (idCell && idCell.textContent.includes(`#${wordId}`)) {
+            targetRow = row;
+            break;
+        }
+    }
+
+    if (targetRow) {
+        const cells = targetRow.querySelectorAll('td');
+
+        const wordData = {
+            id: cells[0].textContent.replace('#', '').trim(),
+            word: cells[1].querySelector('strong').textContent.trim(),
+            meaning: cells[2].textContent.trim(),
+            difficulty: cells[3].textContent.trim(),
+            pronunciation: cells[4].querySelector('code') ? cells[4].querySelector('code').textContent : 'N/A'
+        };
+
+        document.getElementById('wordModalBody').innerHTML = `
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="text-primary">${wordData.word}</h4>
+                    <p><strong>Meaning:</strong> ${wordData.meaning}</p>
+                    <p><strong>Pronunciation:</strong> <code>${wordData.pronunciation}</code></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Difficulty:</strong> <span class="badge bg-secondary">${wordData.difficulty}</span></p>
+                    <p><strong>ID:</strong> #${wordData.id}</p>
+                </div>
+            </div>
+        `;
+
+        new bootstrap.Modal(document.getElementById('wordModal')).show();
+    }
+}
+</script>

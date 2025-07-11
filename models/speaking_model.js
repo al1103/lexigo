@@ -1,4 +1,5 @@
 const { pool } = require('../config/database');
+const UserModel = require('./user_model');
 
 const speakingModel = {
   // Lấy danh sách levels cho speaking
@@ -128,7 +129,7 @@ const speakingModel = {
     }
   },
 
-  // Lưu kết quả speaking
+  // Lưu kết quả speaking - CẬP NHẬT để tính điểm
   saveSpeakingResult: async (resultData) => {
     try {
       const {
@@ -166,6 +167,38 @@ const speakingModel = {
       ];
 
       const result = await pool.query(query, values);
+
+      // 🆕 UPDATE SPEAKING STATISTICS AFTER SAVING RESULT
+      if (userId && overallScore !== undefined) {
+        try {
+          // Update speaking answer stats (XP dựa trên score)
+          await UserModel.updateSpeakingAnswer(userId, overallScore);
+          console.log(`📊 Updated speaking answer stats for user ${userId}, score: ${overallScore}`);
+
+          // Update words mastered nếu phát âm tốt
+          if (wordId && overallScore >= 70) {
+            const isNewWord = await UserModel.updateSpeakingWordMastered(userId, wordId, overallScore);
+            if (isNewWord) {
+              console.log(`🗣️ User ${userId} mastered new word via speaking: ${wordId}`);
+            }
+          }
+
+          // Update điểm cho user (points system)
+          const points = Math.round(overallScore / 10); // 80 score = 8 points
+          if (points > 0) {
+            await UserModel.updateUserPoints(userId, points, 'speaking_practice');
+            console.log(`✅ Added ${points} points to user ${userId} for speaking`);
+          }
+
+          // 🔥 Update streak cho mọi hoạt động speaking
+          await UserModel.updateStreak(userId);
+
+        } catch (statsError) {
+          console.error('Speaking stats update error (continuing):', statsError.message);
+          // Tiếp tục thực hiện
+        }
+      }
+
       return result.rows[0];
     } catch (error) {
       console.error('Error saving speaking result:', error);
@@ -206,7 +239,7 @@ const speakingModel = {
     }
   },
 
-  // Hoàn thành speaking session
+  // Hoàn thành speaking session - CẬP NHẬT để tính tổng điểm
   completeSpeakingSession: async (sessionId) => {
     try {
       const query = `
@@ -230,9 +263,40 @@ const speakingModel = {
 
       const result = await pool.query(query, [sessionId]);
 
-      // Cập nhật user statistics
+      // 🆕 UPDATE SPEAKING COMPLETION STATISTICS
       if (result.rows.length > 0) {
-        await this.updateUserSpeakingStats(result.rows[0].user_id);
+        const session = result.rows[0];
+        const userId = session.user_id;
+
+        try {
+          // Update speaking completion count
+          const sessionsCompleted = await UserModel.updateSpeakingCompletion(userId);
+          console.log(`🎯 Updated speaking completion count to ${sessionsCompleted} for user ${userId}`);
+
+          // Bonus điểm cho việc hoàn thành session
+          const averageScore = session.average_score;
+          let bonusPoints = 0;
+
+          if (averageScore >= 85) {
+            bonusPoints = 50; // Excellent speaking bonus
+          } else if (averageScore >= 70) {
+            bonusPoints = 30; // Good speaking bonus
+          } else if (averageScore >= 55) {
+            bonusPoints = 15; // Fair speaking bonus
+          }
+
+          if (bonusPoints > 0) {
+            await UserModel.updateUserPoints(userId, bonusPoints, 'speaking_completion');
+            console.log(`🎉 Added ${bonusPoints} bonus points to user ${userId} for speaking completion`);
+          }
+
+        } catch (statsError) {
+          console.error('Speaking completion stats update error (continuing):', statsError.message);
+          // Tiếp tục thực hiện
+        }
+
+        // Cập nhật user statistics cũ (tương thích ngược)
+        await this.updateUserSpeakingStats(userId);
       }
 
       return result.rows[0];
@@ -452,6 +516,56 @@ const speakingModel = {
       console.error('❌ Error updating session total words:', error);
       throw error;
     }
+  },
+
+  // ADMIN: Lấy tất cả speaking sessions
+  getAllSpeakingSessions: async () => {
+    const result = await pool.query('SELECT * FROM speaking_sessions ORDER BY started_at DESC');
+    return result.rows;
+  },
+
+  // ADMIN: Xóa speaking session
+  deleteSpeakingSession: async (sessionId) => {
+    const result = await pool.query('DELETE FROM speaking_sessions WHERE id = $1 RETURNING id', [sessionId]);
+    return result.rows[0];
+  },
+
+  // ADMIN: Thêm từ mới cho speaking (word)
+  createWord: async (data) => {
+    const { word, pronunciation, meaning, definition, example_sentence, audio_url, image_url, difficulty_level } = data;
+    const result = await pool.query(
+      `INSERT INTO words (word, pronunciation, meaning, definition, example_sentence, audio_url, image_url, difficulty_level)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+       RETURNING *`,
+      [word, pronunciation, meaning, definition, example_sentence, audio_url, image_url, difficulty_level]
+    );
+    return result.rows[0];
+  },
+
+  // ADMIN: Sửa từ cho speaking
+  updateWord: async (id, data) => {
+    const { word, pronunciation, meaning, definition, example_sentence, audio_url, image_url, difficulty_level } = data;
+    const result = await pool.query(
+      `UPDATE words SET
+        word = COALESCE($2, word),
+        pronunciation = COALESCE($3, pronunciation),
+        meaning = COALESCE($4, meaning),
+        definition = COALESCE($5, definition),
+        example_sentence = COALESCE($6, example_sentence),
+        audio_url = COALESCE($7, audio_url),
+        image_url = COALESCE($8, image_url),
+        difficulty_level = COALESCE($9, difficulty_level)
+       WHERE id = $1
+       RETURNING *`,
+      [id, word, pronunciation, meaning, definition, example_sentence, audio_url, image_url, difficulty_level]
+    );
+    return result.rows[0];
+  },
+
+  // ADMIN: Xóa từ cho speaking
+  deleteWord: async (id) => {
+    const result = await pool.query('DELETE FROM words WHERE id = $1 RETURNING id', [id]);
+    return result.rows[0];
   },
 };
 

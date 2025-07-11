@@ -16,7 +16,7 @@ INSERT INTO words (word, pronunciation, meaning, definition, example_sentence, c
 ('cat', '/kæt/', 'con mèo', 'A small domestic animal', 'My cat likes to sleep on the sofa.', 4, 'easy'),
 ('dog', '/dɔːɡ/', 'con chó', 'A domestic animal, loyal companion', 'The dog is playing in the garden.', 4, 'easy'),
 ('mother', '/ˈmʌðər/', 'mẹ', 'Female parent', 'My mother cooks delicious food.', 5, 'easy');
-
+ 
 -- Insert Lessons
 INSERT INTO lessons (title, description, category_id, difficulty_level, total_words, estimated_time, is_published) VALUES
 ('Basic Greetings', 'Learn essential greeting phrases', 1, 'easy', 3, 15, true),

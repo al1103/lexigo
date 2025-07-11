@@ -6,6 +6,7 @@ const { authenticateToken } = require("../middleware/auth");
 // Public routes
 router.post("/register", userController.register);
 router.post("/login", userController.login);
+router.get("/avatars", userController.getAvatars);
 
 // Protected routes
 router.get("/profile", authenticateToken, userController.getProfile);

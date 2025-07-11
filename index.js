@@ -8,6 +8,13 @@ const http = require("http");
 const cors = require("cors");
 require("dotenv").config();
 const cloudinary = require("./config/cloudinary");
+
+// EJS setup
+const expressLayouts = require('express-ejs-layouts');
+
+// Admin routes
+const adminRoutes = require('./routes/adminRoutes');
+
 const app = express();
 const server = http.createServer(app);
 
@@ -29,8 +36,15 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+
+// EJS view engine setup
+app.set('view engine', 'ejs');
+app.set('views', './views');
+app.use(expressLayouts);
+app.set('layout', 'admin/layout');
 
 // Simple database connection test before starting server
 pool.query("SELECT NOW()", (err, res) => {
@@ -60,6 +74,11 @@ async function startServer() {
       }
     });
 
+    // Mount Admin routes
+    app.use('/admin', adminRoutes);
+    console.log(`✅ Admin Panel started on http://localhost:${process.env.PORT || 9999}/admin`);
+
+    // Mount API routes
     routes(app);
 
     app.use((err, req, res, next) => {
@@ -70,6 +89,8 @@ async function startServer() {
     const PORT = process.env.PORT || 9999;
     server.listen(PORT, () => {
       console.log(`🚀 Server đang chạy trên cổng ${PORT}`);
+      console.log(`📊 Admin dashboard: http://localhost:${PORT}/admin`);
+      console.log(`🔐 Default admin: admin@lexigo.com / admin123`);
     });
   } catch (error) {
     console.error("❌ Error starting server:", error);

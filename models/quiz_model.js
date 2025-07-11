@@ -326,7 +326,7 @@ const quizModel = {
       const countResult = await pool.query(countQuery, [userId]);
 
       return {
-        bookmarks: result.rows,
+        contents: result.rows,
         pagination: {
           page: page,
           limit: limit,
@@ -529,6 +529,92 @@ const quizModel = {
       console.error('❌ Error updating session total questions:', error);
       throw error;
     }
+  },
+
+  // Lấy thông tin question và word_id
+  getQuestionInfo: async (questionId) => {
+    try {
+      const query = `
+        SELECT
+          qq.id as question_id,
+          qq.word_id,
+          w.word,
+          w.meaning
+        FROM quiz_questions qq
+        JOIN words w ON qq.word_id = w.id
+        WHERE qq.id = $1
+      `;
+
+      const result = await pool.query(query, [questionId]);
+      return result.rows[0] || null;
+    } catch (error) {
+      console.error('Error getting question info:', error);
+      throw error;
+    }
+  },
+
+  // Xóa bookmark từ vựng
+  deleteBookmark: async (userId, wordId) => {
+    try {
+      const query = `
+        DELETE FROM user_bookmarks
+        WHERE user_id = $1 AND word_id = $2
+        RETURNING id, word_id
+      `;
+      const result = await pool.query(query, [userId, wordId]);
+      return result.rows[0];
+    } catch (error) {
+      console.error('❌ Error deleting bookmark:', error);
+      throw error;
+    }
+  },
+
+  // ADMIN: Lấy tất cả quiz sessions
+  getAllQuizSessions: async () => {
+    const result = await pool.query('SELECT * FROM user_quiz_sessions ORDER BY started_at DESC');
+    return result.rows;
+  },
+
+  // ADMIN: Xóa quiz session
+  deleteQuizSession: async (sessionId) => {
+    const result = await pool.query('DELETE FROM user_quiz_sessions WHERE id = $1 RETURNING id', [sessionId]);
+    return result.rows[0];
+  },
+
+  // ADMIN: Thêm câu hỏi mới
+  createQuestion: async (data) => {
+    const { question_text, question_type, difficulty_level, explanation, points, word_id } = data;
+    const result = await pool.query(
+      `INSERT INTO quiz_questions (question_text, question_type, difficulty_level, explanation, points, word_id)
+       VALUES ($1, $2, $3, $4, $5, $6)
+       RETURNING *`,
+      [question_text, question_type, difficulty_level, explanation, points, word_id]
+    );
+    return result.rows[0];
+  },
+
+  // ADMIN: Sửa câu hỏi
+  updateQuestion: async (id, data) => {
+    const { question_text, question_type, difficulty_level, explanation, points, word_id } = data;
+    const result = await pool.query(
+      `UPDATE quiz_questions SET
+        question_text = COALESCE($2, question_text),
+        question_type = COALESCE($3, question_type),
+        difficulty_level = COALESCE($4, difficulty_level),
+        explanation = COALESCE($5, explanation),
+        points = COALESCE($6, points),
+        word_id = COALESCE($7, word_id)
+       WHERE id = $1
+       RETURNING *`,
+      [id, question_text, question_type, difficulty_level, explanation, points, word_id]
+    );
+    return result.rows[0];
+  },
+
+  // ADMIN: Xóa câu hỏi
+  deleteQuestion: async (id) => {
+    const result = await pool.query('DELETE FROM quiz_questions WHERE id = $1 RETURNING id', [id]);
+    return result.rows[0];
   },
 };
 

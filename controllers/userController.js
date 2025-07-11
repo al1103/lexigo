@@ -9,6 +9,7 @@ const fs = require("fs");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const ApiResponse = require("../utils/apiResponse");
+const getAvatarListFromDb = require("../utils/avatarList");
 
 // Helper function to generate random referral code
 function generateReferralCode() {
@@ -233,7 +234,7 @@ const userController = {
         return ApiResponse.error(res, 404, "User not found");
       }
 
-      return ApiResponse.success(res, '200', "Profile retrieved successfully", { user });
+      return ApiResponse.success(res, '200', "Profile retrieved successfully",   user );
     } catch (error) {
       console.error("Get profile error:", error);
       return ApiResponse.error(res, 500, "Failed to get profile");
@@ -1035,13 +1036,13 @@ const userController = {
   updateUserProfile: async (req, res) => {
     try {
       const userId = req.user.userId;
-      const { fullName, phoneNumber, address, avatar } = req.body;
+      const { fullName, phoneNumber, address, avatar_id } = req.body;
 
       const updatedUserData = await UserModel.updateUser(userId, {
         fullName,
         phoneNumber,
-        address, // Thêm trường address
-        avatar,
+        address,
+        avatar_id,
       });
 
       if (!updatedUserData) {
@@ -1121,6 +1122,23 @@ const userController = {
         status: 500,
         message: "Lỗi khi upload avatar",
         error: error.message,
+      });
+    }
+  },
+
+  // Lấy danh sách avatar mẫu từ DB
+  getAvatars: async (req, res) => {
+    try {
+      const avatars = await getAvatarListFromDb();
+      return res.status(200).json({
+        status: 200,
+        data: avatars
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: "Không thể lấy danh sách avatar",
+        error: error.message
       });
     }
   },

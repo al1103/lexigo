@@ -1,6 +1,7 @@
 const quizModel = require('../models/quiz_model');
 const LevelModel = require('../models/level_model'); // Thêm import
 const ApiResponse = require('../utils/apiResponse');
+const UserModel = require('../models/user_model');
 
 const quizController = {
   // Bắt đầu quiz session mới hoặc tiếp tục session đang có
@@ -202,10 +203,11 @@ const quizController = {
     }
   },
 
-  // Submit câu trả lời
+  // Submit câu trả lời - CẬP NHẬT để tính điểm
   submitAnswer: async (req, res) => {
     try {
       const { session_id, question_id, selected_option_id, response_time = 0 } = req.body;
+      const userId = req.user?.userId || req.user?.id;
 
       if (!session_id || !question_id || !selected_option_id) {
         return ApiResponse.error(res, 400, 'Missing required fields');
@@ -218,9 +220,72 @@ const quizController = {
         response_time
       );
 
+      // NẾU ĐÚNG: Update điểm ngay lập tức cho weekly/monthly tracking
+      if (result.is_correct && userId) {
+        try {
+          // Lấy điểm của câu hỏi
+          const points = 10; // Default 10 điểm
+
+          // Update total points và weekly/monthly points với error handling
+          try {
+            await UserModel.updateUserPoints(userId, points, 'quiz_completion');
+            console.log(`✅ Added ${points} points to user ${userId} for correct answer`);
+          } catch (pointsError) {
+            console.error('Points update error (continuing):', pointsError.message);
+            // Tiếp tục thực hiện các tác vụ khác
+          }
+
+          // Update words mastered nếu trả lời đúng
+          try {
+            // Lấy word_id từ question
+            const questionInfo = await quizModel.getQuestionInfo(question_id);
+            if (questionInfo && questionInfo.word_id) {
+              const isNewWord = await UserModel.updateWordsMastered(userId, questionInfo.word_id);
+              if (isNewWord) {
+                console.log(`📚 User ${userId} mastered new word: ${questionInfo.word_id}`);
+              }
+            }
+          } catch (wordsError) {
+            console.error('Words mastered update error (continuing):', wordsError.message);
+            // Tiếp tục thực hiện
+          }
+
+          // Update user activity để tăng streak (mỗi ngày chỉ tăng 1 lần)
+          try {
+            console.log(`🔥 Updated activity/streak for user ${userId}`);
+          } catch (streakError) {
+            if (streakError.code === '42P01') {
+              console.log('ℹ️ User stats tables not yet created. Run: node utils/setupUserStats.js');
+            } else {
+              console.error('Streak update error (continuing):', streakError.message);
+            }
+            // Tiếp tục thực hiện
+          }
+
+        } catch (pointError) {
+          console.error('Error in post-answer processing:', pointError);
+          // Không throw error vì submit answer đã thành công
+        }
+      }
+
+      // 🆕 UPDATE QUIZ ANSWER STATISTICS & STREAK
+      if (userId) {
+        try {
+          await UserModel.updateQuizAnswer(userId, result.is_correct);
+          console.log(`📊 Updated quiz answer stats for user ${userId}, correct: ${result.is_correct}`);
+
+          // 🔥 Update streak cho mọi hoạt động quiz (không chỉ khi đúng)
+          await UserModel.updateStreak(userId);
+        } catch (statsError) {
+          console.error('Quiz answer stats update error (continuing):', statsError.message);
+          // Tiếp tục thực hiện
+        }
+      }
+
       return ApiResponse.success(res, '200', 'Answer submitted successfully', {
         is_correct: result.is_correct,
-        response_id: result.id
+        response_id: result.id,
+        points_earned: result.is_correct ? ( 10) : 0
       });
     } catch (error) {
       console.error('Error submitting answer:', error);
@@ -228,10 +293,11 @@ const quizController = {
     }
   },
 
-  // Hoàn thành quiz
+  // Hoàn thành quiz - CẬP NHẬT để tính tổng điểm
   completeQuiz: async (req, res) => {
     try {
       const { session_id } = req.body;
+      const userId = req.user?.userId || req.user?.id;
 
       if (!session_id) {
         return ApiResponse.error(res, 400, 'Session ID is required');
@@ -239,12 +305,75 @@ const quizController = {
 
       const result = await quizModel.completeQuizSession(session_id);
 
+      // Update điểm bonus cho việc hoàn thành quiz
+      if (userId && result.score > 0) {
+        try {
+          // Bonus điểm dựa trên tỷ lệ đúng
+          const correctPercentage = (result.correct_answers / result.total_questions) * 100;
+          let bonusPoints = 0;
+
+          if (correctPercentage >= 90) {
+            bonusPoints = 50; // Excellent bonus
+          } else if (correctPercentage >= 70) {
+            bonusPoints = 30; // Good bonus
+          } else if (correctPercentage >= 50) {
+            bonusPoints = 15; // Fair bonus
+          }
+
+          if (bonusPoints > 0) {
+            await UserModel.updateUserPoints(userId, bonusPoints, 'quiz_completion');
+            console.log(`🎉 Added ${bonusPoints} bonus points to user ${userId} for quiz completion`);
+          }
+
+          // Streak đã được update trong submitAnswer, không cần update lại
+          // Chỉ log thông báo hoàn thành
+          console.log(`🎯 Quiz completed by user ${userId} with ${correctPercentage.toFixed(1)}% accuracy`);
+
+        } catch (pointError) {
+          console.error('Error updating completion bonus:', pointError);
+        }
+      }
+
+      // 🆕 UPDATE QUIZ COMPLETION STATISTICS
+      if (userId) {
+        try {
+          const quizzesCompleted = await UserModel.updateQuizCompletion(userId);
+          console.log(`🎯 Updated quiz completion count to ${quizzesCompleted} for user ${userId}`);
+        } catch (statsError) {
+          console.error('Quiz completion stats update error (continuing):', statsError.message);
+          // Tiếp tục thực hiện
+        }
+      }
+
+      // Lấy rank hiện tại của user sau khi update điểm
+      let currentRankings = null;
+      if (userId) {
+        try {
+          const rankings = {};
+          for (const type of ['global', 'weekly', 'monthly']) {
+            const rankInfo = await UserModel.getUserRank(userId, type);
+            rankings[type] = {
+              rank: rankInfo?.rank || null,
+              points: rankInfo?.points || 0
+            };
+          }
+          currentRankings = rankings;
+        } catch (rankError) {
+          console.error('Error getting updated rankings:', rankError);
+        }
+      }
+
       return ApiResponse.success(res, '200', 'Quiz completed successfully', {
         session_id: result.id,
         total_questions: result.total_questions,
         correct_answers: result.correct_answers,
         score: result.score,
-        completed_at: result.completed_at
+        completed_at: result.completed_at,
+        performance: {
+          accuracy: Math.round((result.correct_answers / result.total_questions) * 100),
+          bonus_points: result.correct_answers > 0 ? Math.round(result.score / result.correct_answers) : 0
+        },
+        current_rankings: currentRankings
       });
     } catch (error) {
       console.error('Error completing quiz:', error);
@@ -307,7 +436,94 @@ const quizController = {
       console.error('Error getting quiz history:', error);
       return ApiResponse.error(res, 500, 'Failed to get quiz history');
     }
-  }
+  },
+
+  // Xóa bookmark từ vựng
+  deleteBookmark: async (req, res) => {
+    try {
+      const { word_id } = req.body;
+      const userId = req.user?.userId || req.user?.id;
+
+      if (!userId || !word_id) {
+        return ApiResponse.error(res, 400, 'User ID và word ID là bắt buộc');
+      }
+
+      const deleted = await quizModel.deleteBookmark(userId, word_id);
+      if (deleted) {
+        return ApiResponse.success(res, '200', 'Đã xóa bookmark thành công', deleted);
+      } else {
+        return ApiResponse.error(res, 404, 'Bookmark không tồn tại');
+      }
+    } catch (error) {
+      console.error('Error deleting bookmark:', error);
+      return ApiResponse.error(res, 500, 'Xóa bookmark thất bại');
+    }
+  },
+
+  // ADMIN: Lấy tất cả quiz sessions
+  getAllQuizSessions: async (req, res) => {
+    try {
+      const sessions = await quizModel.getAllQuizSessions();
+      return ApiResponse.success(res, '200', 'Lấy tất cả quiz sessions thành công', sessions);
+    } catch (error) {
+      return ApiResponse.error(res, 500, 'Không thể lấy quiz sessions', error.message);
+    }
+  },
+
+  // ADMIN: Xóa quiz session
+  deleteQuizSession: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const deleted = await quizModel.deleteQuizSession(id);
+      if (deleted) {
+        return ApiResponse.success(res, '200', 'Đã xóa quiz session', deleted);
+      } else {
+        return ApiResponse.error(res, 404, 'Quiz session không tồn tại');
+      }
+    } catch (error) {
+      return ApiResponse.error(res, 500, 'Không thể xóa quiz session', error.message);
+    }
+  },
+
+  // ADMIN: Thêm câu hỏi mới
+  createQuestion: async (req, res) => {
+    try {
+      const question = await quizModel.createQuestion(req.body);
+      return ApiResponse.success(res, '200', 'Tạo câu hỏi thành công', question);
+    } catch (error) {
+      return ApiResponse.error(res, 500, 'Không thể tạo câu hỏi', error.message);
+    }
+  },
+
+  // ADMIN: Sửa câu hỏi
+  updateQuestion: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updated = await quizModel.updateQuestion(id, req.body);
+      if (updated) {
+        return ApiResponse.success(res, '200', 'Cập nhật câu hỏi thành công', updated);
+      } else {
+        return ApiResponse.error(res, 404, 'Câu hỏi không tồn tại');
+      }
+    } catch (error) {
+      return ApiResponse.error(res, 500, 'Không thể cập nhật câu hỏi', error.message);
+    }
+  },
+
+  // ADMIN: Xóa câu hỏi
+  deleteQuestion: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const deleted = await quizModel.deleteQuestion(id);
+      if (deleted) {
+        return ApiResponse.success(res, '200', 'Đã xóa câu hỏi', deleted);
+      } else {
+        return ApiResponse.error(res, 404, 'Câu hỏi không tồn tại');
+      }
+    } catch (error) {
+      return ApiResponse.error(res, 500, 'Không thể xóa câu hỏi', error.message);
+    }
+  },
 };
 
 module.exports = quizController;

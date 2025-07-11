@@ -22,6 +22,6 @@ router.get('/users/:userId/achievements', authenticateToken, userStatsController
 router.post('/achievements', authenticateToken, userStatsController.createAchievement);
 
 // Leaderboard route
-router.get('/leaderboard', authenticateToken, userStatsController.getLeaderboard);
+router.get('/rank', authenticateToken, userStatsController.getLeaderboard);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const speakingModel = require('../models/speaking_model');
 const ApiResponse = require('../utils/apiResponse');
+const UserModel = require('../models/user_model');
 const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs');
@@ -21,7 +22,7 @@ const speakingController = {
       );
 
       return ApiResponse.success(res, '200', 'Words retrieved successfully', {
-        words,
+        contents: words,
         total: words.length,
         difficulty_level,
         category_id
@@ -53,7 +54,7 @@ const speakingController = {
       }
 
       return ApiResponse.success(res, '200', 'Speaking levels retrieved successfully', {
-        levels: levels,
+        contents: levels,
         total_levels: levels.length,
         user_stats_included: include_stats === 'true' && userId ? true : false
       });
@@ -86,7 +87,7 @@ const speakingController = {
       return ApiResponse.success(res, '200', 'Level details retrieved successfully', {
         level_code: level_code,
         total_words: wordCount,
-        words: words,
+        contents: words,
         current_batch: words.length
       });
     } catch (error) {
@@ -221,7 +222,7 @@ const speakingController = {
     }
   },
 
-  // Submit speaking result
+  // Submit speaking result - ĐÃ CẬP NHẬT (statistics được xử lý trong speaking_model)
   submitSpeakingResult: async (req, res) => {
     try {
       const { session_id, word_id, spoken_text, overall_score, audio_url, feedback_text } = req.body;
@@ -241,13 +242,23 @@ const speakingController = {
         feedbackText: feedback_text
       };
 
+      // 🆕 speaking_model.saveSpeakingResult sẽ tự động xử lý:
+      // - Update speaking answer stats & XP
+      // - Update words mastered (nếu score >= 70)
+      // - Update user points
+      // - Update streak
       const result = await speakingModel.saveSpeakingResult(resultData);
+
+      const scoreThreshold = 70;
+      const isGoodScore = overall_score >= scoreThreshold;
 
       return ApiResponse.success(res, '201', 'Speaking result saved successfully', {
         result_id: result.id,
         session_id: session_id,
         word_id: word_id,
-        overall_score: overall_score
+        overall_score: overall_score,
+        points_earned: isGoodScore ? Math.round(overall_score / 10) : 0,
+        words_mastered_updated: isGoodScore
       });
     } catch (error) {
       console.error('Error submitting speaking result:', error);
@@ -255,16 +266,33 @@ const speakingController = {
     }
   },
 
-  // Hoàn thành speaking session
+  // Hoàn thành speaking session - ĐÃ CẬP NHẬT (statistics được xử lý trong speaking_model)
   completeSpeakingSession: async (req, res) => {
     try {
       const { session_id } = req.body;
+      const userId = req.user?.userId || req.user?.id;
 
       if (!session_id) {
         return ApiResponse.error(res, 400, 'Session ID is required');
       }
 
+      // 🆕 speaking_model.completeSpeakingSession sẽ tự động xử lý:
+      // - Update speaking completion count
+      // - Calculate và add bonus points
+      // - Update legacy speaking statistics
       const result = await speakingModel.completeSpeakingSession(session_id);
+
+      // Tính bonus points để hiển thị trong response
+      const averageScore = result.average_score;
+      let bonusPoints = 0;
+
+      if (averageScore >= 85) {
+        bonusPoints = 50; // Excellent bonus
+      } else if (averageScore >= 70) {
+        bonusPoints = 30; // Good bonus
+      } else if (averageScore >= 55) {
+        bonusPoints = 15; // Fair bonus
+      }
 
       return ApiResponse.success(res, '200', 'Speaking session completed successfully', {
         session_id: result.id,
@@ -272,7 +300,11 @@ const speakingController = {
         total_score: result.total_score,
         average_score: result.average_score,
         session_duration: result.session_duration,
-        completed_at: result.completed_at
+        completed_at: result.completed_at,
+        performance: {
+          accuracy_percentage: result.average_score ? Math.round(result.average_score) : 0,
+          bonus_points: bonusPoints
+        }
       });
     } catch (error) {
       console.error('Error completing speaking session:', error);
@@ -319,7 +351,203 @@ const speakingController = {
       console.error('Error getting speaking stats:', error);
       return ApiResponse.error(res, 500, 'Failed to get speaking statistics');
     }
-  }
+  },
+
+  // So sánh phát âm với API transcribe
+  comparePronunciation: async (req, res) => {
+    try {
+      const { word_id, reference_text } = req.body;
+      const userId = req.user?.userId || req.user?.id;
+
+      if (!userId) {
+        return ApiResponse.error(res, 401, 'User authentication required');
+      }
+
+      if (!word_id || !reference_text) {
+        return ApiResponse.error(res, 400, 'Word ID and reference text are required');
+      }
+
+      if (!req.file) {
+        return ApiResponse.error(res, 400, 'Audio file is required');
+      }
+
+      console.log(`🎤 Comparing pronunciation for user ${userId}, word: "${reference_text}"`);
+
+      try {
+        // Tạo FormData để gửi audio file đến API transcribe
+        const formData = new FormData();
+        formData.append('audio', fs.createReadStream(req.file.path), {
+          filename: req.file.filename,
+          contentType: req.file.mimetype
+        });
+        formData.append('reference_text', reference_text);
+
+        // Call API transcribe
+        const transcribeResponse = await axios.post('http://192.168.31.225:5000/transcribe', formData, {
+          headers: {
+            ...formData.getHeaders(),
+            'Content-Type': 'multipart/form-data'
+          },
+          timeout: 30000 // 30 seconds timeout
+        });
+
+        console.log('📊 Transcribe API response:', transcribeResponse.data);
+
+        // Xóa file tạm sau khi sử dụng
+        if (fs.existsSync(req.file.path)) {
+          fs.unlinkSync(req.file.path);
+        }
+
+        // Parse kết quả từ API
+        const apiResult = transcribeResponse.data;
+
+        // Chuẩn hóa response format
+        const result = {
+          reference_text: reference_text,
+          transcribed_text: apiResult.transcribed_text || apiResult.text || '',
+          overall_score: apiResult.overall_score || apiResult.score || 0,
+          pronunciation_score: apiResult.pronunciation_score || apiResult.overall_score || 0,
+          accuracy_score: apiResult.accuracy_score || apiResult.overall_score || 0,
+          fluency_score: apiResult.fluency_score || apiResult.overall_score || 0,
+          confidence_score: apiResult.confidence_score || 100,
+          feedback: apiResult.feedback || apiResult.message || 'Pronunciation analysis completed',
+          word_analysis: apiResult.word_analysis || [],
+          similarity_score: apiResult.similarity_score || apiResult.overall_score || 0
+        };
+
+        // Tính điểm tổng thể (0-100)
+        const finalScore = Math.round(result.overall_score);
+
+        // Tạo feedback chi tiết
+        let detailedFeedback = result.feedback;
+        if (finalScore >= 90) {
+          detailedFeedback = 'Excellent pronunciation! Your speech is very clear and accurate.';
+        } else if (finalScore >= 80) {
+          detailedFeedback = 'Great pronunciation! Minor improvements can be made.';
+        } else if (finalScore >= 70) {
+          detailedFeedback = 'Good pronunciation! Keep practicing to improve clarity.';
+        } else if (finalScore >= 60) {
+          detailedFeedback = 'Fair pronunciation. Focus on clearer articulation.';
+        } else {
+          detailedFeedback = 'Needs improvement. Practice speaking more slowly and clearly.';
+        }
+
+        console.log(`✅ Pronunciation analysis completed. Score: ${finalScore}/100`);
+
+        return ApiResponse.success(res, '200', 'Pronunciation comparison completed', {
+          word_id: word_id,
+          reference_text: result.reference_text,
+          transcribed_text: result.transcribed_text,
+          scores: {
+            overall: finalScore,
+            pronunciation: Math.round(result.pronunciation_score),
+            accuracy: Math.round(result.accuracy_score),
+            fluency: Math.round(result.fluency_score),
+            confidence: Math.round(result.confidence_score),
+            similarity: Math.round(result.similarity_score)
+          },
+          feedback: {
+            summary: detailedFeedback,
+            detailed: result.feedback,
+            word_analysis: result.word_analysis
+          },
+          match_quality: finalScore >= 70 ? 'good' : finalScore >= 50 ? 'fair' : 'needs_improvement'
+        });
+
+      } catch (apiError) {
+        console.error('❌ Error calling transcribe API:', apiError.message);
+
+        // Xóa file tạm nếu có lỗi
+        if (req.file && fs.existsSync(req.file.path)) {
+          fs.unlinkSync(req.file.path);
+        }
+
+        // Kiểm tra loại lỗi
+        if (apiError.code === 'ECONNREFUSED') {
+          return ApiResponse.error(res, 503, 'Transcribe service is unavailable. Please try again later.');
+        } else if (apiError.code === 'ETIMEDOUT') {
+          return ApiResponse.error(res, 408, 'Request timeout. Please try with a shorter audio file.');
+        } else {
+          return ApiResponse.error(res, 500, 'Failed to process pronunciation analysis: ' + apiError.message);
+        }
+      }
+
+    } catch (error) {
+      console.error('Error in comparePronunciation:', error);
+
+      // Cleanup file nếu có lỗi
+      if (req.file && fs.existsSync(req.file.path)) {
+        fs.unlinkSync(req.file.path);
+      }
+
+      return ApiResponse.error(res, 500, 'Failed to compare pronunciation: ' + error.message);
+    }
+  },
+
+  // ADMIN: Lấy tất cả speaking sessions
+  getAllSpeakingSessions: async (req, res) => {
+    try {
+      const sessions = await speakingModel.getAllSpeakingSessions();
+      return ApiResponse.success(res, '200', 'Lấy tất cả speaking sessions thành công', sessions);
+    } catch (error) {
+      return ApiResponse.error(res, 500, 'Không thể lấy speaking sessions', error.message);
+    }
+  },
+
+  // ADMIN: Xóa speaking session
+  deleteSpeakingSession: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const deleted = await speakingModel.deleteSpeakingSession(id);
+      if (deleted) {
+        return ApiResponse.success(res, '200', 'Đã xóa speaking session', deleted);
+      } else {
+        return ApiResponse.error(res, 404, 'Speaking session không tồn tại');
+      }
+    } catch (error) {
+      return ApiResponse.error(res, 500, 'Không thể xóa speaking session', error.message);
+    }
+  },
+
+  // ADMIN: Thêm từ mới
+  createWord: async (req, res) => {
+    try {
+      const word = await speakingModel.createWord(req.body);
+      return ApiResponse.success(res, '200', 'Tạo từ mới thành công', word);
+    } catch (error) {
+      return ApiResponse.error(res, 500, 'Không thể tạo từ mới', error.message);
+    }
+  },
+
+  // ADMIN: Sửa từ
+  updateWord: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updated = await speakingModel.updateWord(id, req.body);
+      if (updated) {
+        return ApiResponse.success(res, '200', 'Cập nhật từ thành công', updated);
+      } else {
+        return ApiResponse.error(res, 404, 'Từ không tồn tại');
+      }
+    } catch (error) {
+      return ApiResponse.error(res, 500, 'Không thể cập nhật từ', error.message);
+    }
+  },
+
+  // ADMIN: Xóa từ
+  deleteWord: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const deleted = await speakingModel.deleteWord(id);
+      if (deleted) {
+        return ApiResponse.success(res, '200', 'Đã xóa từ', deleted);
+      } else {
+        return ApiResponse.error(res, 404, 'Từ không tồn tại');
+      }
+    } catch (error) {
+      return ApiResponse.error(res, 500, 'Không thể xóa từ', error.message);
+    }
+  },
 };
 
 module.exports = speakingController;

@@ -4,7 +4,7 @@ require("dotenv").config();
 const config = {
   user: process.env.DB_USER || "postgres",
   host: process.env.DB_HOST || "localhost",
-  database: process.env.DB_NAME || "food_db",
+  database: process.env.DB_NAME || "lexigo_v2",
   password: process.env.DB_PASSWORD || "123123Abc.",
   port: process.env.DB_PORT || 5432,
   // If running locally, comment this 1 line ssl.

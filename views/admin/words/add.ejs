@@ -1,0 +1,213 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h3><i class="fas fa-plus me-2"></i>Add New Word</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/admin/words">Words</a></li>
+                <li class="breadcrumb-item active">Add New Word</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <a href="/admin/words" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Back to Words
+        </a>
+    </div>
+</div>
+
+<!-- Success/Error Messages -->
+<% if (successMessage) { %>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <%= successMessage %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+<% } %>
+
+<% if (errorMessage) { %>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= errorMessage %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+<% } %>
+
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-plus me-2"></i>Add New Word</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/admin/words/add">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="word" class="form-label">Word <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="word" name="word" required placeholder="Enter the word">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="difficulty_level" class="form-label">Difficulty Level <span class="text-danger">*</span></label>
+                            <select class="form-select" id="difficulty_level" name="difficulty_level" required>
+                                <option value="">Select difficulty</option>
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="meaning" class="form-label">Meaning <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="meaning" name="meaning" rows="2" required placeholder="Enter the meaning of the word"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="definition" class="form-label">Definition</label>
+                        <textarea class="form-control" id="definition" name="definition" rows="3" placeholder="Detailed definition of the word"></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="pronunciation" class="form-label">Pronunciation</label>
+                            <input type="text" class="form-control" id="pronunciation" name="pronunciation" placeholder="e.g., /həˈloʊ/">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="audio_url" class="form-label">Audio URL</label>
+                            <input type="url" class="form-control" id="audio_url" name="audio_url" placeholder="https://example.com/audio.mp3">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="example_sentence" class="form-label">Example Sentence</label>
+                        <textarea class="form-control" id="example_sentence" name="example_sentence" rows="2" placeholder="Provide an example sentence using this word"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image_url" class="form-label">Image URL</label>
+                        <input type="url" class="form-control" id="image_url" name="image_url" placeholder="https://example.com/image.jpg">
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="/admin/words" class="btn btn-secondary">
+                            <i class="fas fa-times me-1"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-plus me-1"></i> Add Word
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Word Preview Card -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-eye me-2"></i>Word Preview</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="text-primary mb-1" id="preview-word">Word</h4>
+                        <p class="text-muted mb-2" id="preview-pronunciation" style="display: none;"></p>
+                        <p class="mb-2" id="preview-meaning">Meaning will appear here...</p>
+                        <p class="text-muted mb-2" id="preview-definition" style="display: none;"></p>
+                        <blockquote class="blockquote-footer mb-0" id="preview-example" style="display: none;">
+                        </blockquote>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <span class="badge bg-secondary fs-6" id="preview-difficulty">Unknown</span>
+                        <br><small class="text-muted" id="preview-audio" style="display: none;"></small>
+                        <br><small class="text-muted" id="preview-image" style="display: none;"></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Live preview update
+document.addEventListener('DOMContentLoaded', function() {
+    const wordInput = document.getElementById('word');
+    const meaningInput = document.getElementById('meaning');
+    const pronunciationInput = document.getElementById('pronunciation');
+    const exampleInput = document.getElementById('example_sentence');
+    const difficultySelect = document.getElementById('difficulty_level');
+    const definitionInput = document.getElementById('definition');
+    const audioUrlInput = document.getElementById('audio_url');
+    const imageUrlInput = document.getElementById('image_url');
+
+    function updatePreview() {
+        // Update word
+        document.getElementById('preview-word').textContent = wordInput.value || 'Word';
+
+        // Update meaning
+        document.getElementById('preview-meaning').textContent = meaningInput.value || 'Meaning will appear here...';
+
+        // Update pronunciation
+        const pronunciationEl = document.getElementById('preview-pronunciation');
+        if (pronunciationInput.value) {
+            pronunciationEl.textContent = pronunciationInput.value;
+            pronunciationEl.style.display = 'block';
+        } else {
+            pronunciationEl.style.display = 'none';
+        }
+
+        // Update definition
+        const definitionEl = document.getElementById('preview-definition');
+        if (definitionInput.value) {
+            definitionEl.textContent = definitionInput.value;
+            definitionEl.style.display = 'block';
+        } else {
+            definitionEl.style.display = 'none';
+        }
+
+        // Update example
+        const exampleEl = document.getElementById('preview-example');
+        if (exampleInput.value) {
+            exampleEl.innerHTML = `<em>"${exampleInput.value}"</em>`;
+            exampleEl.style.display = 'block';
+        } else {
+            exampleEl.style.display = 'none';
+        }
+
+        // Update difficulty
+        const difficultyEl = document.getElementById('preview-difficulty');
+        const difficulty = difficultySelect.value;
+        var difficultyColor = 'secondary';
+        if (difficulty === 'easy') difficultyColor = 'success';
+        else if (difficulty === 'medium') difficultyColor = 'warning';
+        else if (difficulty === 'hard') difficultyColor = 'danger';
+
+        difficultyEl.className = `badge bg-${difficultyColor} fs-6`;
+        difficultyEl.textContent = difficulty ? difficulty.charAt(0).toUpperCase() + difficulty.slice(1) : 'Unknown';
+
+        // Update audio URL
+        const audioEl = document.getElementById('preview-audio');
+        if (audioUrlInput.value) {
+            audioEl.innerHTML = '<a href="' + audioUrlInput.value + '" target="_blank">Listen Audio</a>';
+            audioEl.style.display = 'inline';
+        } else {
+            audioEl.style.display = 'none';
+        }
+
+        // Update image URL
+        const imageEl = document.getElementById('preview-image');
+        if (imageUrlInput.value) {
+            imageEl.innerHTML = '<a href="' + imageUrlInput.value + '" target="_blank">View Image</a>';
+            imageEl.style.display = 'inline';
+        } else {
+            imageEl.style.display = 'none';
+        }
+    }
+
+    // Add event listeners
+    [wordInput, meaningInput, pronunciationInput, exampleInput, difficultySelect, definitionInput, audioUrlInput, imageUrlInput].forEach(input => {
+        if (input) {
+            input.addEventListener('input', updatePreview);
+        }
+    });
+
+    // Initial update
+    updatePreview();
+});
+</script>
