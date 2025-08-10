@@ -6,6 +6,7 @@ const speakingRoutes = require("./speakingRoutes");
 const levelRoutes = require("./levelRoutes"); // Thêm dòng này
 const RankRouter = require("./ranking");
 const quoteRoutes = require("./quoteRoutes");
+const grammarRoutes = require("./grammarRoutes");
 
 function routes(app) {
   // User management
@@ -18,6 +19,7 @@ function routes(app) {
   app.use("/api/ranking", RankRouter);
   app.use("/api/levels", levelRoutes); // Thêm dòng này
   app.use("/api/quotes", quoteRoutes);
+  app.use("/api/grammar", grammarRoutes);
 
   // Test connection route
   app.get('/test', (req, res) => {

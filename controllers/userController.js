@@ -245,11 +245,13 @@ const userController = {
   updateProfile: async (req, res) => {
     try {
       const userId = req.user.userId;
-      const { full_name, level } = req.body;
+      const { username, email, full_name, avatar } = req.body;
 
       const updatedUser = await UserModel.updateProfile(userId, {
+        username,
+        email,
         full_name,
-        level,
+        avatar,
       });
 
       return ApiResponse.success(res, '200', "Profile updated successfully", {
@@ -1130,7 +1132,7 @@ const userController = {
   getAvatars: async (req, res) => {
     try {
       const avatars = await getAvatarListFromDb();
-      return res.status(200).json({
+      return res.status('200').json({
         status: 200,
         data: avatars
       });

@@ -384,7 +384,8 @@ const quizController = {
   // Bookmark từ
   bookmarkWord: async (req, res) => {
     try {
-      const { word_id, notes } = req.body;
+      const word_id = req.query.word_id || req.query.id || req.body.word_id;
+      const notes = req.query.notes || req.body.notes;
       const userId = req.user?.userId || req.user?.id;
 
       if (!userId || !word_id) {
@@ -441,7 +442,7 @@ const quizController = {
   // Xóa bookmark từ vựng
   deleteBookmark: async (req, res) => {
     try {
-      const { word_id } = req.body;
+      const word_id = req.query.word_id || req.query.id;
       const userId = req.user?.userId || req.user?.id;
 
       if (!userId || !word_id) {

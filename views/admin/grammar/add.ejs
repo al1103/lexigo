@@ -1,0 +1,289 @@
+<div class="row">
+    <div class="col-12 mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h3><i class="fas fa-plus me-2"></i>Add New Grammar Article</h3>
+                <p class="text-muted">Tạo bài viết ngữ pháp tiếng Anh mới</p>
+            </div>
+            <div>
+                <a href="/admin/grammar" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <form id="grammarForm" method="POST" action="/admin/grammar/add">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="title" name="title"
+                               placeholder="Enter article title..." required maxlength="200">
+                        <div class="form-text">Maximum 200 characters</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="difficulty_level" class="form-label">Difficulty Level <span class="text-danger">*</span></label>
+                            <select class="form-select" id="difficulty_level" name="difficulty_level" required>
+                                <option value="">Select difficulty...</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="reading_time" class="form-label">Reading Time (minutes)</label>
+                            <input type="number" class="form-control" id="reading_time" name="reading_time"
+                                   min="1" max="60" placeholder="e.g., 5">
+                            <div class="form-text">Estimated reading time</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <input type="text" class="form-control" id="category" name="category"
+                               placeholder="e.g., Tenses, Modal Verbs, Conditionals..."
+                               list="categoryDatalist" maxlength="100">
+                        <datalist id="categoryDatalist">
+                            <option value="Tenses">
+                            <option value="Modal Verbs">
+                            <option value="Conditionals">
+                            <option value="Passive Voice">
+                            <option value="Grammar Structures">
+                            <option value="Sentence Patterns">
+                            <option value="Articles">
+                            <option value="Prepositions">
+                        </datalist>
+                        <div class="form-text">Leave empty or enter a new category</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tags" class="form-label">Tags</label>
+                        <input type="text" class="form-control" id="tags" name="tags"
+                               placeholder="Enter tags separated by commas...">
+                        <div class="form-text">Example: present simple, basic grammar, tenses</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="content" name="content" rows="15"
+                                  placeholder="Write your grammar article content here..." required></textarea>
+                        <div class="form-text">
+                            You can use Markdown formatting. Use ## for headers, **bold**, *italic*, etc.
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="is_published"
+                                           name="is_published" value="true" checked>
+                                    <label class="form-check-label" for="is_published">
+                                        <strong>Publish immediately</strong>
+                                    </label>
+                                    <div class="form-text">Uncheck to save as draft</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <button type="button" class="btn btn-outline-info" id="previewBtn">
+                                <i class="fas fa-eye me-2"></i>Preview
+                            </button>
+                        </div>
+                        <div>
+                            <a href="/admin/grammar" class="btn btn-secondary me-2">Cancel</a>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
+                                <i class="fas fa-save me-2"></i>Save Article
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <!-- Help Card -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h6 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Writing Tips</h6>
+            </div>
+            <div class="card-body">
+                <small>
+                    <strong>Content Structure:</strong>
+                    <ul class="mb-2">
+                        <li>Start with a clear explanation</li>
+                        <li>Include examples and usage</li>
+                        <li>Add practice exercises if needed</li>
+                        <li>Use simple, clear language</li>
+                    </ul>
+
+                    <strong>Markdown Formatting:</strong>
+                    <ul class="mb-2">
+                        <li><code>## Heading</code> - Section headers</li>
+                        <li><code>**Bold text**</code> - Important points</li>
+                        <li><code>*Italic text*</code> - Emphasis</li>
+                        <li><code>- Item</code> - Bullet points</li>
+                        <li><code>1. Item</code> - Numbered lists</li>
+                    </ul>
+
+                    <strong>Difficulty Levels:</strong>
+                    <ul class="mb-0">
+                        <li><strong>Beginner:</strong> Basic grammar rules</li>
+                        <li><strong>Intermediate:</strong> Complex structures</li>
+                        <li><strong>Advanced:</strong> Nuanced usage</li>
+                    </ul>
+                </small>
+            </div>
+        </div>
+
+        <!-- Word Count Card -->
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Statistics</h6>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-6">
+                        <h5 class="text-primary mb-0" id="wordCount">0</h5>
+                        <small class="text-muted">Words</small>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="text-info mb-0" id="charCount">0</h5>
+                        <small class="text-muted">Characters</small>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <small class="text-muted">
+                        <i class="fas fa-clock me-1"></i>
+                        Est. reading time: <span id="estimatedTime">0</span> min
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="previewModalLabel">
+                    <i class="fas fa-eye me-2"></i>Article Preview
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="previewContent">
+                <!-- Preview content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const titleInput = document.getElementById('title');
+    const contentTextarea = document.getElementById('content');
+    const wordCountEl = document.getElementById('wordCount');
+    const charCountEl = document.getElementById('charCount');
+    const estimatedTimeEl = document.getElementById('estimatedTime');
+    const previewBtn = document.getElementById('previewBtn');
+    const readingTimeInput = document.getElementById('reading_time');
+
+    // Update statistics
+    function updateStats() {
+        const content = contentTextarea.value;
+        const wordCount = content.trim() === '' ? 0 : content.trim().split(/\s+/).length;
+        const charCount = content.length;
+        const estimatedTime = Math.max(1, Math.ceil(wordCount / 200)); // ~200 words per minute
+
+        wordCountEl.textContent = wordCount.toLocaleString();
+        charCountEl.textContent = charCount.toLocaleString();
+        estimatedTimeEl.textContent = estimatedTime;
+
+        // Auto-suggest reading time if not set
+        if (!readingTimeInput.value && estimatedTime > 0) {
+            readingTimeInput.value = estimatedTime;
+        }
+    }
+
+    // Process tags input
+    function processTags(tagsString) {
+        if (!tagsString.trim()) return [];
+        return tagsString.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
+    }
+
+    // Preview functionality
+    previewBtn.addEventListener('click', function() {
+        const title = titleInput.value || 'Untitled Article';
+        const content = contentTextarea.value || 'No content';
+        const difficulty = document.getElementById('difficulty_level').value || 'Not specified';
+        const category = document.getElementById('category').value || 'No category';
+        const tags = processTags(document.getElementById('tags').value);
+        const readingTime = readingTimeInput.value;
+
+        const previewContent = document.getElementById('previewContent');
+        previewContent.innerHTML = `
+            <div class="mb-3">
+                <h4>${title}</h4>
+                <div class="mb-2">
+                    <span class="badge bg-info me-2">${category}</span>
+                    <span class="badge bg-secondary me-2">${difficulty}</span>
+                    ${readingTime ? `<span class="badge bg-light text-dark"><i class="fas fa-clock me-1"></i>${readingTime} min</span>` : ''}
+                </div>
+                ${tags.length > 0 ? `
+                    <div class="mb-2">
+                        ${tags.map(tag => `<span class="badge bg-light text-dark me-1">${tag}</span>`).join('')}
+                    </div>
+                ` : ''}
+            </div>
+            <div class="border-top pt-3">
+                <div style="max-height: 400px; overflow-y: auto;">
+                    ${content.replace(/\n/g, '<br>')}
+                </div>
+            </div>
+        `;
+
+        const modal = new bootstrap.Modal(document.getElementById('previewModal'));
+        modal.show();
+    });
+
+    // Form validation
+    document.getElementById('grammarForm').addEventListener('submit', function(e) {
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Saving...';
+
+        // Process tags before submit
+        const tagsInput = document.getElementById('tags');
+        const processedTags = processTags(tagsInput.value);
+        tagsInput.value = JSON.stringify(processedTags);
+    });
+
+    // Real-time stats update
+    contentTextarea.addEventListener('input', updateStats);
+    titleInput.addEventListener('input', updateStats);
+
+    // Initial stats
+    updateStats();
+
+    // Auto-resize textarea
+    contentTextarea.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+});
+</script>

@@ -21,8 +21,7 @@ const upload = multer({
 
 // Speaking levels and words routes
 router.get('/levels', authenticateToken, speakingController.getSpeakingLevels);
-router.get('/levels/:level_code', authenticateToken, speakingController.getSpeakingLevelDetail);
-
+router.get('/words', authenticateToken, speakingController.getWordsForSpeaking);
 // Speaking session routes
 router.post('/start', authenticateToken, speakingController.startSpeakingSession);
 router.post('/submit-result', authenticateToken, speakingController.submitSpeakingResult);

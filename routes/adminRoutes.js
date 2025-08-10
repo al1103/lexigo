@@ -27,6 +27,14 @@ router.get('/words/:id/edit', adminController.wordEdit);
 router.post('/words/:id/update', adminController.wordUpdate);
 router.post('/words/:id/delete', adminController.wordDelete);
 
+// Grammar Articles Management
+router.get('/grammar', adminController.grammarIndex);
+router.get('/grammar/add', adminController.grammarAddForm);
+router.post('/grammar/add', adminController.grammarAdd);
+router.get('/grammar/:id/edit', adminController.grammarEdit);
+router.post('/grammar/:id/update', adminController.grammarUpdate);
+router.post('/grammar/:id/delete', adminController.grammarDelete);
+
 // Quiz Sessions Management
 router.get('/quiz-sessions', adminController.quizSessionsIndex);
 

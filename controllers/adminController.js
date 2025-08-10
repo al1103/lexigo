@@ -13,6 +13,7 @@ const adminController = {
         adminUsers: 0,
         newUsersThisWeek: 0,
         totalWords: 0,
+        totalGrammarArticles: 0,
         totalQuizSessions: 0,
         completedQuizSessions: 0,
         totalSpeakingSessions: 0,
@@ -49,6 +50,14 @@ const adminController = {
         dashboardData.totalWords = parseInt(wordsResult.rows[0].count) || 0;
       } catch (error) {
         console.log('Words table not found or error:', error.message);
+      }
+
+      // Safe query for grammar articles
+      try {
+        const grammarResult = await pool.query('SELECT COUNT(*) as count FROM grammar_articles WHERE is_published = true');
+        dashboardData.totalGrammarArticles = parseInt(grammarResult.rows[0].count) || 0;
+      } catch (error) {
+        console.log('Grammar articles table not found or error:', error.message);
       }
 
       // Safe query for speaking sessions
@@ -597,6 +606,322 @@ const adminController = {
     } catch (error) {
       console.error('Export error:', error);
       res.status(500).send('Export failed');
+    }
+  },
+
+  // === GRAMMAR ARTICLES MANAGEMENT ===
+
+  // Grammar articles index
+  grammarIndex: async (req, res) => {
+    try {
+      const { page = 1, limit = 10, difficulty, category, search } = req.query;
+      const offset = (page - 1) * limit;
+
+      let queryParams = [];
+      let paramIndex = 0;
+      let whereConditions = ['is_published = true OR is_published = false']; // Show all articles for admin
+
+      // Build query conditions
+      if (difficulty) {
+        paramIndex++;
+        whereConditions.push(`difficulty_level = $${paramIndex}`);
+        queryParams.push(difficulty);
+      }
+
+      if (category) {
+        paramIndex++;
+        whereConditions.push(`category ILIKE $${paramIndex}`);
+        queryParams.push(`%${category}%`);
+      }
+
+      if (search) {
+        paramIndex++;
+        whereConditions.push(`(title ILIKE $${paramIndex} OR content ILIKE $${paramIndex})`);
+        queryParams.push(`%${search}%`);
+      }
+
+      const whereClause = whereConditions.length > 0 ? `WHERE ${whereConditions.join(' AND ')}` : '';
+
+      // Get articles
+      const articlesQuery = `
+        SELECT id, title, content, difficulty_level, category, tags, reading_time,
+               view_count, is_published, created_at, updated_at
+        FROM grammar_articles
+        ${whereClause}
+        ORDER BY created_at DESC
+        LIMIT $${paramIndex + 1} OFFSET $${paramIndex + 2}
+      `;
+      queryParams.push(limit, offset);
+
+      const articlesResult = await pool.query(articlesQuery, queryParams);
+
+      // Get total count
+      const countQuery = `
+        SELECT COUNT(*) as total
+        FROM grammar_articles
+        ${whereClause}
+      `;
+      const countResult = await pool.query(countQuery, queryParams.slice(0, -2)); // Remove limit and offset
+      const totalArticles = parseInt(countResult.rows[0].total);
+
+      // Get categories for filter dropdown
+      const categoriesResult = await pool.query(`
+        SELECT DISTINCT category
+        FROM grammar_articles
+        WHERE category IS NOT NULL AND category != ''
+        ORDER BY category
+      `);
+      const categories = categoriesResult.rows.map(row => row.category);
+
+      const pagination = {
+        current_page: parseInt(page),
+        total_pages: Math.ceil(totalArticles / limit),
+        total_items: totalArticles,
+        items_per_page: parseInt(limit)
+      };
+
+      // Check for success/error messages from URL
+      const flashMessages = {};
+      if (req.query.success) {
+        flashMessages.success = decodeURIComponent(req.query.success);
+      }
+      if (req.query.error) {
+        flashMessages.error = decodeURIComponent(req.query.error);
+      }
+
+      res.render('admin/grammar/index', {
+        layout: 'admin/layout',
+        title: 'Grammar Articles Management',
+        articles: articlesResult.rows,
+        categories,
+        pagination,
+        query: req.query,
+        flash: Object.keys(flashMessages).length > 0 ? flashMessages : undefined,
+        adminUser: req.adminUser
+      });
+    } catch (error) {
+      console.error('Grammar index error:', error);
+      res.redirect('/admin/grammar?error=' + encodeURIComponent('Failed to load grammar articles'));
+    }
+  },
+
+  // Grammar add form
+  grammarAddForm: async (req, res) => {
+    try {
+      // Check for error messages from URL
+      const flashMessages = {};
+      if (req.query.error) {
+        flashMessages.error = decodeURIComponent(req.query.error);
+      }
+
+      res.render('admin/grammar/add', {
+        layout: 'admin/layout',
+        title: 'Add Grammar Article',
+        flash: Object.keys(flashMessages).length > 0 ? flashMessages : undefined,
+        adminUser: req.adminUser
+      });
+    } catch (error) {
+      console.error('Grammar add form error:', error);
+      res.redirect('/admin/grammar?error=' + encodeURIComponent('Failed to load add form'));
+    }
+  },
+
+  // Grammar add
+  grammarAdd: async (req, res) => {
+    try {
+      const {
+        title,
+        content,
+        difficulty_level = 'beginner',
+        category,
+        tags,
+        reading_time,
+        is_published = false
+      } = req.body;
+
+      // Validate required fields
+      if (!title || !content) {
+        return res.redirect('/admin/grammar/add?error=' + encodeURIComponent('Title and content are required'));
+      }
+
+      // Process tags
+      let processedTags = [];
+      if (tags) {
+        try {
+          processedTags = JSON.parse(tags);
+        } catch (e) {
+          processedTags = typeof tags === 'string' ? tags.split(',').map(tag => tag.trim()) : [];
+        }
+      }
+
+      const query = `
+        INSERT INTO grammar_articles (title, content, difficulty_level, category, tags, reading_time, is_published)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        RETURNING id
+      `;
+
+      const values = [
+        title.trim(),
+        content.trim(),
+        difficulty_level,
+        category ? category.trim() : null,
+        processedTags,
+        reading_time ? parseInt(reading_time) : null,
+        is_published === 'true' || is_published === true
+      ];
+
+      await pool.query(query, values);
+
+      res.redirect('/admin/grammar?success=' + encodeURIComponent('Article created successfully'));
+    } catch (error) {
+      console.error('Grammar add error:', error);
+      res.status(500).render('admin/error', {
+        layout: 'admin/layout',
+        title: 'Error',
+        error: 'Failed to create article',
+        adminUser: req.adminUser
+      });
+    }
+  },
+
+  // Grammar edit form
+  grammarEdit: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const query = `
+        SELECT id, title, content, difficulty_level, category, tags, reading_time,
+               view_count, is_published, created_at, updated_at
+        FROM grammar_articles
+        WHERE id = $1
+      `;
+
+      const result = await pool.query(query, [id]);
+
+      if (result.rows.length === 0) {
+        return res.redirect('/admin/grammar?error=' + encodeURIComponent('Article not found'));
+      }
+
+      // Check for error messages from URL
+      const flashMessages = {};
+      if (req.query.error) {
+        flashMessages.error = decodeURIComponent(req.query.error);
+      }
+
+      res.render('admin/grammar/edit', {
+        layout: 'admin/layout',
+        title: 'Edit Grammar Article',
+        article: result.rows[0],
+        flash: Object.keys(flashMessages).length > 0 ? flashMessages : undefined,
+        adminUser: req.adminUser
+      });
+    } catch (error) {
+      console.error('Grammar edit form error:', error);
+      res.status(500).render('admin/error', {
+        layout: 'admin/layout',
+        title: 'Error',
+        error: 'Failed to load edit form',
+        adminUser: req.adminUser
+      });
+    }
+  },
+
+  // Grammar update
+  grammarUpdate: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const {
+        title,
+        content,
+        difficulty_level,
+        category,
+        tags,
+        reading_time,
+        is_published = false
+      } = req.body;
+
+      // Validate required fields
+      if (!title || !content) {
+        return res.redirect(`/admin/grammar/${id}/edit?error=` + encodeURIComponent('Title and content are required'));
+      }
+
+      // Process tags
+      let processedTags = [];
+      if (tags) {
+        try {
+          processedTags = JSON.parse(tags);
+        } catch (e) {
+          processedTags = typeof tags === 'string' ? tags.split(',').map(tag => tag.trim()) : [];
+        }
+      }
+
+      const query = `
+        UPDATE grammar_articles
+        SET title = $1, content = $2, difficulty_level = $3, category = $4,
+            tags = $5, reading_time = $6, is_published = $7, updated_at = CURRENT_TIMESTAMP
+        WHERE id = $8
+      `;
+
+      const values = [
+        title.trim(),
+        content.trim(),
+        difficulty_level,
+        category ? category.trim() : null,
+        processedTags,
+        reading_time ? parseInt(reading_time) : null,
+        is_published === 'true' || is_published === true,
+        id
+      ];
+
+      const result = await pool.query(query, values);
+
+      if (result.rowCount === 0) {
+        return res.status(404).render('admin/error', {
+          layout: 'admin/layout',
+          title: 'Error',
+          error: 'Article not found',
+          adminUser: req.adminUser
+        });
+      }
+
+      res.redirect('/admin/grammar?success=' + encodeURIComponent('Article updated successfully'));
+    } catch (error) {
+      console.error('Grammar update error:', error);
+      res.status(500).render('admin/error', {
+        layout: 'admin/layout',
+        title: 'Error',
+        error: 'Failed to update article',
+        adminUser: req.adminUser
+      });
+    }
+  },
+
+  // Grammar delete
+  grammarDelete: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const query = `DELETE FROM grammar_articles WHERE id = $1`;
+      const result = await pool.query(query, [id]);
+
+      if (result.rowCount === 0) {
+        return res.status(404).render('admin/error', {
+          layout: 'admin/layout',
+          title: 'Error',
+          error: 'Article not found',
+          adminUser: req.adminUser
+        });
+      }
+
+      res.redirect('/admin/grammar?success=' + encodeURIComponent('Article deleted successfully'));
+    } catch (error) {
+      console.error('Grammar delete error:', error);
+      res.status(500).render('admin/error', {
+        layout: 'admin/layout',
+        title: 'Error',
+        error: 'Failed to delete article',
+        adminUser: req.adminUser
+      });
     }
   },
 };

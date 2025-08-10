@@ -1,0 +1,358 @@
+<div class="row">
+    <div class="col-12 d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h3><i class="fas fa-spell-check me-2"></i>Grammar Articles Management</h3>
+            <p class="text-muted">Quản lý các bài viết ngữ pháp tiếng Anh</p>
+        </div>
+        <div>
+            <a href="/admin/grammar/add" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Add New Article
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Filters -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="GET" action="/admin/grammar" class="row g-3">
+                    <div class="col-md-3">
+                        <label for="difficulty" class="form-label">Difficulty Level</label>
+                        <select class="form-select" id="difficulty" name="difficulty">
+                            <option value="">All Levels</option>
+                            <option value="beginner" <%= query.difficulty === 'beginner' ? 'selected' : '' %>>Beginner</option>
+                            <option value="intermediate" <%= query.difficulty === 'intermediate' ? 'selected' : '' %>>Intermediate</option>
+                            <option value="advanced" <%= query.difficulty === 'advanced' ? 'selected' : '' %>>Advanced</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" id="category" name="category">
+                            <option value="">All Categories</option>
+                            <% if (categories && categories.length > 0) { %>
+                                <% categories.forEach(cat => { %>
+                                    <option value="<%= cat %>" <%= query.category === cat ? 'selected' : '' %>><%= cat %></option>
+                                <% }); %>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="search" class="form-label">Search</label>
+                        <input type="text" class="form-control" id="search" name="search"
+                               placeholder="Search by title or content..." value="<%= query.search || '' %>">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">&nbsp;</label>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-outline-primary">
+                                <i class="fas fa-search me-1"></i>Filter
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Articles Table -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <% if (articles && articles.length > 0) { %>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Difficulty</th>
+                                <th>Reading Time</th>
+                                <th>Views</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% articles.forEach(article => { %>
+                            <tr>
+                                <td><strong>#<%= article.id %></strong></td>
+                                <td>
+                                    <div>
+                                        <strong><%= article.title %></strong>
+                                        <% if (article.tags && article.tags.length > 0) { %>
+                                        <div class="mt-1">
+                                            <% article.tags.forEach(tag => { %>
+                                                <span class="badge bg-light text-dark me-1"><%= tag %></span>
+                                            <% }); %>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                </td>
+                                <td>
+                                    <% if (article.category) { %>
+                                        <span class="badge bg-info"><%= article.category %></span>
+                                    <% } else { %>
+                                        <span class="text-muted">No category</span>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <%
+                                    let difficultyClass = 'secondary';
+                                    if (article.difficulty_level === 'beginner') difficultyClass = 'success';
+                                    else if (article.difficulty_level === 'intermediate') difficultyClass = 'warning';
+                                    else if (article.difficulty_level === 'advanced') difficultyClass = 'danger';
+                                    %>
+                                    <span class="badge bg-<%= difficultyClass %>">
+                                        <%= article.difficulty_level.charAt(0).toUpperCase() + article.difficulty_level.slice(1) %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <% if (article.reading_time) { %>
+                                        <i class="fas fa-clock me-1"></i><%= article.reading_time %> min
+                                    <% } else { %>
+                                        <span class="text-muted">-</span>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <i class="fas fa-eye me-1"></i><%= article.view_count || 0 %>
+                                </td>
+                                <td>
+                                    <% if (article.is_published) { %>
+                                        <span class="badge bg-success">Published</span>
+                                    <% } else { %>
+                                        <span class="badge bg-secondary">Draft</span>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <small class="text-muted">
+                                        <%= new Date(article.created_at).toLocaleDateString() %>
+                                    </small>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a href="/admin/grammar/<%= article.id %>/edit"
+                                           class="btn btn-sm btn-outline-primary" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-info preview-btn"
+                                                data-article-id="<%= article.id %>" title="Preview">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger delete-btn"
+                                                data-article-id="<%= article.id %>"
+                                                data-article-title="<%= article.title %>" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+
+                                                <!-- Pagination -->
+                <% if (pagination && pagination.total_pages > 1) { %>
+                <nav aria-label="Articles pagination" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        <!-- Previous page -->
+                        <% if (pagination.current_page > 1) { %>
+                        <li class="page-item">
+                            <a class="page-link" href="/admin/grammar?page=<%= pagination.current_page - 1 %><%= query.difficulty ? '&difficulty=' + query.difficulty : '' %><%= query.category ? '&category=' + query.category : '' %><%= query.search ? '&search=' + query.search : '' %>">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                        <% } %>
+
+                        <!-- Page numbers -->
+                        <% for (let i = Math.max(1, pagination.current_page - 2); i <= Math.min(pagination.total_pages, pagination.current_page + 2); i++) { %>
+                        <li class="page-item <%= i === pagination.current_page ? 'active' : '' %>">
+                            <a class="page-link" href="/admin/grammar?page=<%= i %><%= query.difficulty ? '&difficulty=' + query.difficulty : '' %><%= query.category ? '&category=' + query.category : '' %><%= query.search ? '&search=' + query.search : '' %>"><%= i %></a>
+                        </li>
+                        <% } %>
+
+                        <!-- Next page -->
+                        <% if (pagination.current_page < pagination.total_pages) { %>
+                        <li class="page-item">
+                            <a class="page-link" href="/admin/grammar?page=<%= pagination.current_page + 1 %><%= query.difficulty ? '&difficulty=' + query.difficulty : '' %><%= query.category ? '&category=' + query.category : '' %><%= query.search ? '&search=' + query.search : '' %>">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                        <% } %>
+                    </ul>
+                    <div class="text-center">
+                        <small class="text-muted">
+                            Showing <%= ((pagination.current_page - 1) * pagination.items_per_page) + 1 %> to
+                            <%= Math.min(pagination.current_page * pagination.items_per_page, pagination.total_items) %>
+                            of <%= pagination.total_items %> articles
+                        </small>
+                    </div>
+                </nav>
+                <% } %>
+
+                <% } else { %>
+                <div class="text-center py-5">
+                    <i class="fas fa-spell-check fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">No grammar articles found</h5>
+                    <p class="text-muted">Start by creating your first grammar article.</p>
+                    <a href="/admin/grammar/add" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Add First Article
+                    </a>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="previewModalLabel">
+                    <i class="fas fa-eye me-2"></i>Article Preview
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="previewContent">
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Preview article function
+    function previewArticle(articleId) {
+        const modal = new bootstrap.Modal(document.getElementById('previewModal'));
+        const previewContent = document.getElementById('previewContent');
+
+        // Show loading spinner
+        previewContent.innerHTML = `
+            <div class="text-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        `;
+
+        modal.show();
+
+        // Fetch article data
+        fetch(`/api/grammar/${articleId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 200 && data.data.article) {
+                    const article = data.data.article;
+                    previewContent.innerHTML = `
+                        <div class="mb-3">
+                            <h4>${article.title}</h4>
+                            <div class="mb-2">
+                                <span class="badge bg-info me-2">${article.category || 'No category'}</span>
+                                <span class="badge bg-secondary me-2">${article.difficulty_level}</span>
+                                ${article.reading_time ? `<span class="badge bg-light text-dark"><i class="fas fa-clock me-1"></i>${article.reading_time} min</span>` : ''}
+                            </div>
+                            ${article.tags && article.tags.length > 0 ? `
+                                <div class="mb-2">
+                                    ${article.tags.map(tag => `<span class="badge bg-light text-dark me-1">${tag}</span>`).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="border-top pt-3">
+                            <div style="max-height: 400px; overflow-y: auto;">
+                                ${article.content.replace(/\n/g, '<br>')}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    previewContent.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Error loading article preview
+                        </div>
+                    `;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                previewContent.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Error loading article preview
+                    </div>
+                `;
+            });
+    }
+
+    // Delete article function
+    function deleteArticle(articleId, articleTitle) {
+        if (confirm(`Are you sure you want to delete the article "${articleTitle}"?\n\nThis action cannot be undone.`)) {
+            // Create form and submit
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = `/admin/grammar/${articleId}/delete`;
+
+            // Add CSRF token if available
+            const csrfToken = document.querySelector('meta[name="csrf-token"]');
+            if (csrfToken) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = '_token';
+                input.value = csrfToken.getAttribute('content');
+                form.appendChild(input);
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
+
+    // Event listeners for preview buttons
+    document.querySelectorAll('.preview-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const articleId = this.getAttribute('data-article-id');
+            previewArticle(articleId);
+        });
+    });
+
+    // Event listeners for delete buttons
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const articleId = this.getAttribute('data-article-id');
+            const articleTitle = this.getAttribute('data-article-title');
+            deleteArticle(articleId, articleTitle);
+        });
+    });
+
+    // Auto-submit form on filter change
+    const difficultySelect = document.getElementById('difficulty');
+    const categorySelect = document.getElementById('category');
+
+    if (difficultySelect) {
+        difficultySelect.addEventListener('change', function() {
+            this.form.submit();
+        });
+    }
+
+    if (categorySelect) {
+        categorySelect.addEventListener('change', function() {
+            this.form.submit();
+        });
+    }
+});
+</script>
