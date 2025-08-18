@@ -1,5 +1,6 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const UserModel = require("../models/user_model");
 const { pool } = require("../config/database");
 const { sendRandomCodeEmail } = require("../server/server");
@@ -11,15 +12,7 @@ const { v4: uuidv4 } = require("uuid");
 const ApiResponse = require("../utils/apiResponse");
 const getAvatarListFromDb = require("../utils/avatarList");
 
-// Helper function to generate random referral code
-function generateReferralCode() {
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let result = "";
-  for (let i = 0; i < 6; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
-}
+
 
 const userController = {
   // Đăng ký user mới
@@ -30,9 +23,6 @@ const userController = {
         email,
         password,
         fullName,
-        phoneNumber,
-        address,
-        referralCode,
       } = req.body;
 
       // Basic validation
@@ -89,9 +79,6 @@ const userController = {
         email,
         password: hashedPassword,
         fullName,
-        phoneNumber,
-        address, // Thêm trường address
-        referralCode,
       };
 
       console.log("Storing registration data for verification:", {
@@ -139,12 +126,22 @@ const userController = {
           `Using column name: ${expirationColumnName} for expiration time`
         );
 
-        // Insert the new verification record using the correct column name
-        await pool.query(
-          `INSERT INTO verification_codes (email, code, ${expirationColumnName}, user_data, created_at)
-         VALUES ($1, $2, $3, $4, NOW())`,
-          [email, code, expirationTime, JSON.stringify(userData)]
-        );
+        // Insert the new verification record using the correct column name and table structure
+        if (hasExpiresAt) {
+          // Use the existing table structure with expires_at and user_data
+          await pool.query(
+            `INSERT INTO verification_codes (email, code, expires_at, code_type, verified, attempts, max_attempts, user_data, created_at, updated_at)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW(), NOW())`,
+            [email, code, expirationTime, 'registration', false, 0, 3, JSON.stringify(userData)]
+          );
+        } else {
+          // Use the new table structure with expiration_time and user_data
+          await pool.query(
+            `INSERT INTO verification_codes (email, code, ${expirationColumnName}, user_data, created_at)
+             VALUES ($1, $2, $3, $4, NOW())`,
+            [email, code, expirationTime, JSON.stringify(userData)]
+          );
+        }
       } catch (dbError) {
         console.error("Database error during table check:", dbError);
         // If the table doesn't exist or other DB issues, create it
@@ -176,8 +173,8 @@ const userController = {
         console.log(`Verification email sent to ${email}`);
       } catch (emailError) {
         console.error("Error sending verification email:", emailError);
-        return res.status(500).json({
-          status: 500,
+        return res.status('500').json({
+          status: '500',
           message: "Không thể gửi email xác thực. Vui lòng thử lại sau.",
         });
       }
@@ -189,8 +186,8 @@ const userController = {
       });
     } catch (error) {
       console.error("Lỗi đăng ký:", error);
-      return res.status(500).json({
-        status: 500,
+      return res.status('500').json({
+        status: '500',
         message: "Đã xảy ra lỗi trong quá trình đăng ký",
         error: error.message,
       });
@@ -311,6 +308,7 @@ const userController = {
         });
       }
 
+
       console.log(`Verifying registration for ${email} with code ${code}`);
 
       // Check the column name in verification_codes table
@@ -400,9 +398,6 @@ const userController = {
           email,
           password,
           fullName,
-          phoneNumber,
-          address,
-          referralCode,
         } = userData;
 
         // THÊM KIỂM TRA NÀY: Kiểm tra lại xem username/email đã tồn tại chưa
@@ -423,132 +418,30 @@ const userController = {
           });
         }
 
-        // Generate UUID for user and referral code
-        const userId = uuidv4();
-        const userReferralCode = generateReferralCode();
+        // bcrypt is already imported at the top, so we don't need to require it again
 
-        let referrerId = null;
-
-        // If referral code provided, find the referrer
-        if (referralCode) {
-          console.log("Looking up referrer with code:", referralCode);
-          const referrerResult = await client.query(
-            `SELECT user_id FROM users WHERE referral_code = $1`,
-            [referralCode]
-          );
-
-          if (referrerResult.rows.length > 0) {
-            referrerId = referrerResult.rows[0].user_id;
-            console.log("Found referrer with ID:", referrerId);
-          } else {
-            console.log("No referrer found with code:", referralCode);
-          }
-        }
+        // Hash password before inserting
+        const saltRounds = 10;
+        const password_hash = await bcrypt.hash(password, saltRounds);
 
         // Insert the new user into database
         const insertUserQuery = `
         INSERT INTO users (
-          user_id, username, email, password,
-          full_name, phone_number, address, referral_code,
-          referred_by, role, created_at, updated_at
+          username, email, password_hash, full_name
         ) VALUES (
-          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW(), NOW()
+          $1, $2, $3, $4
         )
-        RETURNING user_id, username, email, full_name, address, referral_code
+        RETURNING id, username, email, full_name
       `;
 
         const insertedUser = await client.query(insertUserQuery, [
-          userId,
           username,
           email,
-          password,
+          password_hash,
           fullName,
-          phoneNumber,
-          address, // Thêm trường address
-          userReferralCode,
-          referrerId,
-          "customer",
         ]);
 
-        console.log("User created successfully with ID:", userId);
-
-        // If referred by someone, build the referral tree
-        if (referrerId) {
-          // First, insert direct referral (level 1)
-          await client.query(
-            `INSERT INTO referral_tree (user_id, ancestor_id, level)
-           VALUES ($1, $2, 1)`,
-            [userId, referrerId]
-          );
-
-          // Then get all ancestors of the referrer up to level 4
-          const ancestorsResult = await client.query(
-            `SELECT ancestor_id, level
-           FROM referral_tree
-           WHERE user_id = $1 AND level <= 4`,
-            [referrerId]
-          );
-
-          // Insert these ancestors with incremented levels
-          for (const ancestor of ancestorsResult.rows) {
-            await client.query(
-              `INSERT INTO referral_tree (user_id, ancestor_id, level)
-             VALUES ($1, $2, $3)`,
-              [userId, ancestor.ancestor_id, ancestor.level + 1]
-            );
-          }
-
-          // Give signup bonus to direct referrer
-          const signupBonus = 50000;
-
-          await client.query(
-            `UPDATE users
-           SET wallet_balance = wallet_balance + $1
-           WHERE user_id = $2`,
-            [signupBonus, referrerId]
-          );
-
-          // Record the transaction
-          await client.query(
-            `INSERT INTO wallet_transactions (
-            user_id, amount, transaction_type, reference_id, description, created_at
-          ) VALUES (
-            $1, $2, 'signup_bonus', $3, 'Thưởng giới thiệu đăng ký thành công', NOW()
-          )`,
-            [referrerId, signupBonus, userId]
-          );
-
-          // Check if the status column exists in referrals table
-          const referralsColumnsResult = await client.query(`
-          SELECT column_name
-          FROM information_schema.columns
-          WHERE table_name = 'referrals'
-        `);
-
-          const statusColumnName = referralsColumnsResult.rows.some(
-            (row) => row.column_name === "status"
-          )
-            ? "status"
-            : "status";
-
-          console.log(
-            `Using column name: ${statusColumnName} for referrals status`
-          );
-
-          // Record the referral with the correct column name
-          await client.query(
-            `INSERT INTO referrals (
-            referrer_id, referred_id, commission, ${statusColumnName}, level, created_at, updated_at
-          ) VALUES (
-            $1, $2, $3, 'completed', 1, NOW(), NOW()
-          )`,
-            [referrerId, userId, signupBonus]
-          );
-
-          console.log(
-            `Signup bonus of ${signupBonus} given to referrer ${referrerId}`
-          );
-        }
+        console.log("User created successfully with ID:", insertedUser.rows[0].id);
 
         // Delete the verification code after successful registration
         await client.query(`DELETE FROM verification_codes WHERE email = $1`, [
@@ -563,12 +456,10 @@ const userController = {
           status: '200',
           message: "Đăng ký thành công",
           data: {
-            userId,
+            id: insertedUser.rows[0].id,
             username: insertedUser.rows[0].username,
             email: insertedUser.rows[0].email,
             fullName: insertedUser.rows[0].full_name,
-            address: insertedUser.rows[0].address, // Thêm trường address
-            referralCode: userReferralCode,
           },
         });
       } catch (dbError) {

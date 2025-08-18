@@ -267,7 +267,6 @@ Here is the required format (return your full result in this exact format):
     res.status(500).json({
       message: "Có lỗi xảy ra, vui lòng thử lại sau.",
       error: error.message,
-      imageUrl: uploadedImageUrl
     });
   }
 }

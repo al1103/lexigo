@@ -444,10 +444,12 @@ const quizController = {
     try {
       const word_id = req.query.word_id || req.query.id;
       const userId = req.user?.userId || req.user?.id;
+      console.log('🔍 Deleting bookmark for user:', userId, 'word:', word_id);
 
       if (!userId || !word_id) {
         return ApiResponse.error(res, 400, 'User ID và word ID là bắt buộc');
       }
+      console.log('🔍 Deleting bookmark for user:', userId, 'word:', word_id);
 
       const deleted = await quizModel.deleteBookmark(userId, word_id);
       if (deleted) {

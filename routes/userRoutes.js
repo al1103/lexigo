@@ -5,6 +5,7 @@ const { authenticateToken } = require("../middleware/auth");
 
 // Public routes
 router.post("/register", userController.register);
+router.post("/verify-registration", userController.verifyRegistration);
 router.post("/login", userController.login);
 router.get("/avatars", userController.getAvatars);
 

@@ -19,10 +19,11 @@ const app = express();
 const server = http.createServer(app);
 
 const corsOptions = {
-  origin: true, // Hoặc địa chỉ cụ thể của client
+  origin: '*', // Cho phép tất cả origin trong dev
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization", "Set-Cookie"],
+  exposedHeaders: ['set-cookie', 'Set-Cookie']
 };
 
 app.use(cors(corsOptions));
@@ -40,11 +41,26 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
+// Health check route không cần auth
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    clientIP: req.ip,
+    headers: req.headers
+  });
+});
+
 // EJS view engine setup
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(expressLayouts);
 app.set('layout', 'admin/layout');
+
+// Cấu hình trust proxy cho cloudflared/ngrok
+// Tin cậy tất cả proxy trong dev
+app.enable('trust proxy');
+
 
 // Simple database connection test before starting server
 pool.query("SELECT NOW()", (err, res) => {
@@ -76,7 +92,6 @@ async function startServer() {
 
     // Mount Admin routes
     app.use('/admin', adminRoutes);
-    console.log(`✅ Admin Panel started on http://localhost:${process.env.PORT || 9999}/admin`);
 
     // Mount API routes
     routes(app);
@@ -87,9 +102,10 @@ async function startServer() {
     });
 
     const PORT = process.env.PORT || 9999;
-    server.listen(PORT, () => {
-      console.log(`🚀 Server đang chạy trên cổng ${PORT}`);
-      console.log(`📊 Admin dashboard: http://localhost:${PORT}/admin`);
+    const HOST = process.env.HOST || '127.0.0.1'; // Sử dụng IP từ environment hoặc mặc định localhost
+    server.listen(PORT, HOST, () => {
+      console.log(`🚀 Server đang chạy trên ${HOST}:${PORT}`);
+      console.log(`📊 Admin dashboard: http://${HOST}:${PORT}/admin`);
       console.log(`🔐 Default admin: admin@lexigo.com / admin123`);
     });
   } catch (error) {
