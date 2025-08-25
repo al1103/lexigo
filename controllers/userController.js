@@ -70,20 +70,20 @@ const userController = {
       // Generate verification code (6 digits)
       const code = Math.floor(100000 + Math.random() * 900000).toString();
 
-      // Hash password before storing
-      const hashedPassword = password;
+      // Store password as is (no hashing)
+      const plainPassword = password;
 
       // Store temporary user data
       const userData = {
         username,
         email,
-        password: hashedPassword,
+        password: plainPassword,
         fullName,
       };
 
       console.log("Storing registration data for verification:", {
         ...userData,
-        password: "[HASHED]",
+        password: "[PLAIN]",
       });
 
       // Create expiration time (10 minutes from now)
@@ -242,13 +242,19 @@ const userController = {
   updateProfile: async (req, res) => {
     try {
       const userId = req.user.userId;
-      const { username, email, full_name, avatar } = req.body;
+      const { username, full_name } = req.body;
+
+      console.log('🔧 Update Profile Request:', {
+        userId,
+        username,
+        full_name,
+        emailRemoved: 'Email updates are disabled for security',
+        avatarRemoved: 'Avatar updates are disabled - use /upload-avatar instead'
+      });
 
       const updatedUser = await UserModel.updateProfile(userId, {
         username,
-        email,
         full_name,
-        avatar,
       });
 
       return ApiResponse.success(res, '200', "Profile updated successfully", {
@@ -378,7 +384,7 @@ const userController = {
 
         console.log("User data retrieved successfully:", {
           ...userData,
-          password: "[HASHED]",
+          password: "[PLAIN]",
         });
       } catch (parseError) {
         console.error("Error parsing user data:", parseError);
@@ -418,11 +424,8 @@ const userController = {
           });
         }
 
-        // bcrypt is already imported at the top, so we don't need to require it again
-
-        // Hash password before inserting
-        const saltRounds = 10;
-        const password_hash = await bcrypt.hash(password, saltRounds);
+        // Use plain password (no hashing)
+        const password_hash = password;
 
         // Insert the new user into database
         const insertUserQuery = `
@@ -732,7 +735,7 @@ const userController = {
       }
 
       // Kiểm tra xem email có tồn tại trong hệ thống không
-      const user = await UserModel.getUserByEmail(email);
+      const user = await UserModel.findByEmail(email);
       if (!user) {
         return res.status(404).json({
           status: 404,
@@ -754,15 +757,78 @@ const userController = {
         email,
       ]);
 
-      // Thêm mã xác nhận mới với expiration_time 15 phút
+      // Thêm mã xác nhận mới với expiration time 15 phút
       const expirationTime = new Date();
       expirationTime.setMinutes(expirationTime.getMinutes() + 15);
 
-      await pool.query(
-        `INSERT INTO verification_codes (email, code, expiration_time, user_data, created_at)
-       VALUES ($1, $2, $3, $4, NOW())`,
-        [email, code, expirationTime, JSON.stringify(userData)]
-      );
+      // Check if verification_codes table exists and has the correct column name
+      try {
+        const tableInfoQuery = `
+        SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name = 'verification_codes'
+      `;
+        const tableInfo = await pool.query(tableInfoQuery);
+        console.log(
+          "Verification_codes columns:",
+          tableInfo.rows.map((row) => row.column_name)
+        );
+
+        const hasExpirationTime = tableInfo.rows.some(
+          (row) => row.column_name === "expiration_time"
+        );
+        const hasExpiresAt = tableInfo.rows.some(
+          (row) => row.column_name === "expires_at"
+        );
+
+        // Use the correct column name based on what's available
+        const expirationColumnName = hasExpirationTime
+          ? "expiration_time"
+          : hasExpiresAt
+          ? "expires_at"
+          : "expiration_time";
+
+        console.log(
+          `Using column name: ${expirationColumnName} for expiration time`
+        );
+
+        // Insert the new verification record using the correct column name
+        if (hasExpiresAt) {
+          // Use the existing table structure with expires_at
+          await pool.query(
+            `INSERT INTO verification_codes (email, code, expires_at, code_type, verified, attempts, max_attempts, user_data, created_at, updated_at)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW(), NOW())`,
+            [email, code, expirationTime, 'password_reset', false, 0, 3, JSON.stringify(userData)]
+          );
+        } else {
+          // Use the new table structure with expiration_time
+          await pool.query(
+            `INSERT INTO verification_codes (email, code, ${expirationColumnName}, user_data, created_at)
+             VALUES ($1, $2, $3, $4, NOW())`,
+            [email, code, expirationTime, JSON.stringify(userData)]
+          );
+        }
+      } catch (dbError) {
+        console.error("Database error during table check:", dbError);
+        // If the table doesn't exist or other DB issues, create it
+        await pool.query(`
+        CREATE TABLE IF NOT EXISTS verification_codes (
+          id SERIAL PRIMARY KEY,
+          email VARCHAR(255) NOT NULL,
+          code VARCHAR(10) NOT NULL,
+          expiration_time TIMESTAMP NOT NULL,
+          user_data JSONB NOT NULL,
+          created_at TIMESTAMP DEFAULT NOW()
+        )
+      `);
+
+        // Then try the insert again with the new structure
+        await pool.query(
+          `INSERT INTO verification_codes (email, code, expiration_time, user_data, created_at)
+         VALUES ($1, $2, $3, $4, NOW())`,
+          [email, code, expirationTime, JSON.stringify(userData)]
+        );
+      }
 
       // Gửi email chứa mã xác nhận
       await sendRandomCodeEmail(email, code);
@@ -783,49 +849,70 @@ const userController = {
     }
   },
 
-  resetPassword: async (req, res) => {
+    resetPassword: async (req, res) => {
     try {
-      const { email, code, newPassword } = req.body;
+      console.log('🔍 Reset Password Request (No OTP):', {
+        body: req.body,
+        email: req.body.email,
+        newPassword: req.body.newPassword,
+        new_password: req.body.new_password,
+        headers: req.headers['content-type']
+      });
 
-      if (!email || !code || !newPassword) {
+      // Support both field names for backward compatibility
+      const { email, new_password } = req.body;
+      const finalPassword = new_password;
+
+      console.log('🔍 Extracted values:', {
+        email,
+        new_password,
+        finalPassword
+      });
+
+      if (!email || !finalPassword) {
+        console.log('❌ Missing fields check:', {
+          emailMissing: !email,
+          new_passwordMissing: !new_password,
+          finalPasswordMissing: !finalPassword
+        });
         return res.status(400).json({
           status: 400,
           message: "Thiếu thông tin cần thiết",
         });
       }
 
-      if (newPassword.length < 6) {
+      if (finalPassword.length < 6) {
         return res.status(400).json({
           status: 400,
           message: "Mật khẩu phải có ít nhất 6 ký tự",
         });
       }
 
-      // Kiểm tra mã xác nhận
-      const verificationResult = await pool.query(
-        `SELECT * FROM verification_codes
-       WHERE email = $1 AND code = $2 AND expiration_time > NOW()`,
-        [email, code]
+      // Kiểm tra email có tồn tại không
+      const userCheck = await pool.query(
+        'SELECT id FROM users WHERE email = $1',
+        [email]
       );
 
-      if (verificationResult.rows.length === 0) {
-        return res.status(400).json({
-          status: 400,
-          message: "Mã xác nhận không hợp lệ hoặc đã hết hạn",
+      if (userCheck.rows.length === 0) {
+        return res.status(404).json({
+          status: 404,
+          message: "Email không tồn tại trong hệ thống",
         });
       }
 
-      // Hash mật khẩu mới nếu cần
-      // const hashedPassword = bcrypt.hashSync(newPassword, 10);
-      const hashedPassword = newPassword; // Nếu không cần hash
+      console.log('✅ Email found in database, proceeding with password update');
+
+      // Use plain password (no hashing)
+      const plainPassword = finalPassword;
 
       // Cập nhật mật khẩu trong cơ sở dữ liệu
       const updateResult = await pool.query(
         `UPDATE users
-       SET password = $1, updated_at = NOW()
+       SET password_hash = $1, updated_at = NOW()
        WHERE email = $2
-       RETURNING user_id, email`,
-        [hashedPassword, email]
+       RETURNING id, email`,
+        [plainPassword, email]
       );
 
       if (updateResult.rows.length === 0) {
@@ -835,10 +922,7 @@ const userController = {
         });
       }
 
-      // Xóa mã xác nhận sau khi sử dụng
-      await pool.query(`DELETE FROM verification_codes WHERE email = $1`, [
-        email,
-      ]);
+      console.log('✅ Password updated successfully for:', email);
 
       return res.status('200').json({
         status: '200',
@@ -849,6 +933,135 @@ const userController = {
       return res.status(500).json({
         status: 500,
         message: "Đã xảy ra lỗi. Vui lòng thử lại sau.",
+      });
+    }
+  },
+
+  // Verify OTP - Chức năng xác thực OTP tổng quát
+  verifyOTP: async (req, res) => {
+    try {
+      const { email, code, type = 'general' } = req.body;
+
+      // Basic validation
+      if (!email) {
+        return res.status(400).json({
+          status: 400,
+          message: "Email là bắt buộc",
+        });
+      }
+
+      if (!code) {
+        return res.status(400).json({
+          status: 400,
+          message: "Mã OTP là bắt buộc",
+        });
+      }
+
+      console.log(`Verifying OTP for ${email} with code ${code} and type ${type}`);
+
+      // Check column name compatibility
+      const tableInfoQuery = `
+        SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name = 'verification_codes'
+      `;
+      const tableInfo = await pool.query(tableInfoQuery);
+
+      const hasExpirationTime = tableInfo.rows.some(
+        (row) => row.column_name === "expiration_time"
+      );
+      const hasExpiresAt = tableInfo.rows.some(
+        (row) => row.column_name === "expires_at"
+      );
+
+      // Use the correct column name based on what's available
+      const expirationColumnName = hasExpirationTime
+        ? "expiration_time"
+        : hasExpiresAt
+        ? "expires_at"
+        : "expiration_time";
+
+      console.log(
+        `Using column name: ${expirationColumnName} for expiration check`
+      );
+
+      // Get the verification record using the correct column name
+      const verificationResult = await pool.query(
+        `SELECT * FROM verification_codes
+         WHERE email = $1 AND code = $2 AND ${expirationColumnName} > NOW()`,
+        [email, code]
+      );
+
+      console.log("OTP verification result:", {
+        found: verificationResult.rows.length > 0,
+        email: email,
+        code: code,
+        type: type,
+        currentTime: new Date(),
+      });
+
+      // Check if OTP exists and is valid
+      if (verificationResult.rows.length === 0) {
+        return res.status(400).json({
+          status: 400,
+          message: "Mã OTP không chính xác hoặc đã hết hạn",
+        });
+      }
+
+      const verificationData = verificationResult.rows[0];
+
+      // Parse user_data if exists
+      let userData = null;
+      if (verificationData.user_data) {
+        try {
+          if (typeof verificationData.user_data === "string") {
+            userData = JSON.parse(verificationData.user_data);
+          } else {
+            userData = verificationData.user_data;
+          }
+        } catch (parseError) {
+          console.error("Error parsing user_data:", parseError);
+        }
+      }
+
+      // Determine verification type from data
+      let verificationType = type;
+      if (userData && userData.type) {
+        verificationType = userData.type;
+      } else if (verificationData.code_type) {
+        verificationType = verificationData.code_type;
+      }
+
+      console.log(`OTP verification successful for type: ${verificationType}`);
+
+      // Return success response with verification info
+      const response = {
+        status: '200',
+        message: "Mã OTP đã được xác thực thành công",
+        data: {
+          email: email,
+          type: verificationType,
+          verified: true,
+          verifiedAt: new Date(),
+        }
+      };
+
+      // Add user data if available (but not for password reset for security)
+      if (userData && verificationType !== 'password_reset') {
+        response.data.userData = {
+          ...userData,
+          password: "[HIDDEN]" // Hide password in response
+        };
+      }
+
+      return res.status(200).json(response);
+
+    } catch (error) {
+      console.error("OTP verification error:", error);
+      return res.status(500).json({
+        status: 500,
+        message: "Đã xảy ra lỗi trong quá trình xác thực OTP",
+        error: error.message,
       });
     }
   },

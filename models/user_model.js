@@ -8,9 +8,8 @@ class UserModel {
     try {
       const { username, email, password, full_name, level = 'beginner' } = userData;
 
-      // Hash password
-      const saltRounds = 10;
-      const password_hash = await bcrypt.hash(password, saltRounds);
+      // Use plain password (no hashing)
+      const password_hash = password;
 
       const query = `
         INSERT INTO users (username, email, password_hash, full_name, level)
@@ -48,12 +47,12 @@ class UserModel {
 
       const user = result.rows[0];
 
-      // Verify password
-      // const isPasswordValid = await bcrypt.compare(password, user.password_hash);
+      // Verify password (plain text comparison)
+      const isPasswordValid = password === user.password_hash;
 
-      // if (!isPasswordValid) {
-      //   throw new Error('Invalid password');
-      // }
+      if (!isPasswordValid) {
+        throw new Error('Invalid password');
+      }
 
       // Generate JWT token
       const token = jwt.sign(
@@ -127,21 +126,31 @@ class UserModel {
     }
   }
 
-  // Cập nhật user profile
+  // Cập nhật user profile (EMAIL và AVATAR KHÔNG ĐƯỢC PHÉP UPDATE)
   static async updateProfile(id, updateData) {
     try {
-      const { full_name, level } = updateData;
+      const { username, full_name, level } = updateData;
+
+      console.log('🔧 UserModel.updateProfile:', {
+        id,
+        username,
+        full_name,
+        level,
+        emailDisabled: 'Email updates are disabled for security',
+        avatarDisabled: 'Avatar updates are disabled - use /upload-avatar instead'
+      });
 
       const query = `
         UPDATE users
-        SET full_name = COALESCE($2, full_name),
-            level = COALESCE($3, level),
+        SET username = COALESCE($2, username),
+            full_name = COALESCE($3, full_name),
+            level = COALESCE($4, level),
             updated_at = CURRENT_TIMESTAMP
         WHERE id = $1
-        RETURNING id, username, email, full_name, level, total_points, streak_days, updated_at
+        RETURNING id, username, email, full_name, avatar_id, level, total_points, streak_days, updated_at
       `;
 
-      const result = await pool.query(query, [id, full_name, level]);
+      const result = await pool.query(query, [id, username, full_name, level]);
       return result.rows[0];
     } catch (error) {
       console.error('Error updating user profile:', error);
@@ -224,15 +233,14 @@ class UserModel {
         throw new Error('User not found');
       }
 
-      // Verify current password
-      const isCurrentPasswordValid = await bcrypt.compare(currentPassword, userResult.rows[0].password_hash);
+      // Verify current password (plain text comparison)
+      const isCurrentPasswordValid = currentPassword === userResult.rows[0].password_hash;
       if (!isCurrentPasswordValid) {
         throw new Error('Current password is incorrect');
       }
 
-      // Hash new password
-      const saltRounds = 10;
-      const newPasswordHash = await bcrypt.hash(newPassword, saltRounds);
+      // Use plain password (no hashing)
+      const newPasswordHash = newPassword;
 
       // Update password
       const updateQuery = `

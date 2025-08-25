@@ -9,6 +9,13 @@ router.post("/verify-registration", userController.verifyRegistration);
 router.post("/login", userController.login);
 router.get("/avatars", userController.getAvatars);
 
+// Forgot password routes (public)
+router.post("/forgot-password", userController.forgotPassword);
+router.post("/reset-password", userController.resetPassword);
+
+// OTP verification route (public)
+router.post("/verify-otp", userController.verifyOTP);
+
 // Protected routes
 router.get("/profile", authenticateToken, userController.getProfile);
 router.put("/profile", authenticateToken, userController.updateProfile);
